@@ -14,7 +14,7 @@ This Neovim configuration can be installed using the
 git clone https://github.com/doctorfree/nvim-lazyman $HOME/.config/nvim-Lazyman
 $HOME/.config/nvim-Lazyman/lazyman.sh
 # Install and initialize this configuration with the following command:
-lazyman -4 -J -C https://github.com/doctorfree/astronvim_v4 -N nvim-AstroNvimV4
+lazyman -4 -C https://github.com/doctorfree/astronvim_v4 -N nvim-AstroNvimV4
 ```
 
 ## Run
