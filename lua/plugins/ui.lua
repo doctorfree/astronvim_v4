@@ -284,7 +284,7 @@ return {
     config = function(plugin, opts)
       if not opts.extensions then opts.extensions = {} end
       opts.extensions.command_palette = astronvim.user_opts("command_palette", {})
-      require "plugins.configs.telescope"(plugin, opts)
+      require "configs.telescope"(plugin, opts)
     end,
   },
 }
