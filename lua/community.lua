@@ -15,7 +15,7 @@ return {
     opts = {
       integrations = {
         sandwich = false,
-        noice = true,
+        noice = false,
         mini = true,
         leap = true,
         markdown = true,
