@@ -1,34 +1,24 @@
-# AstroNvim Template
+# AstroNvim v4 Configuration
 
 **NOTE:** This is for AstroNvim v4+
 
-A template for getting started with [AstroNvim](https://github.com/AstroNvim/AstroNvim)
+A sample configuration for [AstroNvim](https://github.com/AstroNvim/AstroNvim)
 
 ## 🛠️ Installation
 
-#### Make a backup of your current nvim and shared folder
+This Neovim configuration can be installed using the
+[Lazyman Neovim Configuration Manager](https://lazyman.dev):
 
-```shell
-mv ~/.config/nvim ~/.config/nvim.bak
-mv ~/.local/share/nvim ~/.local/share/nvim.bak
-mv ~/.local/state/nvim ~/.local/state/nvim.bak
-mv ~/.cache/nvim ~/.cache/nvim.bak
+```bash
+# Install lazyman with the following two commands:
+git clone https://github.com/doctorfree/nvim-lazyman $HOME/.config/nvim-Lazyman
+$HOME/.config/nvim-Lazyman/lazyman.sh
+# Install and initialize this configuration with the following command:
+lazyman -4 -J -C https://github.com/doctorfree/astronvim_v4 -N nvim-AstroNvimV4
 ```
 
-#### Create a new user repository from this template
+## Run
 
-Press the "Use this template" button above to create a new repository to store your user configuration.
-
-You can also just clone this repository directly if you do not want to track your user configuration in GitHub.
-
-#### Clone the repository
-
-```shell
-git clone https://github.com/<your_user>/<your_repository> ~/.config/nvim
-```
-
-#### Start Neovim
-
-```shell
-nvim
+```bash
+NVIM_APPNAME=nvim-AstroNvimV4 nvim
 ```
