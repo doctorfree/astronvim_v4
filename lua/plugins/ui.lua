@@ -280,24 +280,10 @@ return {
     },
   },
   {
-    "nvim-telescope/telescope.nvim",
-    dependencies = {
-      "jvgrootveld/telescope-zoxide",
-      {
-        "AstroNvim/astrocore",
-        opts = {
-          mappings = {
-            n = {
-              ["<Leader>fz"] = { "<Cmd>Telescope zoxide list<CR>", desc = "Find directories" },
-            },
-          },
-        },
-      },
-    },
-    opts = function() require("telescope").load_extension "zoxide" end,
-    config = function(plugin, opts)
-      if not opts.extensions then opts.extensions = {} end
-      require "configs.telescope"(plugin, opts)
-    end,
+    "andrew-george/telescope-themes",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("telescope").load_extension("themes")
+    end
   },
 }
