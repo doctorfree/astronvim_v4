@@ -39,13 +39,40 @@ return {
   { "max397574/better-escape.nvim", enabled = false },
 
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
+  { "L3MON4D3/LuaSnip", enabled = false },
+
+  -- LSP Cmp
   {
-    "L3MON4D3/LuaSnip",
-    config = function(plugin, opts)
-      require "configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
-      -- add more custom luasnip configuration such as filetype extend or custom snippets
-      local luasnip = require "luasnip"
-      luasnip.filetype_extend("javascript", { "javascriptreact" })
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-calc",
+      "saadparwaiz1/cmp_luasnip",
+      {
+        "David-Kunz/cmp-npm",
+        ft = "json",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+          require("configs.cmp-npm")
+        end,
+      },
+      {
+        "garymjr/nvim-snippets",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        opts = { friendly_snippets = true },
+      },
+    },
+    opts = function(_, opts)
+      if not opts.sources then opts.sources = {} end
+      table.insert(opts.sources, { name = "snippets", priority = 750 })
+    end,
+    config = function()
+      require("configs.nvim-cmp")
     end,
   },
 }
