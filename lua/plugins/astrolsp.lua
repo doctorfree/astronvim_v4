@@ -38,12 +38,19 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
-      -- "pyright"
+      -- "pylsp",
+      "pyright"
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      lua_ls = {
+        settings = { Lua = { hint = { enable = true, arrayIndex = "Disable" } } }
+      },
+      pyright = {
+        before_init = function(_, c) c.settings.python.pythonPath = vim.fn.exepath "python" end,
+      },
     },
     -- customize how language servers are attached
     handlers = {
@@ -52,7 +59,7 @@ return {
 
       -- the key is the server that is being setup with `lspconfig`
       -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
-      -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end -- or a custom handler function can be passed
+      pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end -- or a custom handler function can be passed
     },
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {
