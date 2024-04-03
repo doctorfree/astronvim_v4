@@ -4,7 +4,15 @@
 
 ### ⚡️ Added
 
+- Customize `telescope`
+- Customize `autopairs`
+- Expand `neotest` and `nvim-dap` configs
+
 ### 🐞 Fixed
+
+- Revert to template autopairs
+- Silence `dapui` toggle
+- Adopt `dap` configuration from `Ecovim`
 
 ## v1.0.0r1
 
