@@ -58,25 +58,22 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     optional = true,
     opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(
-        opts.ensure_installed,
-        { 
-          "bash-debug-adapter",
-          "bash-language-server",
-          "black",
-          "debugpy",
-          "isort",
-          "json-lsp",
-          "marksman",
-          "php-debug-adapter",
-          "php-cs-fixer",
-          "prettierd",
-          "pyright",
-          "shellcheck",
-          "shfmt",
-          "yaml-language-server",
-        }
-      )
+      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+        "bash-debug-adapter",
+        "bash-language-server",
+        "black",
+        "debugpy",
+        "isort",
+        "json-lsp",
+        "marksman",
+        "php-debug-adapter",
+        "php-cs-fixer",
+        "prettierd",
+        "pyright",
+        "shellcheck",
+        "shfmt",
+        "yaml-language-server",
+      })
     end,
   },
   {
