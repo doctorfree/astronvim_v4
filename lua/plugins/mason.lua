@@ -13,7 +13,6 @@ return {
         "jsonls",
         "lua_ls",
         "marksman",
-        "phpactor",
         "pyright",
         "yamlls",
         -- add more arguments for adding more language servers
@@ -69,7 +68,6 @@ return {
           "isort",
           "json-lsp",
           "marksman",
-          "phpactor",
           "php-debug-adapter",
           "php-cs-fixer",
           "prettierd",
