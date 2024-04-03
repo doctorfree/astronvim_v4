@@ -297,7 +297,6 @@ return {
     opts = function() require("telescope").load_extension "zoxide" end,
     config = function(plugin, opts)
       if not opts.extensions then opts.extensions = {} end
-      opts.extensions.command_palette = astronvim.user_opts("command_palette", {})
       require "configs.telescope"(plugin, opts)
     end,
   },
