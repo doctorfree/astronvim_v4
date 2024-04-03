@@ -30,7 +30,6 @@ return {
         "isort",
         "php-cs-fixer",
         "prettierd",
-        "selene",
         "shfmt",
         "stylua",
         -- add more arguments for adding more null-ls sources
@@ -131,7 +130,6 @@ return {
     optional = true,
     opts = {
       linters_by_ft = {
-        lua = { "selene" },
         sh = { "shellcheck" },
       },
     },
