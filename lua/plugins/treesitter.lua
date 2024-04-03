@@ -15,7 +15,8 @@ return {
       "regex",
       "toml",
       "vim",
-      "yaml"
+      "yaml",
     })
+    opts.auto_install = true
   end,
 }
