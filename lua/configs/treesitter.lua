@@ -1,6 +1,27 @@
 require("nvim-treesitter.configs").setup({
 -- treesitter parsers to be installed
-  ensure_installed = {},          -- one of "all", or a list of languages
+  ensure_installed = {
+    "astro",
+    "css",
+    "gitcommit",
+    "graphql",
+    "html",
+    "javascript",
+    "json",
+    "json5",
+    "lua",
+    "markdown",
+    "markdown_inline",
+    "prisma",
+    "query",
+    "regex",
+    "svelte",
+    "tsx",
+    "typescript",
+    "vim",
+    "vimdoc",
+    "vue",
+  },          -- one of "all", or a list of languages
   auto_install = true,
   sync_install = false,           -- install languages synchronously (only applied to `ensure_installed`)
   ignore_install = { "haskell" }, -- list of parsers to ignore installing
