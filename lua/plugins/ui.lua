@@ -281,6 +281,20 @@ return {
   },
   {
     "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "jvgrootveld/telescope-zoxide",
+      {
+        "AstroNvim/astrocore",
+        opts = {
+          mappings = {
+            n = {
+              ["<Leader>fz"] = { "<Cmd>Telescope zoxide list<CR>", desc = "Find directories" },
+            },
+          },
+        },
+      },
+    },
+    opts = function() require("telescope").load_extension "zoxide" end,
     config = function(plugin, opts)
       if not opts.extensions then opts.extensions = {} end
       opts.extensions.command_palette = astronvim.user_opts("command_palette", {})
