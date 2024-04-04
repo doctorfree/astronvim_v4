@@ -33,10 +33,11 @@ return {
   },
   {
     "nvim-neorg/neorg",
-    lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+    lazy = false,  -- Disable lazy loading
     version = "*", -- Pin Neorg to the latest stable release
     dependencies = {
       { "nvim-lua/plenary.nvim" },
+      { "nvim-neorg/lua-utils.nvim" },
       {
         "vhyrro/luarocks.nvim",
         priority = 1000, -- We'd like this plugin to load first out of the rest
