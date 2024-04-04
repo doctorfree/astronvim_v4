@@ -1,9 +1,5 @@
 local settings = require("configuration")
 local obsidian_vault = settings.obsidian_vault
-local notes = settings.neorg_notes
-if notes == "" or notes == nil then
-  notes = { "~/notes" }
-end
 
 return {
   {
@@ -30,56 +26,6 @@ return {
       vim.g.vim_markdown_autowrite = true
       vim.g.vim_markdown_toc_autofit = true
     end
-  },
-  {
-    "nvim-neorg/neorg",
-    lazy = false,  -- Disable lazy loading
-    version = "*", -- Pin Neorg to the latest stable release
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-neorg/lua-utils.nvim" },
-      {
-        "vhyrro/luarocks.nvim",
-        priority = 1000, -- We'd like this plugin to load first out of the rest
-        config = true,
-      },
-    },
-    config = function()
-      require("neorg").setup {
-        load = {
-          ["core.defaults"] = {},  -- Loads default behaviour
-          ["core.concealer"] = {
-            config = {
-              icon_preset = "diamond"
-            }
-          },
-          ["core.dirman"] = {
-            config = {
-              workspaces = {
-                notes = notes,
-              },
-              default_workspace = "notes",
-            },
-          },
-          ["core.keybinds"] = {}, -- Adds default keybindings
-          ["core.completion"] = {
-            config = {
-              engine = "nvim-cmp",
-            },
-          }, -- Enables support for completion plugins
-          ["core.journal"] = {}, -- Enables support for the journal module
-          ["core.integrations.nvim-cmp"] = {},
-          ["core.integrations.treesitter"] = {
-            config = {
-              configure_parsers = true,
-              install_parsers = true,
-            },
-          },
-          ["core.highlights"] = {}, -- Maps available highlight groups
-          ["core.mode"] = {}, -- Mange Neorg modes
-        },
-      }
-    end,
   },
   {
     "epwalsh/obsidian.nvim",

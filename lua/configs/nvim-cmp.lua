@@ -228,7 +228,6 @@ cmp.setup({
       option = buffer_option,
       max_item_count = 5
     },
-    { name = "neorg",       priority = 7 },
     { name = "nvim_lua",    priority = 4 },
     { name = "path",        priority = 3 },
     { name = "calc",        priority = 2 },
