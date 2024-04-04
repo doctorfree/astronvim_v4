@@ -4,7 +4,14 @@
 
 A sample configuration for [AstroNvim](https://github.com/AstroNvim/AstroNvim) v4
 
-## 🛠️ Installation
+## Table of Contents
+
+- [Installation](#installation)
+- [Run](#run)
+- [Features](#features)
+- [Configuration](#configuration)
+
+## Installation
 
 This Neovim configuration can be installed using the
 [Lazyman Neovim Configuration Manager](https://lazyman.dev):
@@ -29,8 +36,13 @@ If using `lazyman`, the `nvims` shell function can be used to select `AstroNvimV
 
 ```bash
 nvims
+# Or edit a file(s)
+nvims foobar.lua
 # Fuzzy select AstroNvimV4 by typing 'ast' and <Enter>
 ```
+
+After selecting a configuration with `nvims` an alias is set so subsequent
+invocations can be performed using `vi` until the current shell is exited.
 
 Alternately, set `NVIM_APPNAME`:
 
@@ -38,6 +50,38 @@ Alternately, set `NVIM_APPNAME`:
 export NVIM_APPNAME="nvim-AstroNvimV4"
 nvim
 ```
+
+## Features
+
+`AstroNvimV4` is based on the AstroNvim v4 template at https://github.com/AstroNvim/template
+
+Beyond the basic features provided by this template, `AstroNvimV4` includes:
+
+* Options and plugin configuration in `lua/options.lua` and `lua/configuration.lua`
+* Mason/null-ls installed formatters, linters, language servers
+* LSP configuration for several language servers
+* Formatters and Linters configured in `.linter_configs/`
+* Highly customized `alpha.nvim` dashboard
+* Support for multiple colorschemes and colorscheme switching
+* An icon set for use with several plugins
+* Neovim command line customization
+* Many additional plugins enabled in `lua/plugins`:
+  - autocomplete.lua
+  - bufferline.lua
+  - cmp-cmdline.lua
+  - editor-behavior.lua
+  - icons.lua
+  - motion.lua
+  - neogit.lua
+  - neotest.lua
+  - notes.lua
+  - null-ls.lua
+  - nvim-dap.lua
+  - statuslines.lua
+  - syntax.lua
+  - telescope.lua
+  - themes.lua
+  - ui.lua
 
 ## Configuration
 
