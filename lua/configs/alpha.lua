@@ -164,8 +164,10 @@ quit_btn.opts.hl = "AlphaFooter"
 -- Neovim Configuration
 local health_btn = dashboard.button("h", "  Neovim Health", ":checkhealth<CR>")
 health_btn.opts.hl = "AlphaHeader"
-local options_btn = dashboard.button("o", "  Neovim Options", ":e " .. config_lua .. " " .. options_lua .. "<CR>")
+local options_btn = dashboard.button("o", "  Neovim Options", ":e " .. options_lua .. "<CR>")
 options_btn.opts.hl = "AlphaHeader"
+local config_btn = dashboard.button("c", "  AstroNvimV4 Config", ":e " .. config_lua .. "<CR>")
+config_btn.opts.hl = "AlphaHeader"
 
 -- Plugin Management
 local update_btn = dashboard.button("U", "  Update Plugins", ":Lazy update<CR>")
@@ -181,6 +183,7 @@ local buttons = {
     { type = "text", val = "Neovim Configuration", opts = { hl = "AlphaHeader", position = "center" } },
     health_btn,
     options_btn,
+    config_btn,
     { type = "padding", val = 1 },
     { type = "text", val = "Plugin Management", opts = { hl = "AlphaShortcut", position = "center" } },
     install_btn,
