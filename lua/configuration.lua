@@ -41,6 +41,10 @@ conf.listchars = {
   extends = "◀",
   precedes = "▶",
 }
+
+-- Neorg notes folder
+conf.neorg_notes = { "~/Documents/Notes" }
+
 -- use rg instead of grep
 conf.grepprg = "rg --hidden --vimgrep --smart-case --"
 
