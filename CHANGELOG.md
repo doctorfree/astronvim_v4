@@ -6,6 +6,23 @@
 
 ### 🐞 Fixed
 
+## v1.0.1r3
+
+### ⚡️ Added
+
+- Expand and configure notes plugins with `Neorg` custom configuration
+- Add `Neorg` setting in `configuration.lua`
+- Expand `lua/options.lua`
+- Use `configuration.lua` settings in `Mason` installs
+- Expand `conform` configuration
+- Add linter configurations in `.linter_configs`
+- Add formatters and linters to `configuration.lua`
+
+### 🐞 Fixed
+
+- Fix `Neorg` build using `Luarocks`
+- Fix options return tables
+
 ## v1.0.1r2
 
 ### ⚡️ Added
