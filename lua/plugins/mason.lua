@@ -1,4 +1,6 @@
--- Customize Mason plugins
+local settings = require("configuration")
+local formatters_linters = settings.formatters_linters
+local utils = require("utils.linter")
 
 ---@type LazySpec
 return {
@@ -55,24 +57,16 @@ return {
   },
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = "williamboman/mason.nvim",
+    event = "VeryLazy",
     optional = true,
-    opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-        "bash-debug-adapter",
-        "bash-language-server",
-        "black",
-        "debugpy",
-        "isort",
-        "json-lsp",
-        "marksman",
-        "php-debug-adapter",
-        "php-cs-fixer",
-        "prettierd",
-        "pyright",
-        "shellcheck",
-        "shfmt",
-        "yaml-language-server",
-      })
+    config = function()
+      -- triggered myself, since `run_on_start`, does not work w/ lazy-loading
+      require("mason-tool-installer").setup {
+        ensure_installed = formatters_linters,
+        run_on_start = false,
+      }
+      vim.defer_fn(vim.cmd.MasonToolsInstall, 2000)
     end,
   },
   {
@@ -103,27 +97,30 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    optional = true,
-    opts = {
-      formatters_by_ft = {
-        lua = { "stylua" },
-        markdown = { { "prettierd", "prettier" } },
-        ["markdown.mdx"] = { { "prettierd", "prettier" } },
-        php = { "php_cs_fixer" },
-        python = { "isort", "black" },
-        sh = { "shfmt" },
-        yaml = { { "prettierd", "prettier" } },
+    cmd = "ConformInfo",
+    keys = {
+      {
+        "<leader>F",
+        function()
+          require("conform").format { lsp_fallback = "always" }
+          vim.cmd.update()
+        end,
+        mode = { "n", "x" },
+        desc = " Format & Save",
       },
     },
+    config = function()
+      require("configs.conform")
+    end,
   },
   {
     "mfussenegger/nvim-lint",
+    event = "VeryLazy",
     optional = true,
-    opts = {
-      linters_by_ft = {
-        sh = { "shellcheck" },
-      },
-    },
+    config = function()
+      utils.linterConfigs()
+      utils.lintTriggers()
+    end,
   },
   {
     "b0o/SchemaStore.nvim",

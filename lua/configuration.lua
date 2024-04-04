@@ -53,5 +53,38 @@ conf.treesitter_ensure_installed = {
   "vim",
   "vimdoc",
 }
+-- Formatters and linters installed by Mason
+conf.formatters_linters = {
+  "actionlint",
+  "gofumpt",
+  "goimports",
+  "golines",
+  "golangci-lint",
+  "google-java-format",
+  "latexindent",
+  "markdownlint",
+  -- "debugpy",
+  "isort",
+  -- "json-lsp",
+  "marksman",
+  -- "php-debug-adapter",
+  -- "php-cs-fixer",
+  "prettier",
+  "prettierd",
+  "pyright",
+  "sql-formatter",
+  -- "shellcheck",
+  "shfmt",
+  "stylua",
+  "tflint",
+  "yamllint",
+}
+-- Formatters and linters installed externally
+conf.external_formatters = {
+  "beautysh",
+  "black",
+  "flake8",
+  "ruff",
+}
 
 return conf

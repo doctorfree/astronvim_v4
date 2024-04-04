@@ -13,6 +13,15 @@ M.map = function(mode, lhs, rhs, opts)
   end
 end
 
+M.table_contains = function(tbl, x)
+  local found = false
+  for _, v in pairs(tbl) do
+    if v == x then
+      found = true
+    end
+  end
+  return found
+end
 
 M.file_exists = function(path)
   local f = io.open(path, "r")
