@@ -42,6 +42,7 @@ conf.listchars = {
 -- use rg instead of grep
 conf.grepprg = "rg --hidden --vimgrep --smart-case --"
 
+-- Not yet working
 -- treesitter parsers to be installed
 conf.treesitter_ensure_installed = {
   "astro",

@@ -1,3 +1,6 @@
+if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+
+- Not yet working
 local settings = require "configuration"
 ---@type LazySpec
 return {
