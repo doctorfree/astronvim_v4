@@ -1,7 +1,7 @@
 local settings = require("configuration")
 
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = settings.treesitter_ensure_installed
+  ensure_installed = settings.treesitter_ensure_installed,
   auto_install = true,
   sync_install = false,           -- install languages synchronously (only applied to `ensure_installed`)
   ignore_install = {}, -- list of parsers to ignore installing
