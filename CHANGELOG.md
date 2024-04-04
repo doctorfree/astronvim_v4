@@ -6,6 +6,21 @@
 
 ### 🐞 Fixed
 
+## v1.0.1r2
+
+### ⚡️ Added
+
+- Add some `treesitter` parsers to `ensure_installed`
+- Add `cmp-cmdline` command line completion plugin
+- Use `configuration.lua` setting for treesitter `ensure_installed`
+- Add `configuration.lua` and `options.lua`
+- Add support for more colorschemes
+
+### 🐞 Fixed
+
+- Remove `git` plugins from `Alpha` dashboard
+- Fix options and config `Alpha` buttons
+
 ## v1.0.1r1
 
 ### ⚡️ Added
