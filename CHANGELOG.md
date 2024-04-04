@@ -6,6 +6,16 @@
 
 ### 🐞 Fixed
 
+## v1.0.1r4
+
+### ⚡️ Added
+
+- Add support for `Obsidian` plugin to notes
+
+### 🐞 Fixed
+
+- Remove `Neorg` from notes plugins
+
 ## v1.0.1r3
 
 ### ⚡️ Added
