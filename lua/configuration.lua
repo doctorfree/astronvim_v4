@@ -44,6 +44,8 @@ conf.listchars = {
 
 -- Neorg notes folder
 conf.neorg_notes = { "~/Documents/Notes" }
+-- Obsidian vault folder (relative to HOME)
+conf.obsidian_vault = "Documents/Notes/Obsidian"
 
 -- use rg instead of grep
 conf.grepprg = "rg --hidden --vimgrep --smart-case --"

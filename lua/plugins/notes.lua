@@ -1,4 +1,5 @@
 local settings = require("configuration")
+local obsidian_vault = settings.obsidian_vault
 local notes = settings.neorg_notes
 if notes == "" or notes == nil then
   notes = { "~/notes" }
@@ -78,5 +79,20 @@ return {
         },
       }
     end,
+  },
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",  -- recommended, use latest release instead of latest commit
+    lazy = true,
+    event = { "BufReadPre " .. vim.fn.expand "~" .. "/" .. obsidian_vault .. "/**.md" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+      "nvim-telescope/telescope.nvim",
+      "preservim/vim-markdown",
+    },
+    config = function()
+      require("configs.obsidian")
+    end
   },
 }
