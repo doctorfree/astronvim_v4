@@ -1,33 +1,29 @@
 local status_ok, alpha = pcall(require, "alpha")
-if not status_ok then
-  return
-end
+if not status_ok then return end
 
 local path_ok, path = pcall(require, "plenary.path")
-if not path_ok then
-  return
-end
+if not path_ok then return end
 
-local options_lua = vim.fn.stdpath("config") .. "/lua/plugins/astrocore.lua"
+local config_path = vim.fn.stdpath "config"
+local options_lua = config_path .. "/lua/plugins/astrocore.lua"
+local config_lua = config_path .. "/lua/configuration.lua"
 
 -- local filetree = ":Telescope file_browser<CR>"
 local filetree = ":Neotree<CR>"
 
-local dashboard = require("alpha.themes.dashboard")
-local nvim_web_devicons = require("nvim-web-devicons")
+local dashboard = require "alpha.themes.dashboard"
+local nvim_web_devicons = require "nvim-web-devicons"
 local cdir = vim.fn.getcwd()
 
 local function get_extension(fn)
-  local match = fn:match("^.+(%..+)$")
+  local match = fn:match "^.+(%..+)$"
   local ext = ""
-  if match ~= nil then
-    ext = match:sub(2)
-  end
+  if match ~= nil then ext = match:sub(2) end
   return ext
 end
 
 local function icon(fn)
-  local nwd = require("nvim-web-devicons")
+  local nwd = require "nvim-web-devicons"
   local ext = get_extension(fn)
   return nwd.get_icon(fn, ext, { default = true })
 end
@@ -41,20 +37,14 @@ local function file_button(fn, sc, short_fn)
   local ico, hl = icon(fn)
   local hl_option_type = type(nvim_web_devicons.highlight)
   if hl_option_type == "boolean" then
-    if hl and nvim_web_devicons.highlight then
-      table.insert(fb_hl, { hl, 0, 1 })
-    end
+    if hl and nvim_web_devicons.highlight then table.insert(fb_hl, { hl, 0, 1 }) end
   end
-  if hl_option_type == "string" then
-    table.insert(fb_hl, { nvim_web_devicons.highlight, 0, 1 })
-  end
+  if hl_option_type == "string" then table.insert(fb_hl, { nvim_web_devicons.highlight, 0, 1 }) end
   ico_txt = ico .. "  "
 
   local file_button_el = dashboard.button(sc, ico_txt .. short_fn, "<cmd>e " .. fn .. " <CR>")
-  local fn_start = short_fn:match(".*/")
-  if fn_start ~= nil then
-    table.insert(fb_hl, { "Comment", #ico_txt - 2, #fn_start + #ico_txt - 2 })
-  end
+  local fn_start = short_fn:match ".*/"
+  if fn_start ~= nil then table.insert(fb_hl, { "Comment", #ico_txt - 2, #fn_start + #ico_txt - 2 }) end
   file_button_el.opts.hl = "AlphaButtons"
   return file_button_el
 end
@@ -76,9 +66,7 @@ local function mru(start, cwd, items_number, opts)
 
   local oldfiles = {}
   for _, v in pairs(vim.v.oldfiles) do
-    if #oldfiles == items_number then
-      break
-    end
+    if #oldfiles == items_number then break end
     local cwd_cond
     if not cwd then
       cwd_cond = true
@@ -86,9 +74,7 @@ local function mru(start, cwd, items_number, opts)
       cwd_cond = vim.startswith(v, cwd)
     end
     local ignore = (opts.ignore and opts.ignore(v, get_extension(v))) or false
-    if (vim.fn.filereadable(v) == 1) and cwd_cond and not ignore then
-      oldfiles[#oldfiles + 1] = v
-    end
+    if (vim.fn.filereadable(v) == 1) and cwd_cond and not ignore then oldfiles[#oldfiles + 1] = v end
   end
 
   local special_shortcuts = { "a" }
@@ -105,9 +91,7 @@ local function mru(start, cwd, items_number, opts)
 
     if #short_fn > target_width then
       short_fn = path.new(short_fn):shorten(1, { -2, -1 })
-      if #short_fn > target_width then
-        short_fn = path.new(short_fn):shorten(1, { -1 })
-      end
+      if #short_fn > target_width then short_fn = path.new(short_fn):shorten(1, { -1 }) end
     end
 
     local shortcut = ""
@@ -142,23 +126,19 @@ local section_mru = {
     { type = "padding", val = 1 },
     {
       type = "group",
-      val = function()
-        return { mru(1, cdir, 4) }
-      end,
+      val = function() return { mru(1, cdir, 4) } end,
       opts = { shrink_margin = false },
     },
   },
 }
 
 -- close Lazy and re-open when the dashboard is ready
-if vim.o.filetype == "lazy" then
-  vim.cmd.close()
-end
+if vim.o.filetype == "lazy" then vim.cmd.close() end
 
 -- Disable folding on alpha buffer
-vim.cmd([[
+vim.cmd [[
   autocmd FileType alpha setlocal nofoldenable
-]])
+]]
 
 -- This wouldn't be necessary if we could pass 'opts' in to dashboard.button()
 --
@@ -184,7 +164,7 @@ quit_btn.opts.hl = "AlphaFooter"
 -- Neovim Configuration
 local health_btn = dashboard.button("h", "  Neovim Health", ":checkhealth<CR>")
 health_btn.opts.hl = "AlphaHeader"
-local options_btn = dashboard.button("o", "  Neovim Options", ":e " .. options_lua .. "<CR>")
+local options_btn = dashboard.button("o", "  Neovim Options", ":e " .. config_lua .. " " .. options_lua .. "<CR>")
 options_btn.opts.hl = "AlphaHeader"
 
 -- Plugin Management
@@ -237,9 +217,7 @@ local header = {
 local datetime = os.date("  %Y-%b-%d   %H:%M:%S", os.time())
 local version = vim.version()
 local version_info = ""
-if version ~= nil then
-  version_info = "v" .. version.major .. "." .. version.minor .. "." .. version.patch
-end
+if version ~= nil then version_info = "v" .. version.major .. "." .. version.minor .. "." .. version.patch end
 
 local stats = require("lazy").stats()
 local vinfo = "Neovim " .. version_info
@@ -268,10 +246,10 @@ local opts = {
   opts = {
     margin = 4,
     setup = function()
-      require("nvim-web-devicons").setup({
+      require("nvim-web-devicons").setup {
         enabled = true,
         highlight = true,
-      })
+      }
     end,
   },
 }

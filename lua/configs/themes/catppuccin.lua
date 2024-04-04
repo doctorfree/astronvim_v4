@@ -1,5 +1,6 @@
 local catppuccin = require("catppuccin")
-local style = "mocha"
+local settings = require("configuration")
+local style = settings.theme_style
 
 -- Adjust these to create a custom flavor
 local custom_highlights = {}
@@ -146,7 +147,7 @@ catppuccin.setup({
   color_overrides,
   styles,
   custom_highlights,
-  transparent_background = false,
+  transparent_background = settings.enable_transparent,
   show_end_of_buffer = false,
   term_colors = true,
   compile = {
@@ -199,7 +200,7 @@ catppuccin.setup({
     nvimtree = {
       enabled = true,
       show_root = true,
-      transparent_panel = false,
+      transparent_panel = settings.enable_transparent,
     },
     dap = {
       enabled = true,
@@ -209,7 +210,7 @@ catppuccin.setup({
     neotree = {
       enabled = true,
       show_root = true,
-      transparent_panel = false,
+      transparent_panel = settings.enable_transparent,
     },
     which_key = true,
     indent_blankline = {
@@ -236,10 +237,12 @@ catppuccin.setup({
     illuminate = true,
   },
 })
-set_colorscheme(style)
-vim.api.nvim_set_hl(0, "AlphaHeader", { link = "DashboardHeader" })
-vim.api.nvim_set_hl(0, "AlphaHeaderLabel", { link = "DashboardHeader" })
-vim.api.nvim_set_hl(0, "AlphaButtons", { link = "DashboardCenter" })
-vim.api.nvim_set_hl(0, "AlphaShortcut", { link = "DashboardShortcut" })
-vim.api.nvim_set_hl(0, "AlphaFooter", { link = "DashboardFooter" })
-require("configs.highlights")
+if settings.theme == "catppuccin" then
+  set_colorscheme(style)
+  vim.api.nvim_set_hl(0, "AlphaHeader", { link = "DashboardHeader" })
+  vim.api.nvim_set_hl(0, "AlphaHeaderLabel", { link = "DashboardHeader" })
+  vim.api.nvim_set_hl(0, "AlphaButtons", { link = "DashboardCenter" })
+  vim.api.nvim_set_hl(0, "AlphaShortcut", { link = "DashboardShortcut" })
+  vim.api.nvim_set_hl(0, "AlphaFooter", { link = "DashboardFooter" })
+  require("configs.highlights")
+end
