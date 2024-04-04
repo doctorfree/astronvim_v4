@@ -18,23 +18,12 @@ return {
   -- customize alpha options
   {
     "goolord/alpha-nvim",
-    keys = {
-      { "<leader>ua", function() require("alpha").start() end, desc = "Home screen" },
-    },
-    opts = function(_, opts)
-      -- customize the dashboard header
-      opts.section.header.val = {
-      [[ ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ]],
-      [[ ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ]],
-      [[ ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ]],
-      [[ ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ]],
-      [[ ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ]],
-      [[ ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ]],
-      }
-      opts.section.buttons.val = {
-        opts.button( "q", "  Quit", ":qa<CR>"),
-      }
-      return opts
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    enabled = true,
+    event = "VimEnter",
+    keys = { { "<leader>A", "<cmd>Alpha<CR>", "Alpha Dashboard" } },
+    config = function()
+      require("configs.alpha")
     end,
   },
 
