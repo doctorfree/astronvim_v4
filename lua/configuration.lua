@@ -44,24 +44,6 @@ conf.grepprg = "rg --hidden --vimgrep --smart-case --"
 
 -- Not yet working
 -- treesitter parsers to be installed
-conf.treesitter_ensure_installed = {
-  "astro",
-  "c",
-  "css",
-  "graphql",
-  "html",
-  "javascript",
-  "json",
-  "json5",
-  "lua",
-  "markdown",
-  "markdown_inline",
-  "query",
-  "regex",
-  "typescript",
-  "vim",
-  "vimdoc",
-  "vue",
-}
+conf.treesitter_ensure_installed = {}
 
 return conf

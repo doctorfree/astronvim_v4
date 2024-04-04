@@ -1,9 +1,14 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
--- Not yet working
-local settings = require "configuration"
----@type LazySpec
+-- local settings = require "configuration"
 return {
   "nvim-treesitter/nvim-treesitter",
-  opts = function(_, opts) opts.ensure_installed = settings.treesitter_ensure_installed end,
+  event = "BufReadPre",
+  dependencies = {
+    "hiphish/rainbow-delimiters.nvim",
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    "RRethy/nvim-treesitter-textsubjects",
+  },
+  config = function()
+    require("configs.treesitter")
+  end,
 }
+
