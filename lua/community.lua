@@ -6,10 +6,10 @@
 return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.rust" },
-  { import = "astrocommunity.colorscheme.nightfox-nvim", enabled = false },
-  { import = "astrocommunity.colorscheme.kanagawa-nvim", enabled = false },
-  { import = "astrocommunity.colorscheme.rose-pine", enabled = false },
-  { import = "astrocommunity.colorscheme.catppuccin", enabled = false },
+  { import = "astrocommunity.colorscheme.nightfox-nvim" },
+  { import = "astrocommunity.colorscheme.kanagawa-nvim" },
+  { import = "astrocommunity.colorscheme.rose-pine" },
+  { import = "astrocommunity.colorscheme.catppuccin" },
   {
     "folke/tokyonight.nvim",
     lazy = false,
