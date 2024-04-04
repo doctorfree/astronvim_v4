@@ -1,5 +1,7 @@
 local settings = require("configuration")
 local formatters_linters = settings.formatters_linters
+local lsp_servers = settings.lsp_servers
+local null_ensure_installed = settings.null_ensure_installed
 local utils = require("utils.linter")
 
 ---@type LazySpec
@@ -9,16 +11,9 @@ return {
     "williamboman/mason-lspconfig.nvim",
     -- overrides `require("mason-lspconfig").setup(...)`
     opts = function(_, opts)
-      -- add more things to the ensure_installed table protecting against community packs modifying it
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-        "bashls",
-        "jsonls",
-        "lua_ls",
-        "marksman",
-        "pyright",
-        "yamlls",
-        -- add more arguments for adding more language servers
-      })
+      -- lsp_servers defined in lua/configuration.lua
+      opts.ensure_installed =
+        require("astrocore").list_insert_unique(opts.ensure_installed, lsp_servers)
     end,
   },
   -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
@@ -26,16 +21,9 @@ return {
     "jay-babu/mason-null-ls.nvim",
     -- overrides `require("mason-null-ls").setup(...)`
     opts = function(_, opts)
-      -- add more things to the ensure_installed table protecting against community packs modifying it
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-        "black",
-        "isort",
-        "php-cs-fixer",
-        "prettierd",
-        "shfmt",
-        "stylua",
-        -- add more arguments for adding more null-ls sources
-      })
+      -- null_ensure_installed defined in lua/configuration.lua
+      opts.ensure_installed =
+        require("astrocore").list_insert_unique(opts.ensure_installed, null_ensure_installed)
     end,
   },
   {

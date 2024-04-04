@@ -29,6 +29,8 @@ conf.number = true
 conf.mouse = "nv"
 -- set relative numbered lines
 conf.relative_number = true
+-- always show tabs; 0 never, 1 only if at least two tab pages, 2 always
+conf.showtabline = 2
 -- enable or disable listchars
 conf.list = true
 -- which list chars to show
@@ -53,7 +55,7 @@ conf.treesitter_ensure_installed = {
   "vim",
   "vimdoc",
 }
--- Formatters and linters installed by Mason
+-- Formatters and linters installed by mason-tool-installer
 conf.formatters_linters = {
   "actionlint",
   "gofumpt",
@@ -85,6 +87,46 @@ conf.external_formatters = {
   "black",
   "flake8",
   "ruff",
+}
+-- Language servers installed by the Lazyman initialization
+conf.lsp_installed = {
+  "cssls",
+  "denols",
+  "html",
+  "jsonls",
+  "lua_ls",
+  "pylsp",
+}
+-- Language servers that should be installed by mason-lspconfig
+conf.lsp_servers = {
+  "bashls",
+  -- "cssmodules_ls",
+  -- "dockerls",
+  -- "emmet_ls",
+  -- "eslint",
+  -- "gopls",
+  -- "graphql",
+  -- "jdtls",
+  -- "julials",
+  -- "ltex",
+  "jsonls",
+  "marksman",
+  -- "prismals",
+  "pyright",
+  -- "sqlls",
+  -- "tailwindcss",
+  -- "texlab",
+  "tsserver",
+  "vimls",
+  "vuels",
+  "yamlls",
+}
+-- Language servers/formatters installed with mason-null-ls
+conf.null_ensure_installed = {
+  "php-cs-fixer",
+  "prettierd",
+  "shfmt",
+  "stylua",
 }
 
 return conf
