@@ -136,22 +136,6 @@ return {
     }
   },
   {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      {
-        "SmiteshP/nvim-navbuddy",
-        keys = {
-          { "<leader>fs", function() require("nvim-navbuddy").open() end, desc = "Breadcrumb search" },
-        },
-        dependencies = {
-          "SmiteshP/nvim-navic",
-          "MunifTanjim/nui.nvim"
-        },
-        opts = { lsp = { auto_attach = true } }
-      }
-    },
-  },
-  {
     "Wansmer/treesj",
     opts = {
       use_default_keymaps = false,
