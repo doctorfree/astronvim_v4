@@ -55,6 +55,8 @@ return {
         ["<Leader>b"] = { desc = "Buffers" },
         -- quick save
         -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+        -- Telescope themes
+        ["<Leader>T"] = { "<cmd>Telescope themes<CR>", desc = "Theme switcher" },
       },
       t = {
         -- setting a mapping to false will disable it
