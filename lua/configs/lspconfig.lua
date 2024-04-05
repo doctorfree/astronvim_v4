@@ -616,42 +616,6 @@ if table_contains(lsp_installed, "lua_ls") then
   })
 end
 
-if table_contains(lsp_servers, "bashls") then
-  -- Enable/Disable shellcheck in bashls
-  local bashls_settings = {
-    bashIde = {
-      backgroundAnalysisMaxFiles = 500,
-      enableSourceErrorDiagnostics = false,
-      explainshellEndpoint = "",
-      globPattern = vim.env.GLOB_PATTERN or "*@(.sh|.inc|.bash|.command)",
-      includeAllWorkspaceSymbols = false,
-      logLevel = "info",
-      shellcheckArguments = "",
-      shellcheckPath = vim.env.SHELLCHECK_PATH or "",
-    },
-  }
-  if table_contains(formatters_linters, "shellcheck") then
-    bashls_settings = {
-      bashIde = {
-        backgroundAnalysisMaxFiles = 500,
-        enableSourceErrorDiagnostics = false,
-        explainshellEndpoint = "",
-        globPattern = vim.env.GLOB_PATTERN or "*@(.sh|.inc|.bash|.command)",
-        includeAllWorkspaceSymbols = false,
-        logLevel = "info",
-        shellcheckArguments = "",
-        shellcheckPath = vim.env.SHELLCHECK_PATH or "shellcheck",
-      },
-    }
-  end
-  lspconfig.bashls.setup({
-    on_attach = custom_attach,
-    capabilities = capabilities,
-    handlers = handlers,
-    settings = bashls_settings,
-  })
-end
-
 if table_contains(lsp_servers, "emmet_ls") then
   lspconfig.emmet_ls.setup({
     capabilities = capabilities,
