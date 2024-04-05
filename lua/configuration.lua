@@ -50,6 +50,12 @@ conf.obsidian_vault = "Documents/Notes/Obsidian"
 -- use rg instead of grep
 conf.grepprg = "rg --hidden --vimgrep --smart-case --"
 
+-- Show diagnostics, can be one of "none", "icons", "popup". Default is "popup"
+--   "none":  diagnostics are disabled but still underlined
+--   "icons": only an icon will show, use ',de' to see the diagnostic
+--   "popup": an icon will show and a popup with the diagnostic will appear
+conf.show_diagnostics = "popup"
+
 -- treesitter parsers to be installed
 conf.treesitter_ensure_installed = {
   "bash",
