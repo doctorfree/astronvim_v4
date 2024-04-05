@@ -6,6 +6,22 @@
 
 ### 🐞 Fixed
 
+## v1.0.2r1
+
+### ⚡️ Added
+
+- Add `navic` support
+- Integrate `lspconfig` from `Lazyman` with `AstroNvim`
+  - `Lazyman` LSP handlers not yet integrated into `astrolsp`
+- Add example mapping in `astrocore` for `Telescope` themes
+- Add note about leader key in readme
+- Add Features section to readme
+- Add Configuration section to readme
+
+### 🐞 Fixed
+
+- Revert changes to `astrolsp`
+
 ## v1.0.1r4
 
 ### ⚡️ Added
