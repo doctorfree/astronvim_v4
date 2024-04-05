@@ -4,6 +4,13 @@ local lsp_servers = settings.lsp_servers
 
 return {
   {
+    "SmiteshP/nvim-navic",
+    dependencies = "neovim/nvim-lspconfig",
+    config = function()
+      require("configs.navic")
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       {
