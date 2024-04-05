@@ -86,7 +86,10 @@ Beyond the basic features provided by this template, `AstroNvimV4` includes:
 ## Configuration
 
 Neovim options are set in `lua/options.lua`. In addition, some configuration can
-be specified in the file `lua/configuration.lua`:
+be specified in the file `lua/configuration.lua`.
+
+The default leader key in `AstroNvimV4` is set to `,`. To modify the leader key
+or any of several other settings, edit `lua/configuration.lua`.
 
 ```lua
 local conf = {}

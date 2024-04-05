@@ -3,10 +3,6 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
--- We use the LSP server setting 'lsp_installed' in lua/configuration.lua
-local settings = require("configuration")
-local lsp_install = settings.lsp_installed
-
 ---@type LazySpec
 return {
   "AstroNvim/astrolsp",
@@ -19,9 +15,9 @@ return {
       inlay_hints = false, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
     },
-    -- Customize lsp formatting options
+    -- customize lsp formatting options
     formatting = {
-      -- Control auto formatting on save
+      -- control auto formatting on save
       format_on_save = {
         enabled = true, -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
@@ -31,8 +27,8 @@ return {
           -- "python",
         },
       },
-      disabled = { -- Disable formatting capabilities for the listed language servers
-        -- Disable lua_ls formatting capability if you want to use StyLua to format your lua code
+      disabled = { -- disable formatting capabilities for the listed language servers
+        -- disable lua_ls formatting capability if you want to use StyLua to format your lua code
         -- "lua_ls",
       },
       timeout_ms = 1000, -- default format timeout
@@ -40,55 +36,23 @@ return {
       --   return true
       -- end
     },
-    -- Enable servers that you already have installed without mason
-    servers = lsp_install,
-    -- Configure buffer local user commands to add when attaching a language server
-    commands = {
-      Format = {
-        function() vim.lsp.buf.format() end,
-        -- Condition to create the user command
-        -- Can either be a string of a client capability or a function of `fun(client, bufnr): boolean`
-        cond = "textDocument/formatting",
-        -- The rest of the user command options (:h nvim_create_user_command)
-        desc = "Format file with LSP",
-      },
-    },
-    -- Configure default capabilities for language servers (`:h vim.lsp.protocol.make_client.capabilities()`)
-    capabilities = {
-      textDocument = {
-        foldingRange = { dynamicRegistration = false },
-      },
+    -- enable servers that you already have installed without mason
+    servers = {
+      -- "pyright"
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
     },
-    -- A custom flags table to be passed to all language servers  (`:h lspconfig-setup`)
-    flags = {
-      exit_timeout = 5000,
-    },
-    -- Configure how language servers get set up
-    -- A function without a key is simply the default handler, functions take
-    -- two parameters, the server name and the configured options table for that server
-    --     function(server, opts) require("lspconfig")[server].setup(opts) end
-    -- The key is the server that is being setup with `lspconfig`
-    -- Setting a handler to false will disable the set up of that language server
-    --     rust_analyzer = false,
-    -- Or a custom handler function can be passed
-    --     pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end
+    -- customize how language servers are attached
     handlers = {
-      -- Default handler, first entry with no key
-      function(server, opts) require("lspconfig")[server].setup(opts) end,
-      -- Custom function handler for pyright
-      pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end,
-      -- set to false to disable the setup of a language server
-      rust_analyzer = false,
-    },
-    -- Configure `vim.lsp.handlers`
-    lsp_handlers = {
-      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", silent = true }),
-      ["textDocument/signatureHelp"] = false, -- set to false to disable any custom handlers
+      -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
+      -- function(server, opts) require("lspconfig")[server].setup(opts) end
+
+      -- the key is the server that is being setup with `lspconfig`
+      -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
+      -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end -- or a custom handler function can be passed
     },
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {
@@ -115,38 +79,21 @@ return {
         },
       },
     },
-    -- Mappings added when attaching a language server during the core `on_attach`
-    -- The first key into the table is the vim map mode (`:h map-modes`), and the
-    -- value is a table of entries to be passed to `vim.keymap.set` (`:h vim.keymap.set`):
-    --   The key is the first parameter or the vim mode (only a single mode supported)
-    --   and the value is a table of keymaps within that mode:
-    --   The first element with no key in the table is the action (the 2nd parameter)
-    --   and the rest of the keys/value pairs are options for the third parameter.
-    --   There is also a special `cond` key which can either be a string of a language
-    --   server capability or a function with `client` and `bufnr` parameters that returns
-    --   a boolean of whether or not the mapping is added.
+    -- mappings to be set up on attaching of a language server
     mappings = {
-      -- map mode (:h map-modes)
       n = {
-        -- a binding with no condition and therefore is always added
-        gl = {
-          function() vim.diagnostic.open_float() end,
-          desc = "Hover diagnostics",
-        },
-        -- condition for only server with declaration capabilities
-        gD = {
-          function() vim.lsp.buf.declaration() end,
-          desc = "Declaration of current symbol",
-          cond = "textDocument/declaration",
-        },
-        -- condition with a full function with `client` and `bufnr`
-        ["<leader>uY"] = {
-          function() require("astrolsp.toggles").buffer_semantic_tokens() end,
-          desc = "Toggle LSP semantic highlight (buffer)",
-          cond = function(client, bufnr)
-            return client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens
-          end,
-        },
+        gl = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
+        -- a `cond` key can provided as the string of a server capability to be required to attach, or a function with `client` and `bufnr` parameters from the `on_attach` that returns a boolean
+        -- gD = {
+        --   function() vim.lsp.buf.declaration() end,
+        --   desc = "Declaration of current symbol",
+        --   cond = "textDocument/declaration",
+        -- },
+        -- ["<Leader>uY"] = {
+        --   function() require("astrolsp.toggles").buffer_semantic_tokens() end,
+        --   desc = "Toggle LSP semantic highlight (buffer)",
+        --   cond = function(client) return client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens end,
+        -- },
       },
     },
     -- A custom `on_attach` function to be run after the default `on_attach` function
