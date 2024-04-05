@@ -13,6 +13,13 @@ M.map = function(mode, lhs, rhs, opts)
   end
 end
 
+M.concat_tables = function(t1, t2)
+  for _,v in ipairs(t2) do
+    table.insert(t1, v)
+  end
+  return t1
+end
+
 M.table_contains = function(tbl, x)
   local found = false
   for _, v in pairs(tbl) do
