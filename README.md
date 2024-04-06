@@ -31,6 +31,9 @@ git clone https://github.com/doctorfree/astronvim_v4 $HOME/.config/nvim-AstroNvi
 NVIM_APPNAME=nvim-AstroNvimV4 nvim --headless "+Lazy! sync" +qa
 ```
 
+**Note:** Manual installation may require additional dependencies to be installed.
+Use `lazyman` to automatically install dependencies and initialize Neovim configurations.
+
 ## Run
 
 If using `lazyman`, the `nvims` shell function can be used to select `AstroNvimV4`:
