@@ -6,6 +6,20 @@
 
 ### 🐞 Fixed
 
+## v1.0.2r2
+
+### ⚡️ Added
+
+- Integrate LSP handlers/servers into `astrolsp`
+- Move LSP handlers and configuration to `astrolsp`
+- Move capabilities/handlers/on_attach to `lua/configs/lsp`
+- Add test scripts and `lazyman` install script
+
+### 🐞 Fixed
+
+- Remove unused lsp configs
+- Use options.lua in `Alpha` dashboard for `Options` button
+
 ## v1.0.2r1
 
 ### ⚡️ Added
