@@ -5,7 +5,7 @@ local path_ok, path = pcall(require, "plenary.path")
 if not path_ok then return end
 
 local config_path = vim.fn.stdpath "config"
-local options_lua = config_path .. "/lua/plugins/astrocore.lua"
+local options_lua = config_path .. "/lua/options.lua"
 local config_lua = config_path .. "/lua/configuration.lua"
 
 -- local filetree = ":Telescope file_browser<CR>"
