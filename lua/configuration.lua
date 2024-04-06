@@ -59,10 +59,7 @@ conf.show_diagnostics = "popup"
 -- treesitter parsers to be installed
 conf.treesitter_ensure_installed = {
   "bash",
-  "json",
   "lua",
-  "markdown",
-  "markdown_inline",
   "query",
   "regex",
   "vim",
