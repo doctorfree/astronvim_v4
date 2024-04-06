@@ -3,6 +3,31 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
+local settings = require("configuration")
+local lsp_servers = settings.lsp_servers
+local lsp_installed = settings.lsp_installed
+local formatters_linters = settings.formatters_linters
+local external_formatters = settings.external_formatters
+local showdiag = settings.show_diagnostics
+local table_contains = require("utils").table_contains
+local fn = vim.fn
+local api = vim.api
+local keymap = vim.keymap
+local diagnostic = vim.diagnostic
+
+-- set quickfix list from diagnostics in a certain buffer, not the whole workspace
+local set_qflist = function(buf_num, severity)
+  local diagnostics = nil
+  diagnostics = diagnostic.get(buf_num, { severity = severity })
+  local qf_items = diagnostic.toqflist(diagnostics)
+  fn.setqflist({}, ' ', { title = 'Diagnostics', items = qf_items })
+  -- open quickfix by default
+  vim.cmd[[copen]]
+end
+
+local capabilities = require("configs.lsp.capabilities")
+local lspconfig = require("lspconfig")
+
 ---@type LazySpec
 return {
   "AstroNvim/astrolsp",
@@ -29,7 +54,7 @@ return {
       },
       disabled = { -- disable formatting capabilities for the listed language servers
         -- disable lua_ls formatting capability if you want to use StyLua to format your lua code
-        -- "lua_ls",
+        "lua_ls",
       },
       timeout_ms = 1000, -- default format timeout
       -- filter = function(client) -- fully override the default formatting function
@@ -37,9 +62,10 @@ return {
       -- end
     },
     -- enable servers that you already have installed without mason
-    servers = {
-      -- "pyright"
-    },
+    servers = lsp_installed,
+    -- Configure default capabilities for language servers
+    -- (`:h vim.lsp.protocol.make_client.capabilities()`)
+    capabilities = capabilities,
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
@@ -48,12 +74,221 @@ return {
     -- customize how language servers are attached
     handlers = {
       -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
-      -- function(server, opts) require("lspconfig")[server].setup(opts) end
+      function(server, opts) require("lspconfig")[server].setup(opts) end,
 
       -- the key is the server that is being setup with `lspconfig`
-      -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
-      -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end -- or a custom handler function can be passed
+      rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
+      -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end,
+      bashls = function(_, opts)
+        if table_contains(lsp_servers, "bashls") then
+          -- Enable/Disable shellcheck in bashls
+          local bashls_settings = {
+            bashIde = {
+              backgroundAnalysisMaxFiles = 500,
+              enableSourceErrorDiagnostics = false,
+              explainshellEndpoint = "",
+              globPattern = vim.env.GLOB_PATTERN or "*@(.sh|.inc|.bash|.command)",
+              includeAllWorkspaceSymbols = false,
+              logLevel = "info",
+              shellcheckArguments = "",
+              shellcheckPath = vim.env.SHELLCHECK_PATH or "",
+            },
+          }
+          if table_contains(formatters_linters, "shellcheck") then
+            bashls_settings = {
+              bashIde = {
+                backgroundAnalysisMaxFiles = 500,
+                enableSourceErrorDiagnostics = false,
+                explainshellEndpoint = "",
+                globPattern = vim.env.GLOB_PATTERN or "*@(.sh|.inc|.bash|.command)",
+                includeAllWorkspaceSymbols = false,
+                logLevel = "info",
+                shellcheckArguments = "",
+                shellcheckPath = vim.env.SHELLCHECK_PATH or "shellcheck",
+              },
+            }
+          end
+          lspconfig.bashls.setup({ settings = bashls_settings })
+        end
+      end,
+
+      lua_ls = function(_, opts)
+        if table_contains(lsp_installed, "lua_ls") then
+          lspconfig.lua_ls.setup({
+            capabilities = capabilities,
+            require("neodev").setup({
+              library = { plugins = { "nvim-dap-ui" }, types = true },
+              setup_jsonls = true,
+              lspconfig = false,
+              pathStrict = true,
+              override = function(root_dir, library)
+                local util = require("neodev.util")
+                if util.has_file(root_dir, "/etc/nixos") or util.has_file(root_dir, "nvim-config") then
+                  library.enabled = true
+                  library.plugins = true
+                end
+              end,
+            }),
+            -- Note: These settings will meaningfully increase the time until lua_ls
+            -- can service initial requests (completion, location) upon starting as well
+            -- as time to first diagnostics. Completion results will include a workspace
+            -- indexing progress message until the server has finished indexing.
+            before_init = require("neodev.lsp").before_init,
+            settings = {
+              Lua = {
+                runtime = {
+                  version = "LuaJIT",
+                },
+                diagnostics = {
+                  globals = {
+                    "vim",
+                    "describe",
+                    "it",
+                    "before_each",
+                    "after_each",
+                    "pending",
+                    "nnoremap",
+                    "vnoremap",
+                    "inoremap",
+                    "tnoremap",
+                  },
+                },
+                workspace = {
+                  library = api.nvim_get_runtime_file("", true),
+                  checkThirdParty = false,
+                },
+                telemetry = {
+                  enable = false,
+                },
+              },
+            },
+          })
+        end
+      end,
+
+      jsonls = function(_, opts)
+        if table_contains(lsp_installed, "jsonls") then
+          lspconfig.jsonls.setup({
+            capabilities = capabilities,
+            settings = {
+              json = {
+                schemas = require("schemastore").json.schemas(),
+              },
+            },
+          })
+        end
+      end,
+
+      pylsp = function(_, opts)
+        if table_contains(lsp_installed, "pylsp") then
+          local venv_path = os.getenv('VIRTUAL_ENV')
+          local py_path = nil
+          -- decide which python executable to use for mypy
+          if venv_path ~= nil then
+            py_path = venv_path .. "/bin/python3"
+          else
+            py_path = vim.g.python3_host_prog
+          end
+          local enable_black = { enabled = false }
+          if table_contains(external_formatters, "black") then
+            enable_black = { enabled = true }
+          end
+          local enable_ruff = { enabled = false }
+          if table_contains(external_formatters, "ruff") then
+            enable_ruff = { enabled = true }
+          end
+          lspconfig.pylsp.setup({
+            capabilities = capabilities,
+            settings = {
+              pylsp = {
+                plugins = {
+                  -- formatter options
+                  black = enable_black,
+                  autopep8 = { enabled = false },
+                  yapf = { enabled = false },
+                  -- linter options
+                  pylint = { enabled = false },
+                  ruff = enable_ruff,
+                  pyflakes = { enabled = false },
+                  pycodestyle = { enabled = false },
+                  -- type checker
+                  pylsp_mypy = {
+                    enabled = true,
+                    overrides = { "--python-executable", py_path, true },
+                    report_progress = true,
+                    live_mode = false
+                  },
+                  -- auto-completion options
+                  jedi_completion = { fuzzy = true },
+                  -- import sorting
+                  isort = { enabled = true },
+                },
+              },
+            },
+            flags = {
+              debounce_text_changes = 200,
+            },
+          })
+        end
+      end,
+
+      vimls = function(_, opts)
+        if table_contains(lsp_servers, "vimls") then
+          lspconfig.vimls.setup {
+            flags = {
+              debounce_text_changes = 500,
+            },
+            capabilities = capabilities,
+          }
+        end
+      end,
+
+      clangd = function(_, opts)
+        if fn.executable("clangd") == 1 then
+          lspconfig.clangd.setup({
+            capabilities = capabilities,
+            filetypes = { "c", "cpp", "cc" },
+            flags = {
+              debounce_text_changes = 500,
+            },
+          })
+        end
+      end,
+
+      emmet_ls = function(_, opts)
+        if table_contains(lsp_servers, "emmet_ls") then
+          lspconfig.emmet_ls.setup({
+            capabilities = capabilities,
+          })
+        end
+      end,
+
+      graphql = function(_, opts)
+        if table_contains(lsp_servers, "graphql") then
+          lspconfig.graphql.setup({
+            capabilities = capabilities,
+          })
+        end
+      end,
+
+      html = function(_, opts)
+        if table_contains(lsp_installed, "html") then
+          lspconfig.html.setup({
+            capabilities = capabilities,
+          })
+        end
+      end,
+
+      prismals = function(_, opts)
+        if table_contains(lsp_servers, "prismals") then
+          lspconfig.prismals.setup({
+            capabilities = capabilities,
+          })
+        end
+      end,
     },
+    -- Configure `vim.lsp.handlers`
+    lsp_handlers = require("configs.lsp.handlers"),
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {
       -- first key is the `augroup` to add the auto commands to (:h augroup)
@@ -81,26 +316,31 @@ return {
     },
     -- mappings to be set up on attaching of a language server
     mappings = {
+      -- map mode (:h map-modes)
       n = {
-        gl = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
-        -- a `cond` key can provided as the string of a server capability to be required to attach, or a function with `client` and `bufnr` parameters from the `on_attach` that returns a boolean
-        -- gD = {
-        --   function() vim.lsp.buf.declaration() end,
-        --   desc = "Declaration of current symbol",
-        --   cond = "textDocument/declaration",
-        -- },
-        -- ["<Leader>uY"] = {
-        --   function() require("astrolsp.toggles").buffer_semantic_tokens() end,
-        --   desc = "Toggle LSP semantic highlight (buffer)",
-        --   cond = function(client) return client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens end,
-        -- },
+        -- a binding with no condition and therefore is always added
+        gl = {
+          function() vim.diagnostic.open_float() end,
+          desc = "Hover diagnostics",
+        },
+        -- condition for only server with declaration capabilities
+        gD = {
+          function() vim.lsp.buf.declaration() end,
+          desc = "Declaration of current symbol",
+          cond = "textDocument/declaration",
+        },
+        -- condition with a full function with `client` and `bufnr`
+        ["<leader>uY"] = {
+          function() require("astrolsp.toggles").buffer_semantic_tokens() end,
+          desc = "Toggle LSP semantic highlight (buffer)",
+          cond = function(client, bufnr)
+            return client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens
+          end,
+        },
       },
     },
     -- A custom `on_attach` function to be run after the default `on_attach` function
     -- takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)
-    on_attach = function(client, bufnr)
-      -- this would disable semanticTokensProvider for all clients
-      -- client.server_capabilities.semanticTokensProvider = nil
-    end,
+    on_attach = require("configs.lsp.attach").on_attach
   },
 }
