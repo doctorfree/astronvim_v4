@@ -60,9 +60,6 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = lsp_installed,
-    -- Configure default capabilities for language servers
-    -- (`:h vim.lsp.protocol.make_client.capabilities()`)
-    capabilities = require("configs.lsp.capabilities"),
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
