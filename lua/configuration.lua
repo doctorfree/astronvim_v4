@@ -60,7 +60,7 @@ conf.show_diagnostics = "popup"
 conf.treesitter_ensure_installed = {
   "bash",
   "lua",
-  "query",
+  "markdown",
   "regex",
   "vim",
   "vimdoc",

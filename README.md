@@ -28,6 +28,7 @@ Alternately, if `lazyman` is not installed:
 
 ```bash
 git clone https://github.com/doctorfree/astronvim_v4 $HOME/.config/nvim-AstroNvimV4
+NVIM_APPNAME=nvim-AstroNvimV4 nvim --headless "+Lazy! sync" +qa
 ```
 
 ## Run
