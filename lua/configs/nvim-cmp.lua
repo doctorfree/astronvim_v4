@@ -18,6 +18,17 @@ require("luasnip.loaders.from_snipmate").load({ path = { snippet_path }, })
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Command Line                                             │
 -- ╰──────────────────────────────────────────────────────────╯
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = { { name = "buffer" } },
+})
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' } }, {
+    { name = 'cmdline', option = { ignore_cmds = { 'Man', '!' } } }
+  })
+})
 cmp.setup.filetype("java", {
   completion = {
     keyword_length = 2,
@@ -195,6 +206,9 @@ cmp.setup({
   }),
   formatting = {
     format = function(entry, vim_item)
+      if entry.source.name == "luasnip" then
+        vim_item.kind_hl_group = "CmpItemKindSnippet"
+      end
       -- Get the item with kind from the lspkind plugin
       local item_with_kind = require("lspkind").cmp_format({
         mode = "symbol_text",
