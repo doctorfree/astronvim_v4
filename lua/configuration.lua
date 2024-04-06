@@ -61,6 +61,8 @@ conf.treesitter_ensure_installed = {
   "bash",
   "lua",
   "markdown",
+  "python",
+  "query",
   "regex",
   "vim",
   "vimdoc",
