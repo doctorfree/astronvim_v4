@@ -55,6 +55,13 @@ nvim
 
 `AstroNvimV4` is based on the AstroNvim v4 template at https://github.com/AstroNvim/template
 
+The LSP configuration in `AstroNvimV4` leverages the configuration in the
+default `Lazyman` configuration. Much of that LSP configuration, handlers,
+capabilities, `on_attach` function, diagnostics, and more have been integrated
+into the `AstroNvim` v4 `lua/plugins/astrolsp.lua` in `AstroNvimV4`. As such,
+this example configuration may serve as a guide to some advanced LSP
+configuration in `AstroNvim` v4.
+
 Beyond the basic features provided by this template, `AstroNvimV4` includes:
 
 * Options and plugin configuration in `lua/options.lua` and `lua/configuration.lua`
