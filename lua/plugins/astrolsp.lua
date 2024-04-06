@@ -6,24 +6,12 @@
 local settings = require("configuration")
 local lsp_servers = settings.lsp_servers
 local lsp_installed = settings.lsp_installed
+local lsp_all = require("utils").concat_table(lsp_servers, lsp_installed)
 local formatters_linters = settings.formatters_linters
 local external_formatters = settings.external_formatters
-local showdiag = settings.show_diagnostics
 local table_contains = require("utils").table_contains
 local fn = vim.fn
 local api = vim.api
-local keymap = vim.keymap
-local diagnostic = vim.diagnostic
-
--- set quickfix list from diagnostics in a certain buffer, not the whole workspace
-local set_qflist = function(buf_num, severity)
-  local diagnostics = nil
-  diagnostics = diagnostic.get(buf_num, { severity = severity })
-  local qf_items = diagnostic.toqflist(diagnostics)
-  fn.setqflist({}, ' ', { title = 'Diagnostics', items = qf_items })
-  -- open quickfix by default
-  vim.cmd[[copen]]
-end
 
 ---@type LazySpec
 return {
@@ -74,7 +62,7 @@ return {
       rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
       -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end,
       bashls = function(_, opts)
-        if table_contains(lsp_servers, "bashls") then
+        if table_contains(lsp_all, "bashls") then
           -- Enable/Disable shellcheck in bashls
           local bashls_settings = {
             bashIde = {
@@ -107,7 +95,7 @@ return {
       end,
 
       lua_ls = function(_, opts)
-        if table_contains(lsp_installed, "lua_ls") then
+        if table_contains(lsp_all, "lua_ls") then
           require("lspconfig").lua_ls.setup({
             capabilities = require("configs.lsp.capabilities"),
             require("neodev").setup({
@@ -161,7 +149,7 @@ return {
       end,
 
       jsonls = function(_, opts)
-        if table_contains(lsp_installed, "jsonls") then
+        if table_contains(lsp_all, "jsonls") then
           require("lspconfig").jsonls.setup({
             capabilities = require("configs.lsp.capabilities"),
             settings = {
@@ -174,7 +162,7 @@ return {
       end,
 
       pylsp = function(_, opts)
-        if table_contains(lsp_installed, "pylsp") then
+        if table_contains(lsp_all, "pylsp") then
           local venv_path = os.getenv('VIRTUAL_ENV')
           local py_path = nil
           -- decide which python executable to use for mypy
@@ -227,7 +215,7 @@ return {
       end,
 
       vimls = function(_, opts)
-        if table_contains(lsp_servers, "vimls") then
+        if table_contains(lsp_all, "vimls") then
           require("lspconfig").vimls.setup {
             flags = {
               debounce_text_changes = 500,
@@ -250,7 +238,7 @@ return {
       end,
 
       emmet_ls = function(_, opts)
-        if table_contains(lsp_servers, "emmet_ls") then
+        if table_contains(lsp_all, "emmet_ls") then
           require("lspconfig").emmet_ls.setup({
             capabilities = require("configs.lsp.capabilities"),
           })
@@ -258,7 +246,7 @@ return {
       end,
 
       graphql = function(_, opts)
-        if table_contains(lsp_servers, "graphql") then
+        if table_contains(lsp_all, "graphql") then
           require("lspconfig").graphql.setup({
             capabilities = require("configs.lsp.capabilities"),
           })
@@ -266,7 +254,7 @@ return {
       end,
 
       html = function(_, opts)
-        if table_contains(lsp_installed, "html") then
+        if table_contains(lsp_all, "html") then
           require("lspconfig").html.setup({
             capabilities = require("configs.lsp.capabilities"),
           })
@@ -274,7 +262,7 @@ return {
       end,
 
       prismals = function(_, opts)
-        if table_contains(lsp_servers, "prismals") then
+        if table_contains(lsp_all, "prismals") then
           require("lspconfig").prismals.setup({
             capabilities = require("configs.lsp.capabilities"),
           })
