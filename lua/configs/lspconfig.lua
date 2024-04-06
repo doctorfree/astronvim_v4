@@ -1,7 +1,7 @@
 local settings = require("configuration")
 local lsp_servers = settings.lsp_servers
 local lsp_installed = settings.lsp_installed
-local lsp_all = require("utils").concat_table(lsp_servers, lsp_installed)
+local lsp_all = require("utils").concat_tables(lsp_servers, lsp_installed)
 local formatters_linters = settings.formatters_linters
 local showdiag = settings.show_diagnostics
 local table_contains = require("utils").table_contains
