@@ -22,96 +22,7 @@ local set_qflist = function(buf_num, severity)
   vim.cmd[[copen]]
 end
 
-local custom_attach = function(client, bufnr)
-  -- Mappings.
-  local map = function(mode, l, r, opts)
-    opts = opts or {}
-    opts.silent = true
-    opts.buffer = bufnr
-    keymap.set(mode, l, r, opts)
-  end
-
-  map("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
-  map("n", "<C-]>", vim.lsp.buf.definition)
-  map("n", "K", vim.lsp.buf.hover, { desc = "Display symbol info in float"})
-  map("n", "<C-k>", vim.lsp.buf.signature_help)
-  map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "varialbe rename" })
-  map("n", "gr", vim.lsp.buf.references, { desc = "show references" })
-  map("n", "[d", diagnostic.goto_prev, { desc = "previous diagnostic" })
-  map("n", "]d", diagnostic.goto_next, { desc = "next diagnostic" })
-  -- this puts diagnostics from opened files to quickfix
-  map("n", "<leader>qw", diagnostic.setqflist, { desc = "put window diagnostics to qf" })
-  -- this puts diagnostics from current buffer to quickfix
-  map("n", "<leader>qb", function() set_qflist(bufnr) end, { desc = "put buffer diagnostics to qf" })
-  map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
-  map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "add workspace folder" })
-  map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "remove workspace folder" })
-  map("n", "<leader>wl", function()
-    vim.print(vim.lsp.buf.list_workspace_folders())
-  end, { desc = "list workspace folder" })
-
-  -- Set some key bindings conditional on server capabilities
-  if client.server_capabilities.documentFormattingProvider then
-    map("n", "<leader>f", vim.lsp.buf.format, { desc = "format code" })
-  end
-
-  api.nvim_create_autocmd("CursorHold", {
-    buffer = bufnr,
-    callback = function()
-      local float_opts = {
-        focusable = false,
-        close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-        border = "rounded",
-        source = "always", -- show source in diagnostic popup window
-        prefix = " ",
-      }
-
-      if not vim.b.diagnostics_pos then
-        vim.b.diagnostics_pos = { nil, nil }
-      end
-
-      local cursor_pos = api.nvim_win_get_cursor(0)
-      if (cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
-          and #diagnostic.get() > 0
-      then
-        diagnostic.open_float(nil, float_opts)
-      end
-
-      vim.b.diagnostics_pos = cursor_pos
-    end,
-  })
-
-  -- The blow command will highlight the current variable and its usages in the buffer.
-  if client.server_capabilities.documentHighlightProvider then
-    vim.cmd([[
-      hi! link LspReferenceRead Visual
-      hi! link LspReferenceText Visual
-      hi! link LspReferenceWrite Visual
-    ]])
-
-    local gid = api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-    api.nvim_create_autocmd("CursorHold" , {
-      group = gid,
-      buffer = bufnr,
-      callback = function ()
-        vim.lsp.buf.document_highlight()
-      end
-    })
-
-    api.nvim_create_autocmd("CursorMoved" , {
-      group = gid,
-      buffer = bufnr,
-      callback = function ()
-        vim.lsp.buf.clear_references()
-      end
-    })
-  end
-
-  if vim.g.logging_level == "debug" then
-    local msg = string.format("Language server %s started!", client.name)
-    vim.notify(msg, vim.log.levels.DEBUG, { title = "Nvim-config" })
-  end
-end
+local custom_attach = require("configs.lsp.attach").on_attach
 
 local open_float = "<cmd>lua vim.diagnostic.open_float()<cr>"
 if not showdiag == "popup" then
@@ -219,36 +130,10 @@ diagnostic.config({
   update_in_insert = false,
 })
 
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    "documentation",
-    "detail",
-    "additionalTextEdits",
-  },
-}
-
-capabilities.textDocument.foldingRange = {
-  dynamicRegistration = false,
-  lineFoldingOnly = true,
-}
-
+local capabilities = require("configs.lsp.capabilities")
+local handlers = require("configs.lsp.handlers")
 local lspconfig = require("lspconfig")
 local navic = require("nvim-navic")
-
-local handlers = {
-  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    silent = true,
-    border = "rounded",
-  }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-  ["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
-    { virtual_text = false }
-  ),
-}
 
 if table_contains(lsp_servers, "tailwindcss") then
   lspconfig.tailwindcss.setup({
@@ -270,68 +155,6 @@ if table_contains(lsp_installed, "cssls") then
   })
 end
 
-if table_contains(lsp_installed, "pylsp") then
-  local venv_path = os.getenv('VIRTUAL_ENV')
-  local py_path = nil
-  -- decide which python executable to use for mypy
-  if venv_path ~= nil then
-    py_path = venv_path .. "/bin/python3"
-  else
-    py_path = vim.g.python3_host_prog
-  end
-  local enable_black = { enabled = false }
-  if table_contains(external_formatters, "black") then
-    enable_black = { enabled = true }
-  end
-  local enable_ruff = { enabled = false }
-  if table_contains(external_formatters, "ruff") then
-    enable_ruff = { enabled = true }
-  end
-  lspconfig.pylsp.setup({
-    capabilities = capabilities,
-    handlers = handlers,
-    settings = {
-      pylsp = {
-        plugins = {
-          -- formatter options
-          black = enable_black,
-          autopep8 = { enabled = false },
-          yapf = { enabled = false },
-          -- linter options
-          pylint = { enabled = false },
-          ruff = enable_ruff,
-          pyflakes = { enabled = false },
-          pycodestyle = { enabled = false },
-          -- type checker
-          pylsp_mypy = {
-            enabled = true,
-            overrides = { "--python-executable", py_path, true },
-            report_progress = true,
-            live_mode = false
-          },
-          -- auto-completion options
-          jedi_completion = { fuzzy = true },
-          -- import sorting
-          isort = { enabled = true },
-        },
-      },
-    },
-    flags = {
-      debounce_text_changes = 200,
-    },
-  })
-end
-
-if table_contains(lsp_servers, "vimls") then
-  lspconfig.vimls.setup {
-    on_attach = custom_attach,
-    flags = {
-      debounce_text_changes = 500,
-    },
-    capabilities = capabilities,
-  }
-end
-
 if table_contains(lsp_servers, "vuels") then
   lspconfig.vuels.setup({
     filetypes = require("configs.lsp.servers.vuels").filetypes,
@@ -339,18 +162,6 @@ if table_contains(lsp_servers, "vuels") then
     init_options = require("configs.lsp.servers.vuels").init_options,
     on_attach = require("configs.lsp.servers.vuels").on_attach,
     settings = require("configs.lsp.servers.vuels").settings,
-  })
-end
-
-if table_contains(lsp_installed, "jsonls") then
-  lspconfig.jsonls.setup({
-    capabilities = capabilities,
-    handlers = handlers,
-    settings = {
-      json = {
-        schemas = require("schemastore").json.schemas(),
-      },
-    },
   })
 end
 
@@ -534,17 +345,6 @@ if table_contains(lsp_servers, "yamlls") then
   })
 end
 
-if fn.executable("clangd") == 1 then
-  lspconfig.clangd.setup({
-    on_attach = custom_attach,
-    capabilities = capabilities,
-    filetypes = { "c", "cpp", "cc" },
-    flags = {
-      debounce_text_changes = 500,
-    },
-  })
-end
-
 if fn.executable("ccls") == 1 then
   lspconfig.ccls.setup({
     capabilities = capabilities,
@@ -558,89 +358,6 @@ if fn.executable("ccls") == 1 then
         lsRanges = true,
       },
     },
-  })
-end
-
-if table_contains(lsp_installed, "lua_ls") then
-  lspconfig.lua_ls.setup({
-    capabilities = capabilities,
-    handlers = handlers,
-    -- on_attach = navic.attach,
-    on_attach = custom_attach,
-    require("neodev").setup({
-      library = { plugins = { "nvim-dap-ui" }, types = true },
-      setup_jsonls = true,
-      lspconfig = false,
-      pathStrict = true,
-      override = function(root_dir, library)
-        local util = require("neodev.util")
-        if util.has_file(root_dir, "/etc/nixos") or util.has_file(root_dir, "nvim-config") then
-          library.enabled = true
-          library.plugins = true
-        end
-      end,
-    }),
-    -- Note: These settings will meaningfully increase the time until lua_ls
-    -- can service initial requests (completion, location) upon starting as well
-    -- as time to first diagnostics. Completion results will include a workspace
-    -- indexing progress message until the server has finished indexing.
-    before_init = require("neodev.lsp").before_init,
-    settings = {
-      Lua = {
-        runtime = {
-          version = "LuaJIT",
-        },
-        diagnostics = {
-          globals = {
-            "vim",
-            "describe",
-            "it",
-            "before_each",
-            "after_each",
-            "pending",
-            "nnoremap",
-            "vnoremap",
-            "inoremap",
-            "tnoremap",
-          },
-        },
-        workspace = {
-          library = api.nvim_get_runtime_file("", true),
-          checkThirdParty = false,
-        },
-        telemetry = {
-          enable = false,
-        },
-      },
-    },
-  })
-end
-
-if table_contains(lsp_servers, "emmet_ls") then
-  lspconfig.emmet_ls.setup({
-    capabilities = capabilities,
-    handlers = handlers,
-  })
-end
-
-if table_contains(lsp_servers, "graphql") then
-  lspconfig.graphql.setup({
-    capabilities = capabilities,
-    handlers = handlers,
-  })
-end
-
-if table_contains(lsp_installed, "html") then
-  lspconfig.html.setup({
-    capabilities = capabilities,
-    handlers = handlers,
-  })
-end
-
-if table_contains(lsp_servers, "prismals") then
-  lspconfig.prismals.setup({
-    capabilities = capabilities,
-    handlers = handlers,
   })
 end
 
