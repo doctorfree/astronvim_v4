@@ -25,9 +25,6 @@ local set_qflist = function(buf_num, severity)
   vim.cmd[[copen]]
 end
 
-local capabilities = require("configs.lsp.capabilities")
-local lspconfig = require("lspconfig")
-
 ---@type LazySpec
 return {
   "AstroNvim/astrolsp",
@@ -65,7 +62,7 @@ return {
     servers = lsp_installed,
     -- Configure default capabilities for language servers
     -- (`:h vim.lsp.protocol.make_client.capabilities()`)
-    capabilities = capabilities,
+    capabilities = require("configs.lsp.capabilities"),
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
@@ -108,14 +105,14 @@ return {
               },
             }
           end
-          lspconfig.bashls.setup({ settings = bashls_settings })
+          require("lspconfig").bashls.setup({ settings = bashls_settings })
         end
       end,
 
       lua_ls = function(_, opts)
         if table_contains(lsp_installed, "lua_ls") then
-          lspconfig.lua_ls.setup({
-            capabilities = capabilities,
+          require("lspconfig").lua_ls.setup({
+            capabilities = require("configs.lsp.capabilities"),
             require("neodev").setup({
               library = { plugins = { "nvim-dap-ui" }, types = true },
               setup_jsonls = true,
@@ -168,8 +165,8 @@ return {
 
       jsonls = function(_, opts)
         if table_contains(lsp_installed, "jsonls") then
-          lspconfig.jsonls.setup({
-            capabilities = capabilities,
+          require("lspconfig").jsonls.setup({
+            capabilities = require("configs.lsp.capabilities"),
             settings = {
               json = {
                 schemas = require("schemastore").json.schemas(),
@@ -197,8 +194,8 @@ return {
           if table_contains(external_formatters, "ruff") then
             enable_ruff = { enabled = true }
           end
-          lspconfig.pylsp.setup({
-            capabilities = capabilities,
+          require("lspconfig").pylsp.setup({
+            capabilities = require("configs.lsp.capabilities"),
             settings = {
               pylsp = {
                 plugins = {
@@ -234,19 +231,19 @@ return {
 
       vimls = function(_, opts)
         if table_contains(lsp_servers, "vimls") then
-          lspconfig.vimls.setup {
+          require("lspconfig").vimls.setup {
             flags = {
               debounce_text_changes = 500,
             },
-            capabilities = capabilities,
+            capabilities = require("configs.lsp.capabilities"),
           }
         end
       end,
 
       clangd = function(_, opts)
         if fn.executable("clangd") == 1 then
-          lspconfig.clangd.setup({
-            capabilities = capabilities,
+          require("lspconfig").clangd.setup({
+            capabilities = require("configs.lsp.capabilities"),
             filetypes = { "c", "cpp", "cc" },
             flags = {
               debounce_text_changes = 500,
@@ -257,32 +254,32 @@ return {
 
       emmet_ls = function(_, opts)
         if table_contains(lsp_servers, "emmet_ls") then
-          lspconfig.emmet_ls.setup({
-            capabilities = capabilities,
+          require("lspconfig").emmet_ls.setup({
+            capabilities = require("configs.lsp.capabilities"),
           })
         end
       end,
 
       graphql = function(_, opts)
         if table_contains(lsp_servers, "graphql") then
-          lspconfig.graphql.setup({
-            capabilities = capabilities,
+          require("lspconfig").graphql.setup({
+            capabilities = require("configs.lsp.capabilities"),
           })
         end
       end,
 
       html = function(_, opts)
         if table_contains(lsp_installed, "html") then
-          lspconfig.html.setup({
-            capabilities = capabilities,
+          require("lspconfig").html.setup({
+            capabilities = require("configs.lsp.capabilities"),
           })
         end
       end,
 
       prismals = function(_, opts)
         if table_contains(lsp_servers, "prismals") then
-          lspconfig.prismals.setup({
-            capabilities = capabilities,
+          require("lspconfig").prismals.setup({
+            capabilities = require("configs.lsp.capabilities"),
           })
         end
       end,
