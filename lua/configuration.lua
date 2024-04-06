@@ -60,16 +60,13 @@ conf.show_diagnostics = "popup"
 conf.treesitter_ensure_installed = {
   "bash",
   "json",
-  "jsonc",
   "lua",
   "markdown",
   "markdown_inline",
-  "python",
   "query",
   "regex",
   "vim",
   "vimdoc",
-  "yaml",
 }
 -- Formatters and linters installed by mason-tool-installer
 conf.formatters_linters = {
