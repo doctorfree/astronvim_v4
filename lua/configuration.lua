@@ -138,7 +138,6 @@ conf.null_ensure_installed = {
   "php-cs-fixer",
   "prettierd",
   "shfmt",
-  "stylua",
 }
 
 return conf
