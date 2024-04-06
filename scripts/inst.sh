@@ -31,10 +31,8 @@ else
   cp -a astronvim_v4 ${CFDIR}
   export NVIM_APPNAME="${CFG}"
   printf "\n\nInitializing ${CFG} ..."
-  nvim --headless "+Lazy! sync" +qa >/dev/null 2>&1
-  nvim --headless "+Lazy! sync" +qa >/dev/null 2>&1
-  nvim --headless "+Lazy! sync" +qa >/dev/null 2>&1
-  nvim --headless "+Lazy! sync" +qa >/dev/null 2>&1
+  nvim --headless "+Lazy! sync" +qa
+  nvim --headless "+Lazy! sync" +qa
   printf " done\n"
   [ "$1" == "-t" ] && {
     vim ${CFDIR}/lua/configuration.lua

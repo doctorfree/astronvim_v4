@@ -286,7 +286,6 @@ local other_servers_with_navic = {
   "rust_analyzer",
   "ansiblels",
   "cmake",
-  "taplo",
 }
 local check_servers_with_navic = {
   "pyright",

@@ -105,9 +105,9 @@ conf.lsp_installed = {
   "cssls",
   "denols",
   "html",
-  "jsonls",
   "lua_ls",
   "pylsp",
+  "vimls",
 }
 -- Language servers that should be installed by mason-lspconfig
 conf.lsp_servers = {
@@ -127,9 +127,9 @@ conf.lsp_servers = {
   "pyright",
   -- "sqlls",
   -- "tailwindcss",
+  "taplo",
   -- "texlab",
   "tsserver",
-  "vimls",
   "vuels",
   "yamlls",
 }
