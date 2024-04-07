@@ -107,6 +107,7 @@ conf.lsp_installed = {
   "html",
   "lua_ls",
   "pylsp",
+  "pyright",
   "tsserver",
   "vimls",
 }
@@ -125,7 +126,6 @@ conf.lsp_servers = {
   "jsonls",
   "marksman",
   -- "prismals",
-  "pyright",
   -- "sqlls",
   -- "tailwindcss",
   "taplo",

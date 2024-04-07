@@ -274,7 +274,6 @@ local other_servers_with_navic = {
   "cmake",
 }
 local check_servers_with_navic = {
-  "pyright",
   "cssmodules_ls",
   "dockerls",
   "marksman",

@@ -60,7 +60,37 @@ return {
 
       -- the key is the server that is being setup with `lspconfig`
       rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
-      -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end,
+      pyright = function(_, opts)
+        if table_contains(lsp_all, "pyright") then
+          require("lspconfig").pyright.setup({
+            capabilities = require("configs.lsp.capabilities"),
+            settings = {
+              python = {
+                analysis = {
+                  indexing = true,
+                  typeCheckingMode = "basic",
+                  diagnosticMode = "workspace",
+                  autoImportCompletions = true,
+                  autoSearchPaths = true,
+                  inlayHints = {
+                    variableTypes = true,
+                    functionReturnTypes = true,
+                  },
+                  useLibraryCodeForTypes = true,
+                  diagnosticSeverityOverrides = {
+                    reportGeneralTypeIssues = "none",
+                    reportOptionalMemberAccess = "none",
+                    reportOptionalSubscript = "none",
+                    reportPrivateImportUsage = "none",
+                    reportUnusedExpression = "none",
+                  },
+                },
+              },
+            },
+          })
+        end
+      end,
+
       bashls = function(_, opts)
         if table_contains(lsp_all, "bashls") then
           -- Enable/Disable shellcheck in bashls
