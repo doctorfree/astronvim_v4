@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   "hrsh7th/cmp-cmdline",
   keys = { ":", "/", "?" }, -- lazy load cmp on more keys along with insert mode

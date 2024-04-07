@@ -133,11 +133,5 @@ conf.lsp_servers = {
   "vuels",
   "yamlls",
 }
--- Language servers/formatters installed with mason-null-ls
-conf.null_ensure_installed = {
-  "php-cs-fixer",
-  "prettierd",
-  "shfmt",
-}
 
 return conf

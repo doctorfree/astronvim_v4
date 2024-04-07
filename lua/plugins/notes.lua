@@ -1,6 +1,7 @@
 local settings = require("configuration")
 local obsidian_vault = settings.obsidian_vault
 
+---@type LazySpec
 return {
   {
     "toppair/peek.nvim",

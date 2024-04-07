@@ -2,6 +2,7 @@ local settings = require("configuration")
 local formatters_linters = settings.formatters_linters
 local lsp_servers = settings.lsp_servers
 
+---@type LazySpec
 return {
   {
     "SmiteshP/nvim-navic",
@@ -43,8 +44,10 @@ return {
       vim.list_extend(cmds, { "LspInfo", "LspLog", "LspStart" }) -- add normal `nvim-lspconfig` commands
     end,
     event = "User AstroFile",
-    config = function()
-      local opts = {
+    config = function(plugin, opts)
+      -- Include the default astronvim config that calls the setup call
+      require "astronvim.plugins.configs.lspconfig"(plugin, opts)
+      local masonopts = {
         ensure_installed = formatters_linters,
         ui = {
           border = "rounded",
@@ -55,10 +58,10 @@ return {
           },
         },
       }
-      require("mason").setup(opts)
+      require("mason").setup(masonopts)
       local mr = require("mason-registry")
       local function install_ensured()
-        for _, tool in ipairs(opts.ensure_installed) do
+        for _, tool in ipairs(masonopts.ensure_installed) do
           local p = mr.get_package(tool)
           if not p:is_installed() then
             p:install()

@@ -1,48 +1,22 @@
-local settings = require("configuration")
+-- Customize Mason plugins
+
+local settings = require "configuration"
 local formatters_linters = settings.formatters_linters
 local lsp_servers = settings.lsp_servers
-local null_ensure_installed = settings.null_ensure_installed
-local utils = require("utils.linter")
+local utils = require "utils.linter"
 
 ---@type LazySpec
 return {
-  -- use mason-lspconfig to configure LSP installations
+  -- Use mason-lspconfig to configure LSP installations
   {
     "williamboman/mason-lspconfig.nvim",
-    -- overrides `require("mason-lspconfig").setup(...)`
+    -- Overrides `require("mason-lspconfig").setup(...)`
     opts = function(_, opts)
-      -- lsp_servers defined in lua/configuration.lua
-      opts.ensure_installed =
-        require("astrocore").list_insert_unique(opts.ensure_installed, lsp_servers)
+      -- LSP_servers defined in lua/configuration.lua
+      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, lsp_servers)
     end,
   },
-  -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
-  {
-    "jay-babu/mason-null-ls.nvim",
-    -- overrides `require("mason-null-ls").setup(...)`
-    opts = function(_, opts)
-      -- null_ensure_installed defined in lua/configuration.lua
-      opts.ensure_installed =
-        require("astrocore").list_insert_unique(opts.ensure_installed, null_ensure_installed)
-    end,
-  },
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    -- overrides `require("mason-nvim-dap").setup(...)`
-    opts = function(_, opts)
-      -- add more things to the ensure_installed table protecting against community packs modifying it
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-        "bash",
-        "php",
-        "python",
-        -- add more arguments for adding more debuggers
-      })
-      if not opts.handlers then opts.handlers = {} end
-      -- make sure python doesn't get set up by mason-nvim-dap,
-      -- it's being set up by nvim-dap-python
-      opts.handlers.python = function() end
-    end,
-  },
+
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     dependencies = "williamboman/mason.nvim",
@@ -57,6 +31,7 @@ return {
       vim.defer_fn(vim.cmd.MasonToolsInstall, 2000)
     end,
   },
+
   {
     "linux-cultist/venv-selector.nvim",
     dependencies = {
@@ -74,6 +49,7 @@ return {
     opts = {},
     cmd = { "VenvSelect", "VenvSelectCached" },
   },
+
   {
     "mfussenegger/nvim-dap-python",
     dependencies = "mfussenegger/nvim-dap",
@@ -83,6 +59,7 @@ return {
       require("dap-python").setup(path, opts)
     end,
   },
+
   {
     "stevearc/conform.nvim",
     cmd = "ConformInfo",
@@ -97,10 +74,9 @@ return {
         desc = " Format & Save",
       },
     },
-    config = function()
-      require("configs.conform")
-    end,
+    config = function() require "configs.conform" end,
   },
+
   {
     "mfussenegger/nvim-lint",
     event = "VeryLazy",
@@ -110,6 +86,7 @@ return {
       utils.lintTriggers()
     end,
   },
+
   {
     "b0o/SchemaStore.nvim",
     dependencies = {

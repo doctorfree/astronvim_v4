@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   { "styled-components/vim-styled-components", lazy = false },
   {
