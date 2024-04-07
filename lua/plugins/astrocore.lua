@@ -133,6 +133,23 @@ return {
             vim.opt_local["foldcolumn"] = "0"
           end,
         },
+        {
+          event = { "VimResized" },
+          desc = "Resize splits if window got resized",
+          group = "astronvimv4",
+          callback = function()
+            vim.cmd("tabdo wincmd =")
+          end,
+        },
+        {
+          event = { "UIEnter" },
+          once = true,
+          desc = "Get GUI config when entering UI",
+          group = "astronvimv4",
+          callback = function()
+            require("ginit")
+          end,
+        },
       },
     },
   },
