@@ -1,7 +1,6 @@
 local present_dapui, dapui = pcall(require, "dapui")
 local present_dap, dap = pcall(require, "dap")
 local present_virtual_text, dap_vt = pcall(require, "nvim-dap-virtual-text")
-local _, shade = pcall(require, "shade")
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
@@ -31,7 +30,27 @@ dap_vt.setup {
 -- │ DAP UI Setup                                             │
 -- ╰──────────────────────────────────────────────────────────╯
 dapui.setup {
-  icons = { expanded = "▾", collapsed = "▸" },
+  controls = {
+    element = "repl",
+    enabled = true,
+    icons = {
+      disconnect = "",
+      pause = "",
+      play = "",
+      run_last = "",
+      step_back = "",
+      step_into = "",
+      step_out = "",
+      step_over = "",
+      terminate = ""
+    }
+  },
+  force_buffers = true,
+  icons = {
+    expanded = "▾",
+    collapsed = "▸",
+    current_frame = "",
+  },
   mappings = {
     -- Use a table to apply multiple mappings
     expand = { "<CR>", "<2-LeftMouse>" },
@@ -72,6 +91,7 @@ dapui.setup {
       position = "bottom",
     },
   },
+  element_mappings = {},
   floating = {
     max_height = nil, -- These can be integers or a float between 0 and 1.
     max_width = nil, -- Floats will be treated as percentage of your screen.
@@ -83,6 +103,8 @@ dapui.setup {
   windows = { indent = 1 },
   render = {
     max_type_length = nil, -- Can be integer or nil.
+    indent = 1,
+    max_value_lines = 100
   },
 }
 

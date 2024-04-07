@@ -63,28 +63,6 @@ attach.on_attach = function(client, bufnr)
     end,
   })
 
-  -- The blow command will highlight the current variable and its usages in the buffer.
-  if client.server_capabilities.documentHighlightProvider then
-    vim.cmd [[
-      hi! link LspReferenceRead Visual
-      hi! link LspReferenceText Visual
-      hi! link LspReferenceWrite Visual
-    ]]
-
-    local gid = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-    vim.api.nvim_create_autocmd("CursorHold", {
-      group = gid,
-      buffer = bufnr,
-      callback = function() vim.lsp.buf.document_highlight() end,
-    })
-
-    vim.api.nvim_create_autocmd("CursorMoved", {
-      group = gid,
-      buffer = bufnr,
-      callback = function() vim.lsp.buf.clear_references() end,
-    })
-  end
-
   if vim.g.logging_level == "debug" then
     local msg = string.format("Language server %s started!", client.name)
     vim.notify(msg, vim.log.levels.DEBUG, { title = "Nvim-config" })

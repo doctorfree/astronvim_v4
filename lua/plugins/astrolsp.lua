@@ -152,7 +152,6 @@ return {
         -- can service initial requests (completion, location) upon starting as well
         -- as time to first diagnostics. Completion results will include a workspace
         -- indexing progress message until the server has finished indexing.
-        before_init = require("neodev.lsp").before_init,
         settings = {
           Lua = {
             runtime = {
@@ -251,21 +250,7 @@ return {
 
       lua_ls = function(_, opts)
         if table_contains(lsp_all, "lua_ls") then
-          require("lspconfig").lua_ls.setup {
-            require("neodev").setup {
-              library = { plugins = { "nvim-dap-ui" }, types = true },
-              setup_jsonls = true,
-              lspconfig = false,
-              pathStrict = true,
-              override = function(root_dir, library)
-                local util = require "neodev.util"
-                if util.has_file(root_dir, "/etc/nixos") or util.has_file(root_dir, "nvim-config") then
-                  library.enabled = true
-                  library.plugins = true
-                end
-              end,
-            },
-          }
+          require("lspconfig").lua_ls.setup(opts)
         end
       end,
 
@@ -331,7 +316,7 @@ return {
         -- condition will be resolved for each client on each execution and if it ever
         -- fails for all clients, the auto commands will be deleted for that buffer
 
-        -- cond = "textDocument/documentHighlight",
+        cond = "textDocument/documentHighlight",
         -- cond = function(client, bufnr) return client.name == "lua_ls" end,
 
         -- List of auto commands to set

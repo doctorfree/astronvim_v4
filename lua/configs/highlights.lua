@@ -1,7 +1,5 @@
-local present, tokyonight = pcall(require, "tokyonight")
-if not present then
-  return
-end
+local present = pcall(require, "tokyonight")
+if not present then return end
 
 local c = require("tokyonight.colors").setup()
 

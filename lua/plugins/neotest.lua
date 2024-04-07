@@ -40,11 +40,20 @@ return {
           "hrsh7th/nvim-cmp",
         },
         opts = function(_, opts)
-          opts.library = opts.library or {}
-          if opts.library.plugins ~= true then
-            opts.library.plugins = require("astrocore").list_insert_unique(opts.library.plugins, { "neotest" })
+          opts.library = {
+            plugins = { "nvim-dap-ui", "neotest" },
+            types = true
+          }
+          opts.setup_jsonls = true
+          opts.lspconfig = true
+          opts.pathStrict = true
+          opts.override = function(root_dir, library)
+            local util = require "neodev.util"
+            if util.has_file(root_dir, "/etc/nixos") or util.has_file(root_dir, "nvim-config") then
+              library.enabled = true
+              library.plugins = true
+            end
           end
-          opts.library.types = true
         end,
       },
     },

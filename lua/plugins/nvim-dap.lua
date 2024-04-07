@@ -1,10 +1,15 @@
 ---@type LazySpec
 return {
   {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
+    },
+  },
+  {
     "mfussenegger/nvim-dap",
-    config = function()
-      require("configs.dap")
-    end,
+    config = function() require "configs.dap" end,
     keys = {
       "<Leader>da",
       "<Leader>db",
