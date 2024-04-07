@@ -8,7 +8,7 @@ vim.api.nvim_set_hl(0, "NavicSeparator", { link = "Comment" })
 navic.setup {
     lsp = {
         auto_attach = true,
-        preference = { "pylsp", "pyright" },
+        -- preference = { "pylsp", "pyright" },
     },
     highlight = true,
     separator = " " .. icons.misc.caretRight .. " ",

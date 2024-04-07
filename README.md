@@ -28,7 +28,11 @@ Alternately, if `lazyman` is not installed:
 
 ```bash
 git clone https://github.com/doctorfree/astronvim_v4 $HOME/.config/nvim-AstroNvimV4
+NVIM_APPNAME=nvim-AstroNvimV4 nvim --headless "+Lazy! sync" +qa
 ```
+
+**Note:** Manual installation may require additional dependencies to be installed.
+Use `lazyman` to automatically install dependencies and initialize Neovim configurations.
 
 ## Run
 
@@ -64,15 +68,15 @@ configuration in `AstroNvim` v4.
 
 Beyond the basic features provided by this template, `AstroNvimV4` includes:
 
-* Options and plugin configuration in `lua/options.lua` and `lua/configuration.lua`
-* Mason/null-ls installed formatters, linters, language servers
-* LSP configuration for several language servers
-* Formatters and Linters configured in `.linter_configs/`
-* Highly customized `alpha.nvim` dashboard
-* Support for multiple colorschemes and colorscheme switching
-* An icon set for use with several plugins
-* Neovim command line customization
-* Many additional plugins enabled in `lua/plugins`:
+- Options and plugin configuration in `lua/options.lua` and `lua/configuration.lua`
+- Mason/null-ls installed formatters, linters, language servers
+- LSP configuration for several language servers
+- Formatters and Linters configured in `.linter_configs/`
+- Highly customized `alpha.nvim` dashboard
+- Support for multiple colorschemes and colorscheme switching
+- An icon set for use with several plugins
+- Neovim command line customization
+- Many additional plugins enabled in `lua/plugins`:
   - autocomplete.lua
   - bufferline.lua
   - cmp-cmdline.lua
@@ -150,6 +154,12 @@ conf.obsidian_vault = "Documents/Notes/Obsidian"
 
 -- use rg instead of grep
 conf.grepprg = "rg --hidden --vimgrep --smart-case --"
+
+-- Show diagnostics, can be one of "none", "icons", "popup". Default is "popup"
+--   "none":  diagnostics are disabled but still underlined
+--   "icons": only an icon will show, use ',de' to see the diagnostic
+--   "popup": an icon will show and a popup with the diagnostic will appear
+conf.show_diagnostics = "popup"
 
 -- treesitter parsers to be installed
 conf.treesitter_ensure_installed = {

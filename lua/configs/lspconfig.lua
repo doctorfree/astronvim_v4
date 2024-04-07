@@ -1,28 +1,14 @@
 local settings = require("configuration")
 local lsp_servers = settings.lsp_servers
 local lsp_installed = settings.lsp_installed
+local lsp_all = require("utils").concat_tables(lsp_servers, lsp_installed)
 local formatters_linters = settings.formatters_linters
-local external_formatters = settings.external_formatters
 local showdiag = settings.show_diagnostics
 local table_contains = require("utils").table_contains
 local fn = vim.fn
 local api = vim.api
 local keymap = vim.keymap
 local diagnostic = vim.diagnostic
-
--- set quickfix list from diagnostics in a certain buffer, not the whole workspace
-local set_qflist = function(buf_num, severity)
-  local diagnostics = nil
-  diagnostics = diagnostic.get(buf_num, { severity = severity })
-
-  local qf_items = diagnostic.toqflist(diagnostics)
-  fn.setqflist({}, ' ', { title = 'Diagnostics', items = qf_items })
-
-  -- open quickfix by default
-  vim.cmd[[copen]]
-end
-
-local custom_attach = require("configs.lsp.attach").on_attach
 
 local open_float = "<cmd>lua vim.diagnostic.open_float()<cr>"
 if not showdiag == "popup" then
@@ -135,7 +121,7 @@ local handlers = require("configs.lsp.handlers")
 local lspconfig = require("lspconfig")
 local navic = require("nvim-navic")
 
-if table_contains(lsp_servers, "tailwindcss") then
+if table_contains(lsp_all, "tailwindcss") then
   lspconfig.tailwindcss.setup({
     capabilities = require("configs.lsp.servers.tailwindcss").capabilities,
     filetypes = require("configs.lsp.servers.tailwindcss").filetypes,
@@ -146,7 +132,7 @@ if table_contains(lsp_servers, "tailwindcss") then
   })
 end
 
-if table_contains(lsp_installed, "cssls") then
+if table_contains(lsp_all, "cssls") then
   lspconfig.cssls.setup({
     capabilities = capabilities,
     handlers = handlers,
@@ -155,7 +141,7 @@ if table_contains(lsp_installed, "cssls") then
   })
 end
 
-if table_contains(lsp_servers, "vuels") then
+if table_contains(lsp_all, "vuels") then
   lspconfig.vuels.setup({
     filetypes = require("configs.lsp.servers.vuels").filetypes,
     handlers = handlers,
@@ -165,7 +151,7 @@ if table_contains(lsp_servers, "vuels") then
   })
 end
 
-if table_contains(lsp_servers, "eslint") then
+if table_contains(lsp_all, "eslint") then
   lspconfig.eslint.setup({
     cmd = { "vscode-eslint-language-server", "--stdio" },
     capabilities = capabilities,
@@ -224,7 +210,7 @@ if table_contains(lsp_servers, "eslint") then
   })
 end
 
-if table_contains(lsp_servers, "tsserver") then
+if table_contains(lsp_all, "tsserver") then
   if settings.typescript_server == "tsserver" then
     -- make sure to only run this once!
     local formatter_bin = "eslint_d"
@@ -286,10 +272,8 @@ local other_servers_with_navic = {
   "rust_analyzer",
   "ansiblels",
   "cmake",
-  "taplo",
 }
 local check_servers_with_navic = {
-  "pyright",
   "cssmodules_ls",
   "dockerls",
   "marksman",
@@ -297,7 +281,7 @@ local check_servers_with_navic = {
   "texlab",
 }
 for _, server in ipairs(check_servers_with_navic) do
-  if table_contains(lsp_servers, server) then
+  if table_contains(lsp_all, server) then
     table.insert(other_servers_with_navic, server)
   end
 end
@@ -310,55 +294,6 @@ for _, server in ipairs(other_servers_with_navic) do
       end,
     })
   end
-end
-
-if table_contains(lsp_servers, "yamlls") then
-  lspconfig.yamlls.setup({
-    capabilities = capabilities,
-    handlers = handlers,
-    on_attach = function(client, bufnr)
-      navic.attach(client, bufnr)
-    end,
-    schemaStore = {
-      enable = true,
-      url = "https://www.schemastore.org/api/json/catalog.json",
-    },
-    schemas = {
-      kubernetes = "*.yaml",
-      ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
-      ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
-      ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
-      ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
-      ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
-      ["http://json.schemastore.org/ansible-playbook"] = "*play*.{yml,yaml}",
-      ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
-      ["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
-      ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "*gitlab-ci*.{yml,yaml}",
-      ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "*api*.{yml,yaml}",
-      ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
-      ["https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json"] = "*flow*.{yml,yaml}",
-    },
-    format = { enabled = false },
-    validate = false,
-    completion = true,
-    hover = true,
-  })
-end
-
-if fn.executable("ccls") == 1 then
-  lspconfig.ccls.setup({
-    capabilities = capabilities,
-    handlers = handlers,
-    on_attach = navic.attach,
-    init_options = {
-      cache = {
-        directory = ".ccls-cache",
-      },
-      highlight = {
-        lsRanges = true,
-      },
-    },
-  })
 end
 
 local setup_servers = function()

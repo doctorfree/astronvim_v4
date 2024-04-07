@@ -59,17 +59,13 @@ conf.show_diagnostics = "popup"
 -- treesitter parsers to be installed
 conf.treesitter_ensure_installed = {
   "bash",
-  "json",
-  "jsonc",
   "lua",
   "markdown",
   "markdown_inline",
-  "python",
   "query",
   "regex",
   "vim",
   "vimdoc",
-  "yaml",
 }
 -- Formatters and linters installed by mason-tool-installer
 conf.formatters_linters = {
@@ -79,7 +75,7 @@ conf.formatters_linters = {
   "golines",
   "golangci-lint",
   "google-java-format",
-  "latexindent",
+  -- "latexindent",
   "markdownlint",
   -- "debugpy",
   "isort",
@@ -99,19 +95,21 @@ conf.formatters_linters = {
 }
 -- Formatters and linters installed externally
 conf.external_formatters = {
-  "beautysh",
+  -- "beautysh",
   "black",
-  "flake8",
-  "ruff",
+  -- "flake8",
+  -- "ruff",
 }
 -- Language servers installed by the Lazyman initialization
 conf.lsp_installed = {
   "cssls",
   "denols",
   "html",
-  "jsonls",
   "lua_ls",
   "pylsp",
+  "pyright",
+  "tsserver",
+  "vimls",
 }
 -- Language servers that should be installed by mason-lspconfig
 conf.lsp_servers = {
@@ -128,12 +126,10 @@ conf.lsp_servers = {
   "jsonls",
   "marksman",
   -- "prismals",
-  "pyright",
   -- "sqlls",
   -- "tailwindcss",
+  "taplo",
   -- "texlab",
-  "tsserver",
-  "vimls",
   "vuels",
   "yamlls",
 }
@@ -142,7 +138,6 @@ conf.null_ensure_installed = {
   "php-cs-fixer",
   "prettierd",
   "shfmt",
-  "stylua",
 }
 
 return conf

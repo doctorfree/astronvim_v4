@@ -6,9 +6,9 @@ M.attach = function(client, buffer)
     return
   end
 
-  if client.name == "pylsp" then
-    return
-  end
+  -- if client.name == "pylsp" then
+  --   return
+  -- end
 
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, buffer)

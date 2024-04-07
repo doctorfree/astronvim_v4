@@ -63,5 +63,77 @@ return {
         -- ["<esc>"] = false,
       },
     },
+    autocmds = {
+      -- autocommands are organized into augroups for easy management
+      autohidetabline = {
+        -- each augroup contains a list of auto commands
+        {
+          -- create a new autocmd on the "User" event
+          event = "User",
+          -- the pattern is the name of our User autocommand events
+          pattern = "AstroBufsUpdated", -- triggered when vim.t.bufs is updated
+          -- nice description
+          desc = "Hide tabline when only one buffer and one tab",
+          -- add the autocmd to the newly created augroup
+          group = "autohidetabline",
+          callback = function()
+            -- if there is more than one buffer in the tab, show the tabline
+            -- if there are 0 or 1 buffers in the tab, only show the tabline if there is more than one vim tab
+            local new_showtabline = #vim.t.bufs > 1 and 2 or 1
+            -- check if the new value is the same as the current value
+            if new_showtabline ~= vim.opt.showtabline:get() then
+              -- if it is different, then set the new `showtabline` value
+              vim.opt.showtabline = new_showtabline
+            end
+          end,
+        },
+      },
+      astronvimv4 = {
+        {
+          event = { "BufRead", "BufNewFile" },
+          pattern = "*/node_modules/*",
+          desc = "Disable diagnostics in node_modules",
+          group = "astronvimv4",
+          command = "lua vim.diagnostic.disable(0)",
+        },
+        {
+          event = { "BufRead", "BufNewFile" },
+          pattern = { "*.txt", "*.md", "*.tex" },
+          desc = "Enable spell checking for certain file types",
+          group = "astronvimv4",
+          command = "setlocal spell",
+        },
+        {
+          event = { "BufRead", "BufNewFile" },
+          pattern = { "*.txt", "*.md", "*.json" },
+          desc = "Show `` in specific files",
+          group = "astronvimv4",
+          command = "setlocal conceallevel=0",
+        },
+        {
+          event = { "WinEnter", "BufWinEnter", "TermOpen" },
+          desc = "Auto insert mode for Terminal",
+          group = "astronvimv4",
+          callback = function(args)
+            if vim.startswith(vim.api.nvim_buf_get_name(args.buf), "term://") then
+              vim.opt_local.wrap = true
+              vim.opt_local.spell = false
+              vim.cmd("startinsert")
+            end
+          end,
+        },
+        {
+          event = { "TermOpen" },
+          desc = "Disable line numbers and columns for Terminal",
+          group = "astronvimv4",
+          pattern = { "*" },
+          callback = function()
+            vim.opt_local["number"] = false
+            vim.opt_local["signcolumn"] = "no"
+            vim.opt_local["foldcolumn"] = "0"
+          end,
+        },
+      },
+    },
   },
 }

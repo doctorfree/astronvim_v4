@@ -35,6 +35,9 @@ return {
       },
       {
         "folke/neodev.nvim",
+        dependencies = {
+          "hrsh7th/nvim-cmp",
+        },
         opts = function(_, opts)
           opts.library = opts.library or {}
           if opts.library.plugins ~= true then

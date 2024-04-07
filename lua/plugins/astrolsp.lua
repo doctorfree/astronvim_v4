@@ -6,27 +6,12 @@
 local settings = require("configuration")
 local lsp_servers = settings.lsp_servers
 local lsp_installed = settings.lsp_installed
+local lsp_all = require("utils").concat_tables(lsp_servers, lsp_installed)
 local formatters_linters = settings.formatters_linters
 local external_formatters = settings.external_formatters
-local showdiag = settings.show_diagnostics
 local table_contains = require("utils").table_contains
 local fn = vim.fn
 local api = vim.api
-local keymap = vim.keymap
-local diagnostic = vim.diagnostic
-
--- set quickfix list from diagnostics in a certain buffer, not the whole workspace
-local set_qflist = function(buf_num, severity)
-  local diagnostics = nil
-  diagnostics = diagnostic.get(buf_num, { severity = severity })
-  local qf_items = diagnostic.toqflist(diagnostics)
-  fn.setqflist({}, ' ', { title = 'Diagnostics', items = qf_items })
-  -- open quickfix by default
-  vim.cmd[[copen]]
-end
-
-local capabilities = require("configs.lsp.capabilities")
-local lspconfig = require("lspconfig")
 
 ---@type LazySpec
 return {
@@ -63,9 +48,6 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = lsp_installed,
-    -- Configure default capabilities for language servers
-    -- (`:h vim.lsp.protocol.make_client.capabilities()`)
-    capabilities = capabilities,
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
@@ -78,9 +60,39 @@ return {
 
       -- the key is the server that is being setup with `lspconfig`
       rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
-      -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end,
+      pyright = function(_, opts)
+        if table_contains(lsp_all, "pyright") then
+          require("lspconfig").pyright.setup({
+            capabilities = require("configs.lsp.capabilities"),
+            settings = {
+              python = {
+                analysis = {
+                  indexing = true,
+                  typeCheckingMode = "basic",
+                  diagnosticMode = "workspace",
+                  autoImportCompletions = true,
+                  autoSearchPaths = true,
+                  inlayHints = {
+                    variableTypes = true,
+                    functionReturnTypes = true,
+                  },
+                  useLibraryCodeForTypes = true,
+                  diagnosticSeverityOverrides = {
+                    reportGeneralTypeIssues = "none",
+                    reportOptionalMemberAccess = "none",
+                    reportOptionalSubscript = "none",
+                    reportPrivateImportUsage = "none",
+                    reportUnusedExpression = "none",
+                  },
+                },
+              },
+            },
+          })
+        end
+      end,
+
       bashls = function(_, opts)
-        if table_contains(lsp_servers, "bashls") then
+        if table_contains(lsp_all, "bashls") then
           -- Enable/Disable shellcheck in bashls
           local bashls_settings = {
             bashIde = {
@@ -108,14 +120,14 @@ return {
               },
             }
           end
-          lspconfig.bashls.setup({ settings = bashls_settings })
+          require("lspconfig").bashls.setup({ settings = bashls_settings })
         end
       end,
 
       lua_ls = function(_, opts)
-        if table_contains(lsp_installed, "lua_ls") then
-          lspconfig.lua_ls.setup({
-            capabilities = capabilities,
+        if table_contains(lsp_all, "lua_ls") then
+          require("lspconfig").lua_ls.setup({
+            capabilities = require("configs.lsp.capabilities"),
             require("neodev").setup({
               library = { plugins = { "nvim-dap-ui" }, types = true },
               setup_jsonls = true,
@@ -167,9 +179,9 @@ return {
       end,
 
       jsonls = function(_, opts)
-        if table_contains(lsp_installed, "jsonls") then
-          lspconfig.jsonls.setup({
-            capabilities = capabilities,
+        if table_contains(lsp_all, "jsonls") then
+          require("lspconfig").jsonls.setup({
+            capabilities = require("configs.lsp.capabilities"),
             settings = {
               json = {
                 schemas = require("schemastore").json.schemas(),
@@ -180,7 +192,7 @@ return {
       end,
 
       pylsp = function(_, opts)
-        if table_contains(lsp_installed, "pylsp") then
+        if table_contains(lsp_all, "pylsp") then
           local venv_path = os.getenv('VIRTUAL_ENV')
           local py_path = nil
           -- decide which python executable to use for mypy
@@ -197,8 +209,8 @@ return {
           if table_contains(external_formatters, "ruff") then
             enable_ruff = { enabled = true }
           end
-          lspconfig.pylsp.setup({
-            capabilities = capabilities,
+          require("lspconfig").pylsp.setup({
+            capabilities = require("configs.lsp.capabilities"),
             settings = {
               pylsp = {
                 plugins = {
@@ -233,20 +245,67 @@ return {
       end,
 
       vimls = function(_, opts)
-        if table_contains(lsp_servers, "vimls") then
-          lspconfig.vimls.setup {
+        if table_contains(lsp_all, "vimls") then
+          require("lspconfig").vimls.setup {
             flags = {
               debounce_text_changes = 500,
             },
-            capabilities = capabilities,
+            capabilities = require("configs.lsp.capabilities"),
           }
+        end
+      end,
+
+      yamlls = function(_, opts)
+        if table_contains(lsp_all, "yamlls") then
+          require("lspconfig").yamlls.setup({
+            capabilities = require("configs.lsp.capabilities"),
+            schemaStore = {
+              enable = true,
+              url = "https://www.schemastore.org/api/json/catalog.json",
+            },
+            schemas = {
+              kubernetes = "*.yaml",
+              ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+              ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+              ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
+              ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
+              ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+              ["http://json.schemastore.org/ansible-playbook"] = "*play*.{yml,yaml}",
+              ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+              ["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
+              ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "*gitlab-ci*.{yml,yaml}",
+              ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "*api*.{yml,yaml}",
+              ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
+              ["https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json"] = "*flow*.{yml,yaml}",
+            },
+            format = { enabled = false },
+            validate = false,
+            completion = true,
+            hover = true,
+          })
+        end
+      end,
+
+      ccls = function(_, opts)
+        if fn.executable("ccls") == 1 then
+          require("lspconfig").ccls.setup({
+            capabilities = require("configs.lsp.capabilities"),
+            init_options = {
+              cache = {
+                directory = ".ccls-cache",
+              },
+              highlight = {
+                lsRanges = true,
+              },
+            },
+          })
         end
       end,
 
       clangd = function(_, opts)
         if fn.executable("clangd") == 1 then
-          lspconfig.clangd.setup({
-            capabilities = capabilities,
+          require("lspconfig").clangd.setup({
+            capabilities = require("configs.lsp.capabilities"),
             filetypes = { "c", "cpp", "cc" },
             flags = {
               debounce_text_changes = 500,
@@ -256,33 +315,33 @@ return {
       end,
 
       emmet_ls = function(_, opts)
-        if table_contains(lsp_servers, "emmet_ls") then
-          lspconfig.emmet_ls.setup({
-            capabilities = capabilities,
+        if table_contains(lsp_all, "emmet_ls") then
+          require("lspconfig").emmet_ls.setup({
+            capabilities = require("configs.lsp.capabilities"),
           })
         end
       end,
 
       graphql = function(_, opts)
-        if table_contains(lsp_servers, "graphql") then
-          lspconfig.graphql.setup({
-            capabilities = capabilities,
+        if table_contains(lsp_all, "graphql") then
+          require("lspconfig").graphql.setup({
+            capabilities = require("configs.lsp.capabilities"),
           })
         end
       end,
 
       html = function(_, opts)
-        if table_contains(lsp_installed, "html") then
-          lspconfig.html.setup({
-            capabilities = capabilities,
+        if table_contains(lsp_all, "html") then
+          require("lspconfig").html.setup({
+            capabilities = require("configs.lsp.capabilities"),
           })
         end
       end,
 
       prismals = function(_, opts)
-        if table_contains(lsp_servers, "prismals") then
-          lspconfig.prismals.setup({
-            capabilities = capabilities,
+        if table_contains(lsp_all, "prismals") then
+          require("lspconfig").prismals.setup({
+            capabilities = require("configs.lsp.capabilities"),
           })
         end
       end,
