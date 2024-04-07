@@ -257,8 +257,8 @@ return {
 
       yamlls = function(_, opts)
         if table_contains(lsp_all, "yamlls") then
-          lspconfig.yamlls.setup({
-            capabilities = capabilities,
+          require("lspconfig").yamlls.setup({
+            capabilities = require("configs.lsp.capabilities"),
             schemaStore = {
               enable = true,
               url = "https://www.schemastore.org/api/json/catalog.json",
@@ -288,8 +288,8 @@ return {
 
       ccls = function(_, opts)
         if fn.executable("ccls") == 1 then
-          lspconfig.ccls.setup({
-            capabilities = capabilities,
+          require("lspconfig").ccls.setup({
+            capabilities = require("configs.lsp.capabilities"),
             init_options = {
               cache = {
                 directory = ".ccls-cache",
