@@ -31,7 +31,6 @@ end
 local function file_button(fn, sc, short_fn)
   short_fn = short_fn or fn
   local ico_txt
-  -- Could remove some cruft but i'm scared. If it ain't broke don't fix it
   local fb_hl = {}
 
   local ico, hl = icon(fn)
