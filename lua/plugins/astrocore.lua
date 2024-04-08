@@ -1,6 +1,8 @@
 -- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
 -- Configuration documentation can be found with `:h astrocore`
 
+local get_icon = require("astroui").get_icon
+
 ---@type LazySpec
 return {
   "AstroNvim/astrocore",
@@ -42,6 +44,7 @@ return {
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
         ["<Leader>b"] = { desc = "Buffers" },
+        ["<Leader>t"] = { desc = get_icon("Terminal", 1, true) .. "Terminal" },
         -- quick save
         -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
         -- Telescope themes
@@ -118,8 +121,10 @@ return {
           pattern = { "*" },
           callback = function()
             vim.opt_local["number"] = false
+            vim.opt_local["relativenumber"] = false
             vim.opt_local["signcolumn"] = "no"
             vim.opt_local["foldcolumn"] = "0"
+            vim.opt_local["winhl"] = "Normal:NormalFloat"
           end,
         },
         {
