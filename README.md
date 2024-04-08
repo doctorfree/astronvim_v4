@@ -69,9 +69,10 @@ configuration in `AstroNvim` v4.
 Beyond the basic features provided by this template, `AstroNvimV4` includes:
 
 - Options and plugin configuration in `lua/options.lua` and `lua/configuration.lua`
-- Mason/null-ls installed formatters, linters, language servers
+- Mason installed formatters, linters, language servers
 - LSP configuration for several language servers
 - Formatters and Linters configured in `.linter_configs/`
+- Customized `terminal` with autocmds/commands for `lazygit`, `lazyman`, `htop`, and more
 - Highly customized `alpha.nvim` dashboard
 - Support for multiple colorschemes and colorscheme switching
 - An icon set for use with several plugins
