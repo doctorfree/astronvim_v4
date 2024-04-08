@@ -59,34 +59,6 @@ return {
       require("dap-python").setup(path, opts)
     end,
   },
-
-  {
-    "stevearc/conform.nvim",
-    cmd = "ConformInfo",
-    keys = {
-      {
-        "<leader>F",
-        function()
-          require("conform").format { lsp_fallback = "always" }
-          vim.cmd.update()
-        end,
-        mode = { "n", "x" },
-        desc = " Format & Save",
-      },
-    },
-    config = function() require "configs.conform" end,
-  },
-
-  {
-    "mfussenegger/nvim-lint",
-    event = "VeryLazy",
-    optional = true,
-    config = function()
-      utils.linterConfigs()
-      utils.lintTriggers()
-    end,
-  },
-
   {
     "b0o/SchemaStore.nvim",
     dependencies = {

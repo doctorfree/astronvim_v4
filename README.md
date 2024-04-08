@@ -7,6 +7,7 @@ A sample configuration for [AstroNvim](https://github.com/AstroNvim/AstroNvim) v
 ## Table of Contents
 
 - [Installation](#installation)
+  - [Lazyman](#lazyman)
 - [Run](#run)
 - [Features](#features)
 - [Configuration](#configuration)
@@ -33,6 +34,24 @@ NVIM_APPNAME=nvim-AstroNvimV4 nvim --headless "+Lazy! sync" +qa
 
 **Note:** Manual installation may require additional dependencies to be installed.
 Use `lazyman` to automatically install dependencies and initialize Neovim configurations.
+
+### Lazyman
+
+The recommended installation procedure is with the
+[Lazyman Neovim Configuration Manager](https://lazyman.dev).
+Installing with `lazyman` ensures dependencies are met, initialization is
+automated, updates/removal/reinstallation can be performed easily, and
+configuration is site-specific for some settings. Lazyman can perform
+health checks, launching, updates, and generation of HTML and markdown
+format reports. Several other features make `lazyman` an attractive choice
+but the primary attraction is the `nvims` shell function which can be used
+to easily invoke any `lazyman` installed Neovim configuration.
+
+The main downside to using `lazyman` is the time it takes to instll all of
+the Neovim dependencies including language servers and external utilities.
+It can take several minutes for `lazyman` to install and initialize.
+Minimalists may eschew `lazyman` in favor of a tedious and error-prone manual
+installation of Neovim configurations. Different lanes for different brains!
 
 ## Run
 

@@ -83,7 +83,7 @@ conf.formatters_linters = {
   "golangci-lint",
   "google-java-format",
   -- "latexindent",
-  "markdownlint",
+  -- "markdownlint",
   -- "debugpy",
   "isort",
   -- "json-lsp",
