@@ -17,7 +17,13 @@ $HOME/.config/nvim-Lazyman/lazyman.sh
 lazyman -x AstroNvimV4
 ```
 
-Alternately, if `lazyman` is not installed:
+If `lazyman` is already installed, update it before installing `AstroNvimV4`:
+
+```bash
+lazyman -U
+```
+
+Alternately, if `lazyman` is not suitable for your environment:
 
 ```bash
 git clone https://github.com/doctorfree/astronvim_v4 $HOME/.config/nvim-AstroNvimV4

@@ -29,11 +29,14 @@ if [ "$1" == "-r" ]; then
   clean_data
 else
   cp -a astronvim_v4 ${CFDIR}
+  cp ${CFDIR}/lua/plugins/astrolsp.lua /tmp/astro$$.lua
+  cp ${CFDIR}/scripts/astrolsp.lua ${CFDIR}/lua/plugins/astrolsp.lua
   export NVIM_APPNAME="${CFG}"
   printf "\n\nInitializing ${CFG} ..."
   nvim --headless "+Lazy! sync" +qa
-  nvim --headless "+Lazy! sync" +qa
   printf " done\n"
+  cp /tmp/astro$$.lua ${CFDIR}/lua/plugins/astrolsp.lua
+  rm -f /tmp/astro$$.lua
   [ "$1" == "-t" ] && {
     vim ${CFDIR}/lua/configuration.lua
     nvim ${CFDIR}/lua/configuration.lua

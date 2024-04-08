@@ -65,14 +65,22 @@ conf.show_diagnostics = "popup"
 
 -- treesitter parsers to be installed
 conf.treesitter_ensure_installed = {
-	"bash",
-	"lua",
-	"markdown",
-	"markdown_inline",
-	"query",
-	"regex",
-	"vim",
-	"vimdoc",
+  "bash",
+  "c",
+  "cpp",
+  "json",
+  "jsonc",
+  "javascript",
+  "lua",
+  "markdown",
+  "markdown_inline",
+  "python",
+  "query",
+  "regex",
+  "toml",
+  "vim",
+  "vimdoc",
+  "yaml",
 }
 
 -- Language servers installed by the Lazyman initialization
