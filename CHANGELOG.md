@@ -6,6 +6,8 @@
 
 ### 🐞 Fixed
 
+- Remove `conform` and linter configs
+
 ## v1.0.3r2
 
 ### ⚡️ Added
