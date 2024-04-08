@@ -151,6 +151,7 @@ return {
     SignIn = " ",
     Table = " ",
     Telescope = " ",
+    Terminal  = " ",
     Yoga = "🧘",
     Xmark = "✗",
   },

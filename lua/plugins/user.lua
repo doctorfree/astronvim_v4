@@ -14,7 +14,7 @@ return {
 
   -- Disable default plugins as follows:
   { "max397574/better-escape.nvim", enabled = false },
-  { "akinsho/toggleterm.nvim", enabled = false },
+  -- { "akinsho/toggleterm.nvim", enabled = false },
 
   -- Customize additional setup of plugins that are outside of the plugin's setup call
   {
@@ -27,7 +27,13 @@ return {
       luasnip.filetype_extend("javascript", { "javascriptreact" })
     end,
   },
-
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("configs.which-key")
+    end,
+  },
   {
     "windwp/nvim-autopairs",
     config = function(plugin, opts)
