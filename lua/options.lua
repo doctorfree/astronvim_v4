@@ -38,14 +38,24 @@ else
   vim.g.homebrew_install_dir = "/usr"
 end
 
+local home = os.getenv("HOME")
 -- Python venv home
-local pyenv_home = os.getenv("HOME") .. "/.pyenv/shims"
--- User local bin
-local local_bin = os.getenv("HOME") .. "/.local/bin"
+if home ~= nil then
+  if utils.isdir(home .. "/.pyenv") then
+    vim.g.pyenv_home = home .. "/.pyenv"
+  else
+    vim.g.pyenv_home = ""
+  end
+  if utils.isdir(home .. "/.local/bin") then
+    vim.g.local_bin = home .. "/.local/bin"
+  else
+    vim.g.local_bin = ""
+  end
+end
 
 local python_path = vim.fn.exepath("python3")
 if python_path == nil or python_path == "" then
-  python_path = pyenv_home .. "/python3"
+  python_path = vim.g.pyenv_home .. "/shims/python3"
   if utils.file_or_dir_exists(python_path) then
     vim.g.python3_host_prog = python_path
   else
@@ -99,7 +109,7 @@ end
 
 local doq_path = vim.fn.exepath("doq")
 if doq_path == nil or doq_path == "" then
-  doq_path = local_bin .. "/doq"
+  doq_path = vim.g.local_bin .. "/doq"
   if utils.file_or_dir_exists(doq_path) then
     vim.g.pydocstring_doq_path = doq_path
   else
