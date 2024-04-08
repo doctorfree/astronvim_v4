@@ -4,6 +4,13 @@
 
 ### ⚡️ Added
 
+### 🐞 Fixed
+
+## v1.0.3r2
+
+### ⚡️ Added
+
+- Add `zen-mode` plugin and settings for it in `configuration.lua`
 - Add `package-info`, `markdown-preview`, and telescope `repo` extension
 - Add `keymaps` and customize `which-key`, integrate `options` into `astrocore`
 - Add `which-key` menu entry for `Terminal`
