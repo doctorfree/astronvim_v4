@@ -180,7 +180,7 @@ conf.formatters_linters = {
   "golines",
   "golangci-lint",
   "google-java-format",
-  "latexindent",
+  -- "latexindent",
   "markdownlint",
   -- "debugpy",
   "isort",
@@ -210,9 +210,11 @@ conf.lsp_installed = {
   "cssls",
   "denols",
   "html",
-  "jsonls",
   "lua_ls",
   "pylsp",
+  "pyright",
+  "tsserver",
+  "vimls",
 }
 -- Language servers that should be installed by mason-lspconfig
 conf.lsp_servers = {
@@ -229,21 +231,12 @@ conf.lsp_servers = {
   "jsonls",
   "marksman",
   -- "prismals",
-  "pyright",
   -- "sqlls",
   -- "tailwindcss",
+  "taplo",
   -- "texlab",
-  "tsserver",
-  "vimls",
   "vuels",
   "yamlls",
-}
--- Language servers/formatters installed with mason-null-ls
-conf.null_ensure_installed = {
-  "php-cs-fixer",
-  "prettierd",
-  "shfmt",
-  "stylua",
 }
 
 return conf

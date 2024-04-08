@@ -6,6 +6,34 @@
 
 ### 🐞 Fixed
 
+## v1.0.3r1
+
+### ⚡️ Added
+
+- Refactor LSP configuration using `AstroNvim` v4 `astrolsp`
+- Add `pyenv` home to `python` path search in `options.lua`
+- Conditional formatting settings based on `configuration.lua`
+- Configure `neodev` and `dap-ui`
+- Add autocmds for resizing and entering gui
+- Finish porting `yamlls` and `ccls` lsp configs to `astrolsp`
+- Move `yamlls` and `ccls` lsp config to `astrolsp`
+- Add example autocmds in `astrocore`
+- Configure `pyright` in `astrolsp`
+- Enable `LuaSnip`
+- Define `heirline` ruler to show line number and column
+- Concatenate lsp server tables in `lspconfig.lua` and `astrolsp.lua`
+- Move `jsonls` out of installed lsp servers
+- Move `vimls` in, `taplo` out of `navic` and into `mason-lspconfig`
+- Update readme `configuration.lua`
+- Adjust treesitter `ensure_installed`
+
+### 🐞 Fixed
+
+- Comment out formatters not yet working
+- Replace `null-ls` with `none-ls`
+- Reduce number of preinstalled treesitter parsers
+- Cleanup unused functions/vars
+
 ## v1.0.2r2
 
 ### ⚡️ Added
