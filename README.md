@@ -47,7 +47,12 @@ format reports. Several other features make `lazyman` an attractive choice
 but the primary attraction is the `nvims` shell function which can be used
 to easily invoke any `lazyman` installed Neovim configuration.
 
-The main downside to using `lazyman` is the time it takes to instll all of
+An additional benefit `lazyman` provides is the ability to easily and
+quickly explore other Neovim configurations including many `AstroNvim`
+configurations. For example, `lazyman -i astronvim` installs and initializes
+8 `AstroNvim` configurations. These can be easily explored using `nvims`.
+
+The main downside to using `lazyman` is the time it takes to install all of
 the Neovim dependencies including language servers and external utilities.
 It can take several minutes for `lazyman` to install and initialize.
 Minimalists may eschew `lazyman` in favor of a tedious and error-prone manual
@@ -88,7 +93,7 @@ configuration in `AstroNvim` v4.
 Beyond the basic features provided by this template, `AstroNvimV4` includes:
 
 - Options and plugin configuration in `lua/options.lua` and `lua/configuration.lua`
-- Mason installed language servers
+- Mason installed formatters, linters, language servers
 - LSP configuration for several language servers
 - Customized `terminal` with autocmds/commands for `lazygit`, `lazyman`, `htop`
 - Highly customized `alpha.nvim` dashboard
