@@ -6,6 +6,14 @@
 
 ### 🐞 Fixed
 
+## v1.0.3r3
+
+### ⚡️ Added
+
+- Customize `marksman.toml`, `stylua.toml`, and `selene.toml`
+
+### 🐞 Fixed
+
 - Remove `conform` and linter configs
 
 ## v1.0.3r2
