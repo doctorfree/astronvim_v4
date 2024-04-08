@@ -148,15 +148,6 @@ local normal_mode_mappings = {
     r = { "<cmd>set norelativenumber!<CR>", "Relative number" },
   },
 
-  b = {
-    name = "Buffer",
-    c = { '<cmd>lua require("ecovim.utils").closeOtherBuffers()<CR>', "Close but current" },
-    f = { "<cmd>bfirst<CR>", "First buffer" },
-    s = {
-      name = "Sort",
-    },
-  },
-
   c = {
     name = "LSP",
     a = { "code action" },
@@ -207,7 +198,6 @@ local normal_mode_mappings = {
     name = "Git",
     a = { "<cmd>!git add %:p<CR>", "Add current" },
     A = { "<cmd>!git add .<CR>", "Add all" },
-    b = { '<cmd>lua require("ecovim.internal.blame").open()<CR>', "Blame" },
     B = { "<cmd>Telescope git_branches<CR>", "Branches" },
     c = {
       name = "Conflict",
@@ -217,9 +207,7 @@ local normal_mode_mappings = {
     },
     l = {
       name = "Log",
-      A = { '<cmd>lua require("ecovim.plugins.telescope").my_git_commits()<CR>', "Commits (Telescope)" },
       a = { "<cmd>LazyGitFilter<CR>", "Commits" },
-      C = { '<cmd>lua require("ecovim.plugins.telescope").my_git_bcommits()<CR>', "Buffer commits (Telescope)" },
       c = { "<cmd>LazyGitFilterCurrentFile<CR>", "Buffer commits" },
     },
     m = { "Blame line" },
@@ -248,9 +236,7 @@ local normal_mode_mappings = {
 
   s = {
     name = "Search",
-    d = { '<cmd>lua require("ecovim.plugins.telescope").edit_neovim()<CR>', "Dotfiles" },
     h = { "<cmd>Telescope oldfiles hidden=true<CR>", "File history" },
-    H = { '<cmd>lua require("ecovim.plugins.telescope").command_history()<CR>', "Command history" },
     n = { name = "Noice" },
   },
 
@@ -322,27 +308,6 @@ local function attach_markdown(bufnr)
   })
 end
 
-local function attach_typescript(bufnr)
-  wk.register({
-    c = {
-      name = "LSP",
-      e = { "<cmd>TSC<CR>", "Workspace errors (TSC)" },
-      F = { "<cmd>TSToolsFixAll<CR>", "Fix all" },
-      i = { "<cmd>TSToolsAddMissingImports<CR>", "Import all" },
-      o = { "<cmd>TSToolsOrganizeImports<CR>", "Organize imports" },
-      s = { "<cmd>TSToolsSortImports<CR>", "Sort imports" },
-      u = { "<cmd>TSToolsRemoveUnused<CR>", "Remove unused" },
-    },
-  }, {
-    buffer = bufnr,
-    mode = "n", -- NORMAL mode
-    prefix = "<leader>",
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
-  })
-end
-
 local function attach_npm(bufnr)
   wk.register({
     n = {
@@ -378,43 +343,6 @@ local function attach_zen(bufnr)
   })
 end
 
-local function attach_jest(bufnr)
-  wk.register({
-    j = {
-      name = "Jest",
-      f = { '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<CR>', "Run current file" },
-      i = { '<cmd>lua require("neotest").summary.toggle()<CR>', "Toggle info panel" },
-      j = { '<cmd>lua require("neotest").run.run()<CR>', "Run nearest test" },
-      l = { '<cmd>lua require("neotest").run.run_last()<CR>', "Run last test" },
-      o = { '<cmd>lua require("neotest").output.open({ enter = true })<CR>', "Open test output" },
-      s = { '<cmd>lua require("neotest").run.stop()<CR>', "Stop" },
-    },
-  }, {
-    buffer = bufnr,
-    mode = "n", -- NORMAL mode
-    prefix = "<leader>",
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
-  })
-end
-
-local function attach_spectre(bufnr)
-  wk.register({
-    ["R"] = { "[SPECTRE] Replace all" },
-    ["o"] = { "[SPECTRE] Show options" },
-    ["q"] = { "[SPECTRE] Send all to quicklist" },
-    ["v"] = { "[SPECTRE] Change view mode" },
-  }, {
-    buffer = bufnr,
-    mode = "n", -- NORMAL mode
-    prefix = "<leader>",
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
-  })
-end
-
 local function attach_nvim_tree(bufnr)
   wk.register({
     ["+"] = { "<cmd>NvimTreeResize +5<CR>", "Resize +5" },
@@ -431,10 +359,7 @@ end
 
 return {
   attach_markdown = attach_markdown,
-  attach_typescript = attach_typescript,
   attach_npm = attach_npm,
   attach_zen = attach_zen,
-  attach_jest = attach_jest,
-  attach_spectre = attach_spectre,
   attach_nvim_tree = attach_nvim_tree,
 }

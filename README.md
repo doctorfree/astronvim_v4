@@ -148,6 +148,13 @@ conf.listchars = {
   precedes = "▶",
 }
 
+-- Enable zen mode distraction-free coding
+conf.enable_zenmode = true
+-- if zenmode enabled then enable terminal support as well
+conf.enable_kitty = false
+conf.enable_alacritty = false
+conf.enable_wezterm = false
+
 -- Neorg notes folder
 conf.neorg_notes = { "~/Documents/Notes" }
 -- Obsidian vault folder (relative to HOME)
