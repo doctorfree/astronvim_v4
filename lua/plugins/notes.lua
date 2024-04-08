@@ -29,6 +29,29 @@ return {
     end
   },
   {
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && npm install && git reset --hard",
+    cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
+    event = "VeryLazy",
+    config = function()
+      require("configs.markdown-preview")
+      local wk = require("which-key")
+      wk.register({
+        m = {
+          name = "Markdown",
+          p = { ":MarkdownPreview<CR>", "Start Preview" },
+          s = { ":MarkdownPreviewStop<CR>", "Stop Preview" },
+          t = { ":MarkdownPreviewToggle<CR>", "Toggle Preview" },
+        },
+      }, {
+        prefix = "<Leader>",
+        mode = "n",
+        { silent = true },
+      })
+    end,
+    ft = { "markdown" },
+  },
+  {
     "epwalsh/obsidian.nvim",
     version = "*",  -- recommended, use latest release instead of latest commit
     lazy = true,

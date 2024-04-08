@@ -10,6 +10,7 @@ return {
     "nvim-telescope/telescope-file-browser.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    "cljoly/telescope-repo.nvim",
     "jvgrootveld/telescope-zoxide",
     {
       "AstroNvim/astrocore",

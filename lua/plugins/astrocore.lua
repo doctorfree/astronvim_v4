@@ -97,6 +97,7 @@ return {
         sonokai_style = "andromeda",
       },
     },
+    -- Mappings for this configuration are specified in lua/keymaps.lua
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs.
     -- For example, `<Leader>` must be capitalized

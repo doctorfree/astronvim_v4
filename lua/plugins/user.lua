@@ -89,4 +89,11 @@ return {
     },
     config = function() require "configs.nvim-cmp" end,
   },
+  {
+    "vuki656/package-info.nvim",
+    event = "BufEnter package.json",
+    config = function()
+      require("configs.package-info")
+    end,
+  },
 }
