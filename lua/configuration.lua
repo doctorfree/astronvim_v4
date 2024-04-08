@@ -35,11 +35,11 @@ conf.showtabline = 2
 conf.list = true
 -- which list chars to show
 conf.listchars = {
-  eol = "⤶",
-  tab = ">.",
-  trail = "~",
-  extends = "◀",
-  precedes = "▶",
+	eol = "⤶",
+	tab = ">.",
+	trail = "~",
+	extends = "◀",
+	precedes = "▶",
 }
 
 -- Enable zen mode distraction-free coding
@@ -65,80 +65,82 @@ conf.show_diagnostics = "popup"
 
 -- treesitter parsers to be installed
 conf.treesitter_ensure_installed = {
-  "bash",
-  "lua",
-  "markdown",
-  "markdown_inline",
-  "query",
-  "regex",
-  "vim",
-  "vimdoc",
+	"bash",
+	"lua",
+	"markdown",
+	"markdown_inline",
+	"query",
+	"regex",
+	"vim",
+	"vimdoc",
 }
--- Formatters and linters installed by mason-tool-installer
-conf.formatters_linters = {
-  "actionlint",
-  "gofumpt",
-  "goimports",
-  "golines",
-  "golangci-lint",
-  "google-java-format",
-  -- "latexindent",
-  -- "markdownlint",
-  -- "debugpy",
-  "isort",
-  -- "json-lsp",
-  "marksman",
-  -- "php-debug-adapter",
-  -- "php-cs-fixer",
-  "prettier",
-  "prettierd",
-  "pyright",
-  "sql-formatter",
-  -- "shellcheck",
-  "shfmt",
-  "stylua",
-  "tflint",
-  "yamllint",
-}
--- Formatters and linters installed externally
-conf.external_formatters = {
-  "beautysh",
-  "black",
-  "flake8",
-  "ruff",
-}
+
 -- Language servers installed by the Lazyman initialization
 conf.lsp_installed = {
-  "cssls",
-  "denols",
-  "html",
-  "lua_ls",
-  "pylsp",
-  "pyright",
-  "tsserver",
-  "vimls",
+	"cssls",
+	"denols",
+	"html",
+	"lua_ls",
+	"pylsp",
+	"pyright",
+	"tsserver",
+	"vimls",
 }
 -- Language servers that should be installed by mason-lspconfig
 conf.lsp_servers = {
-  "bashls",
-  -- "cssmodules_ls",
-  -- "dockerls",
-  -- "emmet_ls",
-  -- "eslint",
-  -- "gopls",
-  -- "graphql",
-  -- "jdtls",
-  -- "julials",
-  -- "ltex",
-  "jsonls",
-  "marksman",
-  -- "prismals",
-  -- "sqlls",
-  -- "tailwindcss",
-  "taplo",
-  -- "texlab",
-  "vuels",
-  "yamlls",
+	"bashls",
+	-- "cssmodules_ls",
+	-- "dockerls",
+	-- "emmet_ls",
+	-- "eslint",
+	-- "gopls",
+	-- "graphql",
+	-- "jdtls",
+	-- "julials",
+	-- "ltex",
+	"jsonls",
+	"marksman",
+	-- "prismals",
+	-- "sqlls",
+	-- "tailwindcss",
+	"taplo",
+	-- "texlab",
+	"vuels",
+	"yamlls",
+}
+
+-- Formatters and linters installed by mason-tool-installer
+conf.formatters_linters = {
+	"actionlint",
+	"gofumpt",
+	"goimports",
+	"golines",
+	"golangci-lint",
+	"google-java-format",
+	-- "latexindent",
+	-- "markdownlint",
+	-- "debugpy",
+	"isort",
+	-- "json-lsp",
+	"marksman",
+	-- "php-debug-adapter",
+	-- "php-cs-fixer",
+	"prettier",
+	"prettierd",
+	"pyright",
+	"sql-formatter",
+	-- "shellcheck",
+	"shfmt",
+	"stylua",
+	"tflint",
+	"yamllint",
+}
+-- Formatters and linters installed externally
+conf.external_formatters = {
+	"beautysh",
+	"black",
+	"flake8",
+	"ruff",
 }
 
 return conf

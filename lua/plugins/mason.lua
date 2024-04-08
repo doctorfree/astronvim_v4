@@ -3,7 +3,6 @@
 local settings = require "configuration"
 local formatters_linters = settings.formatters_linters
 local lsp_servers = settings.lsp_servers
-local utils = require "utils.linter"
 
 ---@type LazySpec
 return {

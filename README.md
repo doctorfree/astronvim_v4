@@ -76,7 +76,7 @@ nvim
 
 ## Features
 
-`AstroNvimV4` is based on the AstroNvim v4 template at https://github.com/AstroNvim/template
+`AstroNvimV4` is based on the AstroNvim v4 template at <https://github.com/AstroNvim/template>
 
 The LSP configuration in `AstroNvimV4` leverages the configuration in the
 default `Lazyman` configuration. Much of that LSP configuration, handlers,
@@ -88,10 +88,9 @@ configuration in `AstroNvim` v4.
 Beyond the basic features provided by this template, `AstroNvimV4` includes:
 
 - Options and plugin configuration in `lua/options.lua` and `lua/configuration.lua`
-- Mason installed formatters, linters, language servers
+- Mason installed language servers
 - LSP configuration for several language servers
-- Formatters and Linters configured in `.linter_configs/`
-- Customized `terminal` with autocmds/commands for `lazygit`, `lazyman`, `htop`, and more
+- Customized `terminal` with autocmds/commands for `lazygit`, `lazyman`, `htop`
 - Highly customized `alpha.nvim` dashboard
 - Support for multiple colorschemes and colorscheme switching
 - An icon set for use with several plugins
