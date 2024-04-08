@@ -4,7 +4,14 @@
 
 ### ⚡️ Added
 
+- Add `package-info`, `markdown-preview`, and telescope `repo` extension
+- Add `keymaps` and customize `which-key`, integrate `options` into `astrocore`
+- Add `which-key` menu entry for `Terminal`
+- Add `terminal` plugin with autocmds/commands for `lazygit`, `lazyman`, `htop`, etc
+
 ### 🐞 Fixed
+
+- Update `stylua` toml with less aggressive settings
 
 ## v1.0.3r1
 

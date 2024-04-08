@@ -97,7 +97,11 @@ return {
         sonokai_style = "andromeda",
       },
     },
-    -- Mappings for this configuration are specified in lua/keymaps.lua
+    -- Keymaps are spread all over Hell's halfacre in Neovim configurations.
+    -- While I appreciate the effort to centralize them here, this work is not yet
+    -- complete in this configuration. Mappings for this configuration are specified
+    -- in lua/keymaps.lua, lua/configs/which-key.lua, and various plugin configurations.
+    --
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs.
     -- For example, `<Leader>` must be capitalized

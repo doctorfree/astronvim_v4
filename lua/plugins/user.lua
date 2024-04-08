@@ -14,7 +14,6 @@ return {
 
   -- Disable default plugins as follows:
   { "max397574/better-escape.nvim", enabled = false },
-  -- { "akinsho/toggleterm.nvim", enabled = false },
 
   -- Customize additional setup of plugins that are outside of the plugin's setup call
   {
