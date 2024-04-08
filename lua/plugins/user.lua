@@ -174,14 +174,6 @@ return {
       require("configs.package-info")
     end,
   },
-  {
-    "folke/zen-mode.nvim",
-    cmd = { "ZenMode" },
-    config = function()
-      require("configs.zen")
-    end,
-    cond = Ecovim.plugins.zen.enabled,
-  },
   twilight,
   zenmode,
 }
