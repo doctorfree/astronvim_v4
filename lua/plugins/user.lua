@@ -9,9 +9,7 @@ return {
     enabled = true,
     event = "VimEnter",
     keys = { { "<leader>A", "<cmd>Alpha<CR>", "Alpha Dashboard" } },
-    config = function()
-      require("configs.alpha")
-    end,
+    config = function() require "configs.alpha" end,
   },
 
   -- Disable default plugins as follows:
@@ -82,8 +80,6 @@ return {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-calc",
     },
-    config = function()
-      require("configs.nvim-cmp")
-    end,
+    config = function() require "configs.nvim-cmp" end,
   },
 }

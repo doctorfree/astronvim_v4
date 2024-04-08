@@ -1,3 +1,24 @@
+local settings = require "configuration"
+local formatters_linters = settings.formatters_linters
+local table_contains = require("utils").table_contains
+
+local use_stylua = {}
+if table_contains(formatters_linters, "stylua") then
+  use_stylua = { "stylua" }
+end
+local use_shellcheck = {}
+if table_contains(formatters_linters, "shellcheck") then
+  use_shellcheck = { "shellcheck" }
+end
+local use_markdownlint = {}
+if table_contains(formatters_linters, "markdownlint") then
+  use_markdownlint = { "markdownlint" }
+end
+local use_yamllint = {}
+if table_contains(formatters_linters, "yamllint") then
+  use_yamllint = { "yamllint" }
+end
+
 local linterConfig = vim.fn.stdpath("config") .. '.linter_configs'
 local cfg = {}
 
@@ -6,11 +27,11 @@ function cfg.linterConfigs()
 	local linters = require("lint").linters
 
 	lint.linters_by_ft = {
-		lua = { "stylua" },
+		lua = use_stylua,
 		css = { "stylelint" },
-		sh = { "shellcheck" },
-		markdown = { "markdownlint" },
-		yaml = { "yamllint" },
+		sh = use_shellcheck,
+		markdown = use_markdownlint,
+		yaml = use_yamllint,
 		python = { "pylint" },
 		gitcommit = {},
 		json = {},

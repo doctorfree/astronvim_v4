@@ -95,10 +95,10 @@ conf.formatters_linters = {
 }
 -- Formatters and linters installed externally
 conf.external_formatters = {
-  -- "beautysh",
+  "beautysh",
   "black",
-  -- "flake8",
-  -- "ruff",
+  "flake8",
+  "ruff",
 }
 -- Language servers installed by the Lazyman initialization
 conf.lsp_installed = {

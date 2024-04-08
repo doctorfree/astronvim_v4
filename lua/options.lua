@@ -38,11 +38,21 @@ else
   vim.g.homebrew_install_dir = "/usr"
 end
 
+-- Python venv home
+local pyenv_home = os.getenv("HOME") .. "/.pyenv/shims"
+-- User local bin
+local local_bin = os.getenv("HOME") .. "/.local/bin"
+
 local python_path = vim.fn.exepath("python3")
 if python_path == nil or python_path == "" then
-  python_path = vim.g.homebrew_install_dir .. "/bin/python3"
+  python_path = pyenv_home .. "/python3"
   if utils.file_or_dir_exists(python_path) then
     vim.g.python3_host_prog = python_path
+  else
+    python_path = vim.g.homebrew_install_dir .. "/bin/python3"
+    if utils.file_or_dir_exists(python_path) then
+      vim.g.python3_host_prog = python_path
+    end
   end
 else
   vim.g.python3_host_prog = python_path
@@ -89,11 +99,16 @@ end
 
 local doq_path = vim.fn.exepath("doq")
 if doq_path == nil or doq_path == "" then
-  doq_path = vim.g.homebrew_install_dir .. "/bin/doq"
+  doq_path = local_bin .. "/doq"
   if utils.file_or_dir_exists(doq_path) then
     vim.g.pydocstring_doq_path = doq_path
   else
-    vim.g.pydocstring_doq_path = "/usr/bin/doq"
+    doq_path = vim.g.homebrew_install_dir .. "/bin/doq"
+    if utils.file_or_dir_exists(doq_path) then
+      vim.g.pydocstring_doq_path = doq_path
+    else
+      vim.g.pydocstring_doq_path = "/usr/bin/doq"
+    end
   end
 else
   vim.g.pydocstring_doq_path = doq_path
