@@ -143,12 +143,12 @@ return {
     },
     keys = {
       {
-        "<leader>m",
+        "<leader>j",
         function() require("treesj").toggle() end,
         desc = "Split/join block",
       },
       {
-        "<leader>M",
+        "<leader>J",
         function() require('treesj').toggle({ split = { recursive = true } }) end,
         desc = "Split/join block recursively",
       },

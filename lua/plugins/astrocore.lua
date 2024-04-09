@@ -115,58 +115,143 @@ return {
         -- This is useful for naming menus
         ["<Leader>b"] = { desc = "Buffers" },
         ["<Leader>t"] = { desc = icons.ui.Terminal .. "Terminal" },
-        ["<Leader>,"] = { desc = icons.kinds.Color .. " Manage/Theme/Transparency" },
+        ["<Leader><tab>"] = { desc = icons.ui.Terminal .. "Tabs" },
+        ["<Leader>w"] = { desc = icons.ui.Terminal .. "Windows" },
+        ["<Leader>W"] = { desc = icons.ui.Terminal .. "Workspaces" },
+        ["<Leader>,"] = { desc = icons.kinds.Color .. " Color/Manage/Theme" },
 
-        -- mappings seen under group name "Buffer"
+        -- mappings seen under group name "Buffers"
+        ["<Leader>bc"] = {
+          function()
+            require("astrocore.buffer").close()
+          end,
+          desc = "Close buffer",
+        },
+        ["<Leader>bC"] = {
+          function()
+            require("astrocore.buffer").close(0, true)
+          end,
+          desc = "Force close buffer",
+        },
         ["<Leader>bD"] = {
           function()
             require("astroui.status.heirline").buffer_picker(function(bufnr)
               require("astrocore.buffer").close(bufnr)
             end)
           end,
-          desc = "Pick to close"
+          desc = "Pick to close",
         },
-        -- Quick save
-        -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
-        -- Telescope themes
+
+        -- Telescope
+        ["<Leader>C"] = {
+          "<cmd>Telescope command_palette<CR>",
+          desc = "Command palette",
+        },
         ["<Leader>,T"] = {
           "<cmd>Telescope themes<CR>",
-          desc = "Theme Switcher"
+          desc = "Theme Switcher",
         },
+        ["<Leader>,c"] = {
+          "<cmd>Telescope colorscheme<CR>",
+          desc = "Color Schemes",
+        },
+
+        -- AstroNvimV4 custom mappings
         ["<Leader>,a"] = {
           "<cmd>Alpha<CR>",
-          desc = "Open Dashboard"
+          desc = "Open Dashboard",
         },
         ["<Leader>,m"] = {
           "<cmd>Mason<CR>",
-          desc = "Manage Packages"
+          desc = "Manage Packages",
+        },
+        ["<Leader>M"] = {
+          "<cmd>Mason<CR>",
+          desc = "Manage Packages",
         },
         ["<Leader>,p"] = {
           "<cmd>Lazy<CR>",
-          desc = "Manage Plugins"
+          desc = "Manage Plugins",
+        },
+        ["<Leader>P"] = {
+          "<cmd>Lazy<CR>",
+          desc = "Manage Plugins",
         },
         ["<Leader>,u"] = {
           "<cmd>Lazy update<CR>",
-          desc = "Update Plugins"
+          desc = "Update Plugins",
         },
 
-        ["<Leader>,c"] = {
-          "<cmd>Telescope colorscheme<CR>",
-          desc = "Color Schemes"
-        },
         -- Plugin Management
         ["<Leader>,L"] = {
           "<cmd>Lazy<cr>",
-          desc = "Lazy Menu"
+          desc = "Lazy Menu",
         },
-        ["<Leader>,U"] = {
+        ["<Leader>U"] = {
           "<cmd>Lazy update<cr>",
-          desc = "Lazy Update"
+          desc = "Update Plugins",
         },
         -- Options
         ["<Leader>,o"] = {
           "<cmd>options<cr>",
-          desc = "Options"
+          desc = "Options",
+        },
+        -- Windows
+        ["<Leader>ww"] = {
+          "<C-W>p",
+          desc = "Other window",
+        },
+        ["<Leader>wd"] = {
+          "<C-W>c",
+          desc = "Delete window",
+        },
+        ["<Leader>w-"] = {
+          "<C-W>s",
+          desc = "Split window below",
+        },
+        ["<Leader>w|"] = {
+          "<C-W>v",
+          desc = "Split window right",
+        },
+        -- Tabs
+        ["<Leader><tab>l"] = {
+          "<cmd>tablast<cr>",
+          desc = "Last Tab",
+        },
+        ["<Leader><tab>f"] = {
+          "<cmd>tabfirst<cr>",
+          desc = "First Tab",
+        },
+        ["<Leader><tab><tab>"] = {
+          "<cmd>tabnew<cr>",
+          desc = "New Tab",
+        },
+        ["<Leader><tab>]"] = {
+          "<cmd>tabnext<cr>",
+          desc = "Next Tab",
+        },
+        ["<Leader><tab>d"] = {
+          "<cmd>tabclose<cr>",
+          desc = "Close Tab",
+        },
+        ["<Leader><tab>["] = {
+          "<cmd>tabprevious<cr>",
+          desc = "Previous Tab",
+        },
+        -- Workspaces
+        ["<leader>Wa"] = {
+          vim.lsp.buf.add_workspace_folder,
+          desc = "add workspace folder"
+        },
+        ["<leader>Wr"] = {
+          vim.lsp.buf.remove_workspace_folder,
+          desc = "remove workspace folder"
+        },
+        ["<leader>Wl"] = {
+          function()
+            vim.print(vim.lsp.buf.list_workspace_folders())
+          end,
+          desc = "list workspace folder"
         },
       },
     },

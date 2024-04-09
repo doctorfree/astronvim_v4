@@ -47,9 +47,6 @@ return {
   {
     "LinArcX/telescope-command-palette.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
-    keys = {
-      { "<leader>P", "<cmd>Telescope command_palette<CR>", desc = "Command palette" },
-    },
     config = function() require("telescope").load_extension "command_palette" end,
   },
   {

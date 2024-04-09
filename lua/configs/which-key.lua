@@ -129,10 +129,6 @@ local normal_mode_mappings = {
   ["V"] = { "<C-W>s", "Split below" },
   ["q"] = { "quicklist" },
 
-  ["<Tab>"] = {
-    name = "Tabs",
-  },
-
   ["/"] = {
     name = "Manage",
     ["/"] = { "<cmd>Alpha<CR>", "Open dashboard" },
@@ -244,9 +240,7 @@ local normal_mode_mappings = {
     T = { "<cmd>Telescope themes<CR>", "Theme switcher" },
   },
 
-  w = {
-    name = "Windows",
-  },
+  w = { name = icons.ui.Terminal .. "Windows" },
 }
 
 local visual_mode_mappings = {
