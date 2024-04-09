@@ -131,7 +131,7 @@ local normal_mode_mappings = {
 
   ["/"] = {
     name = "Manage",
-    ["/"] = { "<cmd>Alpha<CR>", "Open dashboard" },
+    a = { "<cmd>Alpha<CR>", "Open dashboard" },
     m = { "<cmd>Mason<CR>", "Manage packages" },
     p = { "<cmd>Lazy<CR>", "Manage plugins" },
     u = { "<cmd>Lazy update<CR>", "Update plugins" },

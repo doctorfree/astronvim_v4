@@ -4,8 +4,39 @@
 local settings = require("configuration")
 local icons = require("icons")
 
-require "keymaps"
-require "options"
+local top = {}
+if vim.fn.executable "btop" == 1 then
+  top = { "<cmd>Top<CR>", desc = "System Monitor" }
+else
+  if vim.fn.executable "htop" == 1 then
+    top = { "<cmd>Top<CR>", desc = "System Monitor" }
+  end
+end
+local git = {}
+if vim.fn.executable "lazygit" == 1 then
+  git = { "<cmd>Lazygit<CR>", desc = "Lazygit Command" }
+end
+local lman = {}
+local lconf = {}
+local lplug = {}
+if vim.fn.executable "lazyman" == 1 then
+  lman = { "<cmd>Lazyman<CR>", desc = "Lazyman Menu" }
+  lconf = { "<cmd>Lazyconf<CR>", desc = "Lazyman Configuration" }
+  lplug = { "<cmd>Lazyplug<CR>", desc = "Lazyman Plugins" }
+end
+local ascii = {}
+if vim.fn.executable "asciiville" == 1 then
+  ascii = { "<cmd>Asciiville<CR>", desc = "Asciiville" }
+end
+local mpplus = {}
+local mpmenu = {}
+if vim.fn.executable "mpplus" == 1 then
+  mpplus = { "<cmd>MusicPlayerPlus<CR>", desc = "MusicPlayerPlus" }
+  mpmenu = { "<cmd>MusicPlayerMenu<CR>", desc = "MusicPlayerPlus Menu" }
+end
+
+require("keymaps")
+require("options")
 
 ---@type LazySpec
 return {
@@ -118,7 +149,8 @@ return {
         ["<Leader><tab>"] = { desc = icons.ui.Terminal .. "Tabs" },
         ["<Leader>w"] = { desc = icons.ui.Terminal .. "Windows" },
         ["<Leader>W"] = { desc = icons.ui.Terminal .. "Workspaces" },
-        ["<Leader>,"] = { desc = icons.kinds.Color .. " Color/Manage/Theme" },
+        ["<Leader>,"] = { desc = icons.kinds.Color .. " Color/Theme" },
+        ["<Leader>."] = { desc = icons.kinds.Color .. " Terminal Commands" },
 
         -- mappings seen under group name "Buffers"
         ["<Leader>bc"] = {
@@ -161,6 +193,10 @@ return {
           "<cmd>Alpha<CR>",
           desc = "Open Dashboard",
         },
+        ["<Leader>A"] = {
+          "<cmd>Alpha<CR>",
+          desc = "Open Dashboard",
+        },
         ["<Leader>,m"] = {
           "<cmd>Mason<CR>",
           desc = "Manage Packages",
@@ -196,6 +232,15 @@ return {
           "<cmd>options<cr>",
           desc = "Options",
         },
+        -- Terminal commands
+        ["<Leader>.s"] = top,
+        ["<Leader>.g"] = git,
+        ["<Leader>.l"] = lman,
+        ["<Leader>.c"] = lconf,
+        ["<Leader>.p"] = lplug,
+        ["<Leader>.a"] = ascii,
+        ["<Leader>.m"] = mpplus,
+        ["<Leader>.M"] = mpmenu,
         -- Windows
         ["<Leader>ww"] = {
           "<C-W>p",
@@ -241,17 +286,17 @@ return {
         -- Workspaces
         ["<leader>Wa"] = {
           vim.lsp.buf.add_workspace_folder,
-          desc = "add workspace folder"
+          desc = "add workspace folder",
         },
         ["<leader>Wr"] = {
           vim.lsp.buf.remove_workspace_folder,
-          desc = "remove workspace folder"
+          desc = "remove workspace folder",
         },
         ["<leader>Wl"] = {
           function()
             vim.print(vim.lsp.buf.list_workspace_folders())
           end,
-          desc = "list workspace folder"
+          desc = "list workspace folder",
         },
       },
     },
@@ -341,7 +386,7 @@ return {
           desc = "Get GUI config when entering UI",
           group = "astronvimv4",
           callback = function()
-            require "ginit"
+            require("ginit")
           end,
         },
       },

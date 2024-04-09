@@ -51,15 +51,26 @@ if vim.fn.executable("lazygit") == 1 then
   end, { nargs = "?" })
 end
 
-if vim.fn.executable("htop") == 1 then
-  local htop = require("terminal").terminal:new({
-    layout = { open_cmd = "float", border = "rounded" },
-    cmd = { "htop" },
+if vim.fn.executable("btop") == 1 then
+  local btop = require("terminal").terminal:new({
+    layout = { open_cmd = "float", border = "rounded", height = 0.99, width = 0.99 },
+    cmd = { "btop" },
     autoclose = true,
   })
-  api.nvim_create_user_command("Htop", function()
-    htop:toggle(nil, true)
+  api.nvim_create_user_command("Top", function()
+    btop:toggle(nil, true)
   end, { nargs = "?" })
+else
+  if vim.fn.executable("htop") == 1 then
+    local htop = require("terminal").terminal:new({
+      layout = { open_cmd = "float", border = "rounded", height = 0.99, width = 0.99 },
+      cmd = { "htop" },
+      autoclose = true,
+    })
+    api.nvim_create_user_command("Top", function()
+      htop:toggle(nil, true)
+    end, { nargs = "?" })
+  end
 end
 
 if vim.fn.executable("lazyman") == 1 then

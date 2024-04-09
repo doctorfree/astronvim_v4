@@ -31,7 +31,7 @@ return {
       "Lazyman",
       "Lazyconf",
       "Lazyplug",
-      "Htop",
+      "Top",
     },
     event = "VimEnter",
     config = function()
