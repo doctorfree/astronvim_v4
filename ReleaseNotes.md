@@ -1,10 +1,18 @@
 # AstroNvimV4 Release Notes
 
-**NOTE:** This configuration is for AstroNvim v4+
+**NOTE:** This is for AstroNvim v4+
 
-A sample configuration for [AstroNvim](https://github.com/AstroNvim/AstroNvim)
+A sample configuration for [AstroNvim](https://github.com/AstroNvim/AstroNvim) v4
 
-## 🛠️ Installation
+## Table of Contents
+
+- [Installation](#installation)
+  - [Lazyman](#lazyman)
+- [Usage](#usage)
+- [Features](#features)
+- [Configuration](#configuration)
+
+## Installation
 
 This Neovim configuration can be installed using the
 [Lazyman Neovim Configuration Manager](https://lazyman.dev):
@@ -50,7 +58,7 @@ quickly explore other Neovim configurations including many `AstroNvim`
 configurations. For example, `lazyman -i astronvim` installs and initializes
 8 `AstroNvim` configurations. These can be easily explored using `nvims`.
 
-## Run
+## Usage
 
 If using `lazyman`, the `nvims` shell function can be used to select `AstroNvimV4`:
 
@@ -84,6 +92,10 @@ configuration in `AstroNvim` v4.
 
 Beyond the basic features provided by this template, `AstroNvimV4` includes:
 
+- Extensive customization of the AstroNvim v4 files:
+  - `lua/plugins/astrocore.lua` : globals, options, mappings, and autocmds
+  - `lua/plugins/astrolsp.lua` : custom formatters, linters, and language servers
+  - `lua/plugins/astroui.lua` : options, icons, and status configuration
 - Options and plugin configuration in `lua/options.lua` and `lua/configuration.lua`
 - Mason installed formatters, linters, language servers
 - LSP configuration for several language servers

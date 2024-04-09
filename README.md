@@ -8,7 +8,7 @@ A sample configuration for [AstroNvim](https://github.com/AstroNvim/AstroNvim) v
 
 - [Installation](#installation)
   - [Lazyman](#lazyman)
-- [Run](#run)
+- [Usage](#usage)
 - [Features](#features)
 - [Configuration](#configuration)
 
@@ -64,7 +64,7 @@ It can take several minutes for `lazyman` to install and initialize.
 Minimalists may eschew `lazyman` in favor of a tedious and error-prone manual
 installation of Neovim configurations. Different lanes for different brains!
 
-## Run
+## Usage
 
 If using `lazyman`, the `nvims` shell function can be used to select `AstroNvimV4`:
 
@@ -98,6 +98,10 @@ configuration in `AstroNvim` v4.
 
 Beyond the basic features provided by this template, `AstroNvimV4` includes:
 
+- Extensive customization of the AstroNvim v4 files:
+  - `lua/plugins/astrocore.lua` : globals, options, mappings, and autocmds
+  - `lua/plugins/astrolsp.lua` : custom formatters, linters, and language servers
+  - `lua/plugins/astroui.lua` : options, icons, and status configuration
 - Options and plugin configuration in `lua/options.lua` and `lua/configuration.lua`
 - Mason installed formatters, linters, language servers
 - LSP configuration for several language servers
@@ -170,13 +174,16 @@ conf.showtabline = 2
 conf.list = true
 -- which list chars to show
 conf.listchars = {
-  eol = "⤶",
-  tab = ">.",
-  trail = "~",
-  extends = "◀",
-  precedes = "▶",
+	eol = "⤶",
+	tab = ">.",
+	trail = "~",
+	extends = "◀",
+	precedes = "▶",
 }
 
+-- PLUGINS CONFIGURATION
+-- Enable ToggleTerm
+conf.enable_toggleterm = false
 -- Enable zen mode distraction-free coding
 conf.enable_zenmode = true
 -- if zenmode enabled then enable terminal support as well
@@ -199,81 +206,94 @@ conf.grepprg = "rg --hidden --vimgrep --smart-case --"
 conf.show_diagnostics = "popup"
 
 -- treesitter parsers to be installed
+-- See https://github.com/nvim-treesitter/nvim-treesitter/wiki/List-of-parsers
 conf.treesitter_ensure_installed = {
   "bash",
+  "c",
+  "cpp",
+  "json",
+  "jsonc",
+  "javascript",
   "lua",
   "markdown",
   "markdown_inline",
+  "python",
   "query",
   "regex",
+  "toml",
   "vim",
   "vimdoc",
+  "yaml",
 }
--- Formatters and linters installed by mason-tool-installer
-conf.formatters_linters = {
-  "actionlint",
-  "gofumpt",
-  "goimports",
-  "golines",
-  "golangci-lint",
-  "google-java-format",
-  -- "latexindent",
-  "markdownlint",
-  -- "debugpy",
-  "isort",
-  -- "json-lsp",
-  "marksman",
-  -- "php-debug-adapter",
-  -- "php-cs-fixer",
-  "prettier",
-  "prettierd",
-  "pyright",
-  "sql-formatter",
-  -- "shellcheck",
-  "shfmt",
-  "stylua",
-  "tflint",
-  "yamllint",
-}
--- Formatters and linters installed externally
-conf.external_formatters = {
-  "beautysh",
-  "black",
-  "flake8",
-  "ruff",
-}
+
 -- Language servers installed by the Lazyman initialization
 conf.lsp_installed = {
-  "cssls",
-  "denols",
-  "html",
-  "lua_ls",
-  "pylsp",
-  "pyright",
-  "tsserver",
-  "vimls",
+	"cssls",
+	"denols",
+	"html",
+	"lua_ls",
+	"pylsp",
+	"pyright",
+	"tsserver",
+	"vimls",
 }
 -- Language servers that should be installed by mason-lspconfig
 conf.lsp_servers = {
-  "bashls",
-  -- "cssmodules_ls",
-  -- "dockerls",
-  -- "emmet_ls",
-  -- "eslint",
-  -- "gopls",
-  -- "graphql",
-  -- "jdtls",
-  -- "julials",
-  -- "ltex",
-  "jsonls",
-  "marksman",
-  -- "prismals",
-  -- "sqlls",
-  -- "tailwindcss",
-  "taplo",
-  -- "texlab",
-  "vuels",
-  "yamlls",
+	"bashls",
+	"clangd",
+	"cmake",
+	-- "cssmodules_ls",
+	-- "dockerls",
+	-- "emmet_ls",
+	-- "eslint",
+	-- "gopls",
+	-- "graphql",
+	-- "jdtls",
+	-- "julials",
+	-- "ltex",
+	"jsonls",
+	"marksman",
+	-- "prismals",
+	-- "sqlls",
+	-- "tailwindcss",
+	"taplo",
+	-- "texlab",
+	"vuels",
+	"yamlls",
+}
+
+-- Formatters and linters installed by mason-tool-installer
+conf.formatters_linters = {
+	"actionlint",
+	"gofumpt",
+	"goimports",
+	"golines",
+	"golangci-lint",
+	"google-java-format",
+	-- "latexindent",
+	-- "markdownlint",
+	-- "debugpy",
+	"isort",
+	-- "json-lsp",
+	"marksman",
+	-- "php-debug-adapter",
+	-- "php-cs-fixer",
+	"prettier",
+	"prettierd",
+	"pyright",
+	"sql-formatter",
+	-- "shellcheck",
+	"shfmt",
+	"stylua",
+	"tflint",
+	"yamllint",
+}
+-- Formatters and linters installed externally
+conf.external_formatters = {
+	"beautysh",
+	"black",
+	"flake8",
+	"ruff",
 }
 
 return conf
