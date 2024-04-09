@@ -1,6 +1,6 @@
 local settings = require("configuration")
-local twilight = { "folke/twilight.nvim", enable = false }
-local zenmode = { "folke/zen-mode.nvim", enable = false }
+local twilight = { "folke/twilight.nvim", enabled = false }
+local zenmode = { "folke/zen-mode.nvim", enabled = false }
 local kitty = false
 if settings.enable_kitty then
   kitty = true
