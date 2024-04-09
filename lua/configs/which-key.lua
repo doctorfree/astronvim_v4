@@ -2,6 +2,8 @@
 local present, wk = pcall(require, "which-key")
 if not present then return end
 
+local icons = require("icons")
+
 wk.setup {
   plugins = {
     marks = true,
@@ -161,7 +163,7 @@ local normal_mode_mappings = {
   },
 
   d = {
-    name = "Debug",
+    name = icons.ui.Bug .. "Debug",
     a = { "Attach" },
     b = { "Breakpoint" },
     c = { "Continue" },
@@ -183,15 +185,11 @@ local normal_mode_mappings = {
   },
 
   D = {
-    name = "Database",
+    name = icons.ui.Database .. "Database",
     t = { "Toggle UI" },
     f = { "Find Buffer" },
     r = { "Rename Buffer" },
     q = { "Last Query Info" },
-  },
-
-  t = {
-    name = "Terminal",
   },
 
   g = {
@@ -235,7 +233,7 @@ local normal_mode_mappings = {
   },
 
   s = {
-    name = "Search",
+    name = icons.ui.Search .. "Search",
     h = { "<cmd>Telescope oldfiles hidden=true<CR>", "File history" },
     n = { name = "Noice" },
   },

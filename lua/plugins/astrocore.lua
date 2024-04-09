@@ -118,7 +118,7 @@ return {
           desc = icons.ui.Terminal .. "Terminal",
         },
         ["<Leader>t"] = {
-          desc = icons.kinds.Color .. "Manage/Theme/Transparency",
+          desc = icons.kinds.Color .. " Manage/Theme/Transparency",
         },
 
         -- mappings seen under group name "Buffer"
@@ -135,7 +135,7 @@ return {
         -- Telescope themes
         ["<Leader>tT"] = {
           "<cmd>Telescope themes<CR>",
-          desc = "Telescope Theme Switcher",
+          desc = "Theme Switcher",
         },
         ["<Leader>ta"] = {
           "<cmd>Alpha<CR>",
@@ -156,7 +156,7 @@ return {
 
         ["<Leader>tc"] = {
           "<cmd>Telescope colorscheme<CR>",
-          desc = "Telescope Color Schemes",
+          desc = "Color Schemes",
         },
       },
     },

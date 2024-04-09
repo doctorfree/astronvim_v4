@@ -134,6 +134,7 @@ return {
     Code = " ",
     Comment = " ",
     Dashboard = " ",
+    Database = " ",
     Fire = " ",
     Gear = " ",
     History = " ",
