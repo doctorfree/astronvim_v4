@@ -5,21 +5,21 @@ local keymap = vim.keymap.set
 local silent = { silent = true }
 local Info = require("lazy.core.util").info
 
--- Plugin Management
-map("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy Menu" })
-map("n", "<leader>U", "<cmd>Lazy update<cr>", { desc = "Lazy Update" })
--- Options
-map("n", "<leader>o", "<cmd>options<cr>", { desc = "Options" })
-
 -- Terminal commands
-if vim.fn.executable "htop" == 1 then map("n", "<leader>H", "<cmd>Htop<cr>", { desc = "Htop command" }) end
-if vim.fn.executable "lazygit" == 1 then map("n", "<leader>gg", "<cmd>Lazygit<cr>", { desc = "Lazygit command" }) end
+if vim.fn.executable "htop" == 1 then
+  map("n", "<leader>H", "<cmd>Htop<cr>", { desc = "Htop command" })
+end
+if vim.fn.executable "lazygit" == 1 then
+  map("n", "<leader>gg", "<cmd>Lazygit<cr>", { desc = "Lazygit command" })
+end
 if vim.fn.executable "lazyman" == 1 then
   map("n", "<leader>lm", "<cmd>Lazyman<cr>", { desc = "Lazyman menu" })
   map("n", "<leader>lc", "<cmd>Lazyconf<cr>", { desc = "Lazyman configuration" })
   map("n", "<leader>lp", "<cmd>Lazyplug<cr>", { desc = "Lazyman plugins" })
 end
-if vim.fn.executable "asciiville" == 1 then map("n", "<leader>av", "<cmd>Asciiville<cr>", { desc = "Asciiville" }) end
+if vim.fn.executable "asciiville" == 1 then
+  map("n", "<leader>av", "<cmd>Asciiville<cr>", { desc = "Asciiville" })
+end
 if vim.fn.executable "mpplus" == 1 then
   map("n", "<leader>am", "<cmd>MusicPlayerPlus<cr>", { desc = "MusicPlayerPlus" })
   map("n", "<leader>aM", "<cmd>MusicPlayerMenu<cr>", { desc = "MusicPlayerPlus Menu" })
@@ -52,7 +52,9 @@ keymap("v", "<leader>cf", function()
 end, silent)
 keymap("n", "K", function()
   local winid = require("ufo").peekFoldedLinesUnderCursor()
-  if not winid then vim.lsp.buf.hover() end
+  if not winid then
+    vim.lsp.buf.hover()
+  end
 end)
 
 -- Resize window using <ctrl> arrow keys
@@ -63,19 +65,20 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window w
 
 -- Toggle keymaps
 map("n", "<leader>uf", require("configs.lsp.format").toggle, { desc = "Toggle format on Save" })
-map("n", "<leader>us", function() Util.toggle "spell" end, { desc = "Toggle Spelling" })
-map("n", "<leader>uw", function() Util.toggle "wrap" end, { desc = "Toggle Word Wrap" })
+map("n", "<leader>us", function()
+  Util.toggle "spell"
+end, { desc = "Toggle Spelling" })
+map("n", "<leader>uw", function()
+  Util.toggle "wrap"
+end, { desc = "Toggle Word Wrap" })
 map("n", "<leader>ul", function()
   Util.toggle("relativenumber", true)
   Util.toggle "number"
 end, { desc = "Toggle Line Numbers" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-map(
-  "n",
-  "<leader>uC",
-  function() Util.toggle("conceallevel", false, { 0, conceallevel }) end,
-  { desc = "Toggle Conceal" }
-)
+map("n", "<leader>uC", function()
+  Util.toggle("conceallevel", false, { 0, conceallevel })
+end, { desc = "Toggle Conceal" })
 
 map("n", "<leader>ug", function()
   if vim.wo.signcolumn == "no" then
@@ -136,11 +139,17 @@ end, { desc = "Toggle number" })
 map("n", "<leader>x", require("utils.functions").toggle_colorcolumn, { desc = "Toggle colorcolumn" })
 
 -- highlights under cursor
-if vim.fn.has "nvim-0.9.0" == 1 then map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" }) end
+if vim.fn.has "nvim-0.9.0" == 1 then
+  map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
+end
 
 -- floating terminal
-map("n", "<leader>ft", function() Util.float_term(nil, { cwd = Util.get_root() }) end, { desc = "Terminal (root dir)" })
-map("n", "<leader>fT", function() Util.float_term() end, { desc = "Terminal (cwd)" })
+map("n", "<leader>ft", function()
+  Util.float_term(nil, { cwd = Util.get_root() })
+end, { desc = "Terminal (root dir)" })
+map("n", "<leader>fT", function()
+  Util.float_term()
+end, { desc = "Terminal (cwd)" })
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
 -- windows
