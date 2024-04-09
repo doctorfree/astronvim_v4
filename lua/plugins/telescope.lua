@@ -54,9 +54,9 @@ return {
     { "<leader>mm", "<cmd>Telescope make<cr>", desc = "Run make" },
     { "<leader>mt", "<cmd>Telescope<cr>", desc = "Telescope" },
     -- Other
-    { "<leader>B", "<cmd>Telescope buffers<cr>", desc = "Bufferlist" },
+    { "<leader>bB", "<cmd>Telescope buffers<cr>", desc = "Bufferlist" },
     { "<C-s>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search in buffer" },
-    { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
+    { "<leader>b,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     {
       "<leader><space>",

@@ -42,7 +42,7 @@ if settings.theme == "everforest" then
   vim.api.nvim_set_hl(0, "AlphaFooter", { link = "DashboardFooter" })
   local opts = require("everforest").config
   vim.g.everforest_transparent = opts.transparent_background_level
-  require("utils").map("n", "<leader>tt", function()
+  require("utils").map("n", "<leader>,t", function()
     if vim.g.everforest_transparent == 1 then
       vim.g.everforest_transparent = 0
     else

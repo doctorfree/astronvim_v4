@@ -84,7 +84,7 @@ if settings.theme == "tundra" then
   vim.api.nvim_set_hl(0, "AlphaFooter", { link = "DiagnosticHint" })
   require("utils").map(
     "n",
-    "<leader>tt",
+    "<leader>,t",
     ":Tundra toggle_transparency<CR>",
     { desc = "Toggle Transparency" }
   )

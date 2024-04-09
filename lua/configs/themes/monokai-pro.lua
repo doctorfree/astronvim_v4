@@ -100,7 +100,7 @@ if theme == "monokai-pro" then
   vim.api.nvim_set_hl(0, "AlphaShortcut", { link = "DashboardShortcut" })
   local mopts = require("monokai-pro.config").options
   vim.g.monokaipro_transparent = mopts.transparent_background
-  require("utils").map("n", "<leader>tt", function()
+  require("utils").map("n", "<leader>,t", function()
     vim.g.monokaipro_transparent = not vim.g.monokaipro_transparent
     mopts.transparent_background = vim.g.monokaipro_transparent
     require("monokai-pro").setup(mopts)

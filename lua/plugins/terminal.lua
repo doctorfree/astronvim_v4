@@ -10,7 +10,7 @@ if settings.enable_toggleterm then
       require("configs.toggleterm")
     end,
     keys = {
-      { "<Leader>Tf", "<cmd>ToggleTerm direction=float<CR>", desc = "Terminal Float" },
+      { "<Leader>tf", "<cmd>ToggleTerm direction=float<CR>", desc = "Terminal Float" },
     },
   }
 end

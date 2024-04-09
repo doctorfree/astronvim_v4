@@ -114,8 +114,8 @@ return {
         -- Tables with just a `desc` key will be registered with which-key if it's installed
         -- This is useful for naming menus
         ["<Leader>b"] = { desc = "Buffers" },
-        ["<Leader>T"] = { desc = icons.ui.Terminal .. "Terminal" },
-        ["<Leader>t"] = { desc = icons.kinds.Color .. " Manage/Theme/Transparency" },
+        ["<Leader>t"] = { desc = icons.ui.Terminal .. "Terminal" },
+        ["<Leader>,"] = { desc = icons.kinds.Color .. " Manage/Theme/Transparency" },
 
         -- mappings seen under group name "Buffer"
         ["<Leader>bD"] = {
@@ -129,42 +129,42 @@ return {
         -- Quick save
         -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
         -- Telescope themes
-        ["<Leader>tT"] = {
+        ["<Leader>,T"] = {
           "<cmd>Telescope themes<CR>",
           desc = "Theme Switcher"
         },
-        ["<Leader>ta"] = {
+        ["<Leader>,a"] = {
           "<cmd>Alpha<CR>",
           desc = "Open Dashboard"
         },
-        ["<Leader>tm"] = {
+        ["<Leader>,m"] = {
           "<cmd>Mason<CR>",
           desc = "Manage Packages"
         },
-        ["<Leader>tp"] = {
+        ["<Leader>,p"] = {
           "<cmd>Lazy<CR>",
           desc = "Manage Plugins"
         },
-        ["<Leader>tu"] = {
+        ["<Leader>,u"] = {
           "<cmd>Lazy update<CR>",
           desc = "Update Plugins"
         },
 
-        ["<Leader>tc"] = {
+        ["<Leader>,c"] = {
           "<cmd>Telescope colorscheme<CR>",
           desc = "Color Schemes"
         },
         -- Plugin Management
-        ["<Leader>tL"] = {
+        ["<Leader>,L"] = {
           "<cmd>Lazy<cr>",
           desc = "Lazy Menu"
         },
-        ["<Leader>tU"] = {
+        ["<Leader>,U"] = {
           "<cmd>Lazy update<cr>",
           desc = "Lazy Update"
         },
         -- Options
-        ["<Leader>to"] = {
+        ["<Leader>,o"] = {
           "<cmd>options<cr>",
           desc = "Options"
         },

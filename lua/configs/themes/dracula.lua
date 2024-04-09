@@ -186,7 +186,7 @@ if settings.theme == "dracula" then
   vim.api.nvim_set_hl(0, "NeoTreeVertSplit", { link = "NvimTreeVertSplit" })
   local dopts = dracula.configs()
   vim.g.dracula_transparent = dopts.transparent_bg
-  require("utils").map("n", "<leader>tt", function()
+  require("utils").map("n", "<leader>,t", function()
     vim.g.dracula_transparent = not vim.g.dracula_transparent
     dopts.transparent_bg = vim.g.dracula_transparent
     require("dracula").setup(dopts)
