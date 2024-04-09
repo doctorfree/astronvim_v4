@@ -70,21 +70,21 @@ conf.show_diagnostics = "popup"
 -- See https://github.com/nvim-treesitter/nvim-treesitter/wiki/List-of-parsers
 conf.treesitter_ensure_installed = {
   "bash",
-  -- "c",
-  -- "cpp",
-  -- "json",
-  -- "jsonc",
-  -- "javascript",
+  "c",
+  "cpp",
+  "json",
+  "jsonc",
+  "javascript",
   "lua",
   "markdown",
   "markdown_inline",
-  -- "python",
+  "python",
   "query",
   "regex",
-  -- "toml",
+  "toml",
   "vim",
   "vimdoc",
-  -- "yaml",
+  "yaml",
 }
 
 -- Language servers installed by the Lazyman initialization

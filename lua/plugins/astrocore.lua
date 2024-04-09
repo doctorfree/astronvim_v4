@@ -114,12 +114,8 @@ return {
         -- Tables with just a `desc` key will be registered with which-key if it's installed
         -- This is useful for naming menus
         ["<Leader>b"] = { desc = "Buffers" },
-        ["<Leader>T"] = {
-          desc = icons.ui.Terminal .. "Terminal",
-        },
-        ["<Leader>t"] = {
-          desc = icons.kinds.Color .. " Manage/Theme/Transparency",
-        },
+        ["<Leader>T"] = { desc = icons.ui.Terminal .. "Terminal" },
+        ["<Leader>t"] = { desc = icons.kinds.Color .. " Manage/Theme/Transparency" },
 
         -- mappings seen under group name "Buffer"
         ["<Leader>bD"] = {
@@ -128,49 +124,49 @@ return {
               require("astrocore.buffer").close(bufnr)
             end)
           end,
-          { desc = "Pick to close" },
+          desc = "Pick to close"
         },
         -- Quick save
         -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
         -- Telescope themes
         ["<Leader>tT"] = {
           "<cmd>Telescope themes<CR>",
-          { desc = "Theme Switcher" },
+          desc = "Theme Switcher"
         },
         ["<Leader>ta"] = {
           "<cmd>Alpha<CR>",
-          { desc = "Open Dashboard" },
+          desc = "Open Dashboard"
         },
         ["<Leader>tm"] = {
           "<cmd>Mason<CR>",
-          { desc = "Manage Packages" },
+          desc = "Manage Packages"
         },
         ["<Leader>tp"] = {
           "<cmd>Lazy<CR>",
-          { desc = "Manage Plugins" },
+          desc = "Manage Plugins"
         },
         ["<Leader>tu"] = {
           "<cmd>Lazy update<CR>",
-          { desc = "Update Plugins" },
+          desc = "Update Plugins"
         },
 
         ["<Leader>tc"] = {
           "<cmd>Telescope colorscheme<CR>",
-          { desc = "Color Schemes" },
+          desc = "Color Schemes"
         },
         -- Plugin Management
         ["<Leader>tL"] = {
           "<cmd>Lazy<cr>",
-          { desc = "Lazy Menu" },
+          desc = "Lazy Menu"
         },
         ["<Leader>tU"] = {
           "<cmd>Lazy update<cr>",
-          { desc = "Lazy Update" },
+          desc = "Lazy Update"
         },
         -- Options
         ["<Leader>to"] = {
           "<cmd>options<cr>",
-          { desc = "Options" },
+          desc = "Options"
         },
       },
     },
