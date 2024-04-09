@@ -42,6 +42,9 @@ conf.listchars = {
 	precedes = "▶",
 }
 
+-- PLUGINS CONFIGURATION
+-- Enable ToggleTerm
+conf.enable_toggleterm = false
 -- Enable zen mode distraction-free coding
 conf.enable_zenmode = true
 -- if zenmode enabled then enable terminal support as well
