@@ -169,7 +169,9 @@ end
 if settings.theme == "dracula" then
   local have_current = false
   local theme_ok, _ = pcall(require, "current-theme")
-  if theme_ok then have_current = true end
+  if theme_ok then
+    have_current = true
+  end
   if have_current then
     require "current-theme"
   else
@@ -184,7 +186,7 @@ if settings.theme == "dracula" then
   vim.api.nvim_set_hl(0, "NeoTreeVertSplit", { link = "NvimTreeVertSplit" })
   local dopts = dracula.configs()
   vim.g.dracula_transparent = dopts.transparent_bg
-  require("utils").map("n", "<leader>ut", function()
+  require("utils").map("n", "<leader>tt", function()
     vim.g.dracula_transparent = not vim.g.dracula_transparent
     dopts.transparent_bg = vim.g.dracula_transparent
     require("dracula").setup(dopts)

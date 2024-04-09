@@ -1,7 +1,8 @@
 -- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
 -- Configuration documentation can be found with `:h astrocore`
 
-local settings = require "configuration"
+local settings = require("configuration")
+local icons = require("icons")
 
 require "keymaps"
 require "options"
@@ -113,25 +114,50 @@ return {
         -- Tables with just a `desc` key will be registered with which-key if it's installed
         -- This is useful for naming menus
         ["<Leader>b"] = { desc = "Buffers" },
-        ["<Leader>t"] = { desc = require("icons").ui.Terminal .. "Terminal" },
+        ["<Leader>T"] = {
+          desc = icons.ui.Terminal .. "Terminal",
+        },
+        ["<Leader>t"] = {
+          desc = icons.kinds.Color .. "Manage/Theme/Transparency",
+        },
 
         -- mappings seen under group name "Buffer"
         ["<Leader>bD"] = {
           function()
-            require("astroui.status.heirline").buffer_picker(
-              function(bufnr) require("astrocore.buffer").close(bufnr) end
-            )
+            require("astroui.status.heirline").buffer_picker(function(bufnr)
+              require("astrocore.buffer").close(bufnr)
+            end)
           end,
           desc = "Pick to close",
         },
         -- Quick save
         -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
         -- Telescope themes
-        ["<Leader>T"] = { "<cmd>Telescope themes<CR>", desc = "Theme switcher" },
-      },
-      t = {
-        -- setting a mapping to false will disable it
-        -- ["<esc>"] = false,
+        ["<Leader>tT"] = {
+          "<cmd>Telescope themes<CR>",
+          desc = "Telescope Theme Switcher",
+        },
+        ["<Leader>ta"] = {
+          "<cmd>Alpha<CR>",
+          desc = "Open Dashboard",
+        },
+        ["<Leader>tm"] = {
+          "<cmd>Mason<CR>",
+          desc = "Manage Packages",
+        },
+        ["<Leader>tp"] = {
+          "<cmd>Lazy<CR>",
+          desc = "Manage Plugins",
+        },
+        ["<Leader>tu"] = {
+          "<cmd>Lazy update<CR>",
+          desc = "Update Plugins",
+        },
+
+        ["<Leader>tc"] = {
+          "<cmd>Telescope colorscheme<CR>",
+          desc = "Telescope Color Schemes",
+        },
       },
     },
     autocmds = {
@@ -210,14 +236,18 @@ return {
           event = { "VimResized" },
           desc = "Resize splits if window got resized",
           group = "astronvimv4",
-          callback = function() vim.cmd "tabdo wincmd =" end,
+          callback = function()
+            vim.cmd "tabdo wincmd ="
+          end,
         },
         {
           event = { "UIEnter" },
           once = true,
           desc = "Get GUI config when entering UI",
           group = "astronvimv4",
-          callback = function() require "ginit" end,
+          callback = function()
+            require "ginit"
+          end,
         },
       },
     },

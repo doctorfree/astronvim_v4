@@ -56,7 +56,9 @@ if settings.theme == "tundra" then
   vim.opt.background = "dark"
   local have_current = false
   local theme_ok, _ = pcall(require, "current-theme")
-  if theme_ok then have_current = true end
+  if theme_ok then
+    have_current = true
+  end
   if have_current then
     require "current-theme"
   else
@@ -80,6 +82,11 @@ if settings.theme == "tundra" then
   vim.api.nvim_set_hl(0, "AlphaButtons", { link = "DiagnosticWarn" })
   vim.api.nvim_set_hl(0, "AlphaShortcut", { link = "DiagnosticInfo" })
   vim.api.nvim_set_hl(0, "AlphaFooter", { link = "DiagnosticHint" })
-  require("utils").map("n", "<leader>ut", ":Tundra toggle_transparency<CR>", { desc = "Toggle Transparency" })
+  require("utils").map(
+    "n",
+    "<leader>tt",
+    ":Tundra toggle_transparency<CR>",
+    { desc = "Toggle Transparency" }
+  )
   require "configs.highlights"
 end

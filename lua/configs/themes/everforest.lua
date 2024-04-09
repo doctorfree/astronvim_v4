@@ -2,7 +2,9 @@ local settings = require "configuration"
 local transparent = settings.enable_transparent
 
 local level = 0
-if transparent then level = 1 end
+if transparent then
+  level = 1
+end
 
 require("everforest").setup {
   -- Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
@@ -25,7 +27,9 @@ require("everforest").setup {
 if settings.theme == "everforest" then
   local have_current = false
   local theme_ok, _ = pcall(require, "current-theme")
-  if theme_ok then have_current = true end
+  if theme_ok then
+    have_current = true
+  end
   if have_current then
     require "current-theme"
   else
@@ -38,7 +42,7 @@ if settings.theme == "everforest" then
   vim.api.nvim_set_hl(0, "AlphaFooter", { link = "DashboardFooter" })
   local opts = require("everforest").config
   vim.g.everforest_transparent = opts.transparent_background_level
-  require("utils").map("n", "<leader>ut", function()
+  require("utils").map("n", "<leader>tt", function()
     if vim.g.everforest_transparent == 1 then
       vim.g.everforest_transparent = 0
     else

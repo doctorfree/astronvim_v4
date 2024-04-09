@@ -1,5 +1,7 @@
 -- AstroUI provides the basis for configuring the AstroNvim User Interface
 -- Configuration documentation can be found with `:h astroui`
+--
+local settings = require("configuration")
 
 ---@type LazySpec
 return {
@@ -8,7 +10,7 @@ return {
     ---@type AstroUIOpts
     opts = {
       -- change colorscheme
-      colorscheme = "tokyonight",
+      colorscheme = settings.theme,
       -- add new user interface icon
       icons = {
         VimIcon = "",

@@ -1,11 +1,15 @@
 local settings = require "configuration"
 local sidebars = "dark"
-if settings.enable_transparent then sidebars = "transparent" end
+if settings.enable_transparent then
+  sidebars = "transparent"
+end
 
 local function set_colorscheme(sty)
   local have_current = false
   local theme_ok, _ = pcall(require, "current-theme")
-  if theme_ok then have_current = true end
+  if theme_ok then
+    have_current = true
+  end
   if have_current then
     require "current-theme"
   else
@@ -81,10 +85,12 @@ if settings.theme == "tokyonight" then
   vim.api.nvim_set_hl(0, "NeoTreeGitUntracked", { link = "NvimTreeGitDeleted" })
   vim.api.nvim_set_hl(0, "NeoTreeSymbolicLinkTarget", { link = "NvimTreeSymlink" })
   vim.g.tokyonight_transparent = require("tokyonight.config").options.transparent
-  require("utils").map("n", "<leader>ut", function()
+  require("utils").map("n", "<leader>tt", function()
     vim.g.tokyonight_transparent = not vim.g.tokyonight_transparent
     local sidebar = "dark"
-    if vim.g.tokyonight_transparent then sidebar = "transparent" end
+    if vim.g.tokyonight_transparent then
+      sidebar = "transparent"
+    end
     require("tokyonight").setup {
       transparent = vim.g.tokyonight_transparent,
       styles = {

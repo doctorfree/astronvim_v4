@@ -3,7 +3,13 @@ local theme = settings.theme
 local style = settings.theme_style
 local filter = "pro"
 if theme == "monokai-pro" then
-  if style == "classic" or style == "octagon" or style == "machine" or style == "ristretto" or style == "spectrum" then
+  if
+    style == "classic"
+    or style == "octagon"
+    or style == "machine"
+    or style == "ristretto"
+    or style == "spectrum"
+  then
     filter = style
   end
 end
@@ -83,7 +89,9 @@ require("monokai-pro").setup {
 if theme == "monokai-pro" then
   local have_current = false
   local theme_ok, _ = pcall(require, "current-theme")
-  if theme_ok then have_current = true end
+  if theme_ok then
+    have_current = true
+  end
   if have_current then
     require "current-theme"
   else
@@ -92,7 +100,7 @@ if theme == "monokai-pro" then
   vim.api.nvim_set_hl(0, "AlphaShortcut", { link = "DashboardShortcut" })
   local mopts = require("monokai-pro.config").options
   vim.g.monokaipro_transparent = mopts.transparent_background
-  require("utils").map("n", "<leader>ut", function()
+  require("utils").map("n", "<leader>tt", function()
     vim.g.monokaipro_transparent = not vim.g.monokaipro_transparent
     mopts.transparent_background = vim.g.monokaipro_transparent
     require("monokai-pro").setup(mopts)
