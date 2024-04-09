@@ -153,6 +153,15 @@ return {
     config = function() require("lsp_signature").setup() end,
   },
 
+  -- clangd extensions (such as inlay hints)
+  {
+    "p00f/clangd_extensions.nvim",
+    dependencies = "neovim/nvim-lspconfig",
+    config = function()
+      require("configs.clangd").setup()
+    end,
+  },
+
   -- LSP Cmp
   {
     "hrsh7th/nvim-cmp",
@@ -164,6 +173,7 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-calc",
+      "p00f/clangd_extensions.nvim",
     },
     config = function() require "configs.nvim-cmp" end,
   },

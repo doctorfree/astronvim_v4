@@ -97,6 +97,8 @@ conf.lsp_installed = {
 -- Language servers that should be installed by mason-lspconfig
 conf.lsp_servers = {
 	"bashls",
+	"clangd",
+	"cmake",
 	-- "cssmodules_ls",
 	-- "dockerls",
 	-- "emmet_ls",

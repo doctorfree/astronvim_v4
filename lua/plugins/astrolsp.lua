@@ -54,9 +54,13 @@ else
   py_path = vim.g.python3_host_prog
 end
 local enable_black = { enabled = false }
-if table_contains(external_formatters, "black") then enable_black = { enabled = true } end
+if table_contains(external_formatters, "black") then
+  enable_black = { enabled = true }
+end
 local enable_ruff = { enabled = false }
-if table_contains(external_formatters, "ruff") then enable_ruff = { enabled = true } end
+if table_contains(external_formatters, "ruff") then
+  enable_ruff = { enabled = true }
+end
 
 ---@type LazySpec
 return {
@@ -226,10 +230,21 @@ return {
         },
       },
       clangd = {
-        filetypes = { "c", "cpp", "cc" },
+        filetypes = { "c", "cpp", "cc", "mpp", "ixx", "objc", "objcpp", "cuda" },
         flags = {
           debounce_text_changes = 500,
+          fallbackFlags = {
+            "--query-driver=/**/*",
+            "--clang-tidy",
+            "--header-insertion=never",
+            "--offset-encoding=utf-16",
+          },
         },
+        on_attach = function(client, bufnr)
+          require("nvim-navic").attach(client, bufnr)
+          require("clangd_extensions.inlay_hints").setup_autocmd()
+          require("clangd_extensions.inlay_hints").set_inlay_hints()
+        end,
       },
     },
     -- customize how language servers are attached
@@ -245,11 +260,15 @@ return {
       rust_analyzer = false,
 
       pyright = function(_, opts)
-        if table_contains(lsp_all, "pyright") then require("lspconfig").pyright.setup(opts) end
+        if table_contains(lsp_all, "pyright") then
+          require("lspconfig").pyright.setup(opts)
+        end
       end,
 
       bashls = function(_, opts)
-        if table_contains(lsp_all, "bashls") then require("lspconfig").bashls.setup(opts) end
+        if table_contains(lsp_all, "bashls") then
+          require("lspconfig").bashls.setup(opts)
+        end
       end,
 
       lua_ls = function(_, opts)
@@ -271,39 +290,57 @@ return {
       end,
 
       pylsp = function(_, opts)
-        if table_contains(lsp_all, "pylsp") then require("lspconfig").pylsp.setup(opts) end
+        if table_contains(lsp_all, "pylsp") then
+          require("lspconfig").pylsp.setup(opts)
+        end
       end,
 
       vimls = function(_, opts)
-        if table_contains(lsp_all, "vimls") then require("lspconfig").vimls.setup(opts) end
+        if table_contains(lsp_all, "vimls") then
+          require("lspconfig").vimls.setup(opts)
+        end
       end,
 
       yamlls = function(_, opts)
-        if table_contains(lsp_all, "yamlls") then require("lspconfig").yamlls.setup(opts) end
+        if table_contains(lsp_all, "yamlls") then
+          require("lspconfig").yamlls.setup(opts)
+        end
       end,
 
       ccls = function(_, opts)
-        if fn.executable "ccls" == 1 then require("lspconfig").ccls.setup(opts) end
+        if fn.executable "ccls" == 1 then
+          require("lspconfig").ccls.setup(opts)
+        end
       end,
 
       clangd = function(_, opts)
-        if fn.executable "clangd" == 1 then require("lspconfig").clangd.setup(opts) end
+        if fn.executable "clangd" == 1 then
+          require("lspconfig").clangd.setup(opts)
+        end
       end,
 
       emmet_ls = function(_, opts)
-        if table_contains(lsp_all, "emmet_ls") then require("lspconfig").emmet_ls.setup(opts) end
+        if table_contains(lsp_all, "emmet_ls") then
+          require("lspconfig").emmet_ls.setup(opts)
+        end
       end,
 
       graphql = function(_, opts)
-        if table_contains(lsp_all, "graphql") then require("lspconfig").graphql.setup(opts) end
+        if table_contains(lsp_all, "graphql") then
+          require("lspconfig").graphql.setup(opts)
+        end
       end,
 
       html = function(_, opts)
-        if table_contains(lsp_all, "html") then require("lspconfig").html.setup(opts) end
+        if table_contains(lsp_all, "html") then
+          require("lspconfig").html.setup(opts)
+        end
       end,
 
       prismals = function(_, opts)
-        if table_contains(lsp_all, "prismals") then require("lspconfig").prismals.setup(opts) end
+        if table_contains(lsp_all, "prismals") then
+          require("lspconfig").prismals.setup(opts)
+        end
       end,
     },
 
@@ -329,12 +366,16 @@ return {
           event = { "CursorHold", "CursorHoldI" },
           -- the rest of the autocmd options (:h nvim_create_autocmd)
           desc = "Document Highlighting",
-          callback = function() vim.lsp.buf.document_highlight() end,
+          callback = function()
+            vim.lsp.buf.document_highlight()
+          end,
         },
         {
           event = { "CursorMoved", "CursorMovedI", "BufLeave" },
           desc = "Document Highlighting Clear",
-          callback = function() vim.lsp.buf.clear_references() end,
+          callback = function()
+            vim.lsp.buf.clear_references()
+          end,
         },
       },
     },
@@ -344,18 +385,24 @@ return {
       n = {
         -- a binding with no condition and therefore is always added
         gl = {
-          function() vim.diagnostic.open_float() end,
+          function()
+            vim.diagnostic.open_float()
+          end,
           desc = "Hover diagnostics",
         },
         -- condition for only server with declaration capabilities
         gD = {
-          function() vim.lsp.buf.declaration() end,
+          function()
+            vim.lsp.buf.declaration()
+          end,
           desc = "Declaration of current symbol",
           cond = "textDocument/declaration",
         },
         -- condition with a full function with `client` and `bufnr`
         ["<leader>uY"] = {
-          function() require("astrolsp.toggles").buffer_semantic_tokens() end,
+          function()
+            require("astrolsp.toggles").buffer_semantic_tokens()
+          end,
           desc = "Toggle LSP semantic highlight (buffer)",
           cond = function(client, bufnr)
             local prv_st = client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens
