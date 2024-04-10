@@ -1,16 +1,20 @@
 local settings = require "configuration"
 
 local all_config = {}
-if settings.enable_transparent then all_config = {
-  ui = {
-    bg_gutter = "none",
-  },
-} end
+if settings.enable_transparent then
+  all_config = {
+    ui = {
+      bg_gutter = "none",
+    },
+  }
+end
 
 local function set_colorscheme(sty)
   local have_current = false
   local theme_ok, _ = pcall(require, "current-theme")
-  if theme_ok then have_current = true end
+  if theme_ok then
+    have_current = true
+  end
   if have_current then
     require "current-theme"
   else
@@ -44,7 +48,11 @@ require("kanagawa").setup {
       wave = {},
       lotus = {},
       dragon = {},
-      all = all_config,
+      all = {
+        ui = {
+          bg_gutter = "none",
+        },
+      },
     },
   },
   overrides = function(colors) -- add/modify highlights
@@ -60,6 +68,17 @@ require("kanagawa").setup {
 if settings.theme == "kanagawa" then
   local style = settings.theme_style
   set_colorscheme(style)
+  local plugin = require("utils.plugin")
+  local kopts = plugin.opts("kanagawa")
+  vim.g.kanagawa_transparent = kopts.transparent
+  local toggle_transparency = function()
+    vim.g.kanagawa_transparent = not vim.g.kanagawa_transparent
+    kopts.transparent = vim.g.kanagawa_transparent
+    require("kanagawa").setup(kopts)
+    set_colorscheme(style)
+  end
+  require("utils").map("n", "<leader>,t", toggle_transparency, { desc = "Toggle Transparency" })
+  require("utils").map("n", "<leader>.t", toggle_transparency, { desc = "Toggle Transparency" })
   vim.api.nvim_set_hl(0, "NeoTreeDirectoryIcon", { link = "DashboardIcon" })
   vim.api.nvim_set_hl(0, "NeoTreeRootName", { link = "NvimTreeRootFolder" })
   vim.api.nvim_set_hl(0, "NeoTreeFileName", { link = "NvimTreeExecFile" })

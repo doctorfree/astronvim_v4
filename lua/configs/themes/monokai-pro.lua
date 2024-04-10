@@ -117,7 +117,6 @@ if theme == "monokai-pro" then
   if settings.dashboard == "alpha" then
     vim.api.nvim_set_hl(0, "AlphaShortcut", { link = "DashboardShortcut" })
   end
-  local mnk_config = require("monokai-pro.config")
   local plugin = require("utils.plugin")
   local mopts = plugin.opts("monokai-pro.nvim")
   vim.g.monokaipro_transparent = mopts.transparent_background

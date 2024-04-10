@@ -3,7 +3,9 @@ local settings = require("configuration")
 local style = settings.theme_style
 
 -- Adjust these to create a custom flavor
-local custom_highlights = {}
+local custom_highlights = function()
+  return {}
+end
 local color_overrides = {}
 local background = {}
 local styles = {}
@@ -138,7 +140,11 @@ local function set_colorscheme(sty)
 end
 
 catppuccin.setup({
+  flavour = "auto", -- auto, latte, frappe, macchiato, mocha
   background,
+  no_italic = false, -- Force no italic
+  no_bold = false, -- Force no bold
+  no_underline = false, -- Force no underline
   dim_inactive = {
     enabled = true,
     shade = "dark",
@@ -169,6 +175,7 @@ catppuccin.setup({
     types = {},
     operators = {},
   },
+  default_integrations = true,
   integrations = {
     treesitter = true,
     native_lsp = {
@@ -197,21 +204,11 @@ catppuccin.setup({
     gitgutter = true,
     gitsigns = true,
     telescope = true,
-    nvimtree = {
-      enabled = true,
-      show_root = true,
-      transparent_panel = settings.enable_transparent,
-    },
-    dap = {
-      enabled = true,
-      enable_ui = true, -- enable nvim-dap-ui
-    },
+    nvimtree = false,
+    dap = true,
+    dap_ui = true,
     mason = true,
-    neotree = {
-      enabled = true,
-      show_root = true,
-      transparent_panel = settings.enable_transparent,
-    },
+    neotree = true,
     which_key = true,
     indent_blankline = {
       enabled = true,
@@ -239,10 +236,24 @@ catppuccin.setup({
 })
 if settings.theme == "catppuccin" then
   set_colorscheme(style)
+  local plugin = require("utils.plugin")
+  local copts = plugin.opts("catppuccin")
+  vim.g.catppuccin_transparent = copts.transparent_background
+  local toggle_transparency = function()
+    vim.g.catppuccin_transparent = not vim.g.catppuccin_transparent
+    copts.transparent_background = vim.g.catppuccin_transparent
+    require("catppuccin").setup(copts)
+    set_colorscheme(style)
+  end
+  require("utils").map("n", "<leader>,t", toggle_transparency, { desc = "Toggle Transparency" })
+  require("utils").map("n", "<leader>.t", toggle_transparency, { desc = "Toggle Transparency" })
   vim.api.nvim_set_hl(0, "AlphaHeader", { link = "DashboardHeader" })
   vim.api.nvim_set_hl(0, "AlphaHeaderLabel", { link = "DashboardHeader" })
   vim.api.nvim_set_hl(0, "AlphaButtons", { link = "DashboardCenter" })
   vim.api.nvim_set_hl(0, "AlphaShortcut", { link = "DashboardShortcut" })
   vim.api.nvim_set_hl(0, "AlphaFooter", { link = "DashboardFooter" })
   require("configs.highlights")
+  -- Sign and Fold columns back to Normal
+  vim.api.nvim_set_hl(0, "SignColumn", { link = "Normal" })
+  vim.api.nvim_set_hl(0, "FoldColumn", { link = "Normal" })
 end

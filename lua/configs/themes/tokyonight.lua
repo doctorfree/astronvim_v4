@@ -85,24 +85,26 @@ if settings.theme == "tokyonight" then
   vim.api.nvim_set_hl(0, "NeoTreeGitUntracked", { link = "NvimTreeGitDeleted" })
   vim.api.nvim_set_hl(0, "NeoTreeSymbolicLinkTarget", { link = "NvimTreeSymlink" })
   vim.g.tokyonight_transparent = require("tokyonight.config").options.transparent
-    require("utils").map("n", "<leader>,t", function()
-      vim.g.tokyonight_transparent = not vim.g.tokyonight_transparent
-      local sidebar = "dark"
-      if vim.g.tokyonight_transparent then
-        sidebar = "transparent"
-      end
-      require("tokyonight").setup {
-        transparent = vim.g.tokyonight_transparent,
-        styles = {
-          comments = { italic = true },
-          keywords = { italic = true },
-          functions = {},
-          variables = {},
-          sidebars = sidebar,
-          floats = "dark",
-        },
-      }
-      set_colorscheme(style)
-    end, { desc = "Toggle Transparency" })
+  local toggle_transparency = function()
+    vim.g.tokyonight_transparent = not vim.g.tokyonight_transparent
+    local sidebar = "dark"
+    if vim.g.tokyonight_transparent then
+      sidebar = "transparent"
+    end
+    require("tokyonight").setup {
+      transparent = vim.g.tokyonight_transparent,
+      styles = {
+        comments = { italic = true },
+        keywords = { italic = true },
+        functions = {},
+        variables = {},
+        sidebars = sidebar,
+        floats = "dark",
+      },
+    }
+    set_colorscheme(style)
+  end
+  require("utils").map("n", "<leader>,t", toggle_transparency, { desc = "Toggle Transparency" })
+  require("utils").map("n", "<leader>.t", toggle_transparency, { desc = "Toggle Transparency" })
   require "configs.highlights"
 end
