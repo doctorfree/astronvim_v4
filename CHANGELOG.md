@@ -6,6 +6,26 @@
 
 ### 🐞 Fixed
 
+## v1.0.3r4
+
+### ⚡️ Added
+
+- Move terminal command mappings from `keymaps.lua` to `astrocore.lua`
+- Move `AstroNvimV4` custom mappings to `<Leader>,` and terminal to `<Leader>t`
+- Move mappings from `keymaps.lua` to `astrocore.lua`
+- Add custom `toggleterm`, conditional on setting in `configuration.lua`
+- Move terminal `which-key` mappings to `<leader>T`
+- Add `<Leader>t` which-key group in `astrocore.lua`
+- Add support for `clangd`
+- Add more `treesitter` parsers to `ensure_installed`
+- Add temporary `astrolsp.lua` for initialization
+
+### 🐞 Fixed
+
+- Fix `desc` format in mappings in `astrocore.lua`
+- Fix Terminal `which-key` group mappings
+- Cleanup which-key names and mappings
+
 ## v1.0.3r3
 
 ### ⚡️ Added
