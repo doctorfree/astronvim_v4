@@ -6,6 +6,20 @@
 
 ### 🐞 Fixed
 
+## v1.0.4r1
+
+### ⚡️ Added
+
+- Configure `heirline` `tabline` and `winbar`
+- Add transparency toggles
+- Add toggle transparency function for `Catppuccin`, `Everforest`, and `Kanagawa`
+- Move user autocmds to `astrocore.lua` `commands` section
+
+### 🐞 Fixed
+
+- Remove `onedarkpro`
+- Fix setup and loading of `monokai-pro` colorscheme
+
 ## v1.0.3r4
 
 ### ⚡️ Added
