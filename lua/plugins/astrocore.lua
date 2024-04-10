@@ -3,6 +3,10 @@
 
 local settings = require("configuration")
 local icons = require("icons")
+local Util = require("utils")
+local plugin = require("utils.plugin")
+local Info = require("lazy.core.util").info
+local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 
 local top = {}
 if vim.fn.executable "btop" == 1 then
@@ -124,7 +128,7 @@ return {
         diagnostics_mode = 3, -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
         icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
         ui_notifications_enabled = true, -- disable notifications when toggling UI elements
-        camelcasemotion_key = "<leader>",
+        camelcasemotion_key = "<Leader>",
         loaded_perl_provider = 0,
         sonokai_style = "andromeda",
       },
@@ -149,9 +153,13 @@ return {
         ["<Leader><tab>"] = { desc = icons.ui.Terminal .. "Tabs" },
         ["<Leader>w"] = { desc = icons.ui.Terminal .. "Windows" },
         ["<Leader>W"] = { desc = icons.ui.Terminal .. "Workspaces" },
-        ["<Leader>,"] = { desc = icons.kinds.Color .. " Color/Theme" },
-        ["<Leader>."] = { desc = icons.kinds.Color .. " Terminal Commands" },
+        ["<Leader>,"] = { desc = icons.kinds.Color .. " Commands/Themes" },
+        ["<Leader>."] = { desc = icons.kinds.Color .. " Toggle Keymaps" },
 
+        ["gh"] = {
+          "<cmd>OpenRepo<CR>",
+          desc = "Open URL",
+        },
         -- mappings seen under group name "Buffers"
         ["<Leader>bc"] = {
           function()
@@ -197,10 +205,6 @@ return {
           "<cmd>Alpha<CR>",
           desc = "Open Dashboard",
         },
-        ["<Leader>,m"] = {
-          "<cmd>Mason<CR>",
-          desc = "Manage Packages",
-        },
         ["<Leader>M"] = {
           "<cmd>Mason<CR>",
           desc = "Manage Packages",
@@ -233,30 +237,17 @@ return {
           desc = "Options",
         },
         -- Terminal commands
-        ["<Leader>.s"] = top,
-        ["<Leader>.g"] = git,
-        ["<Leader>.l"] = lman,
-        ["<Leader>.c"] = lconf,
-        ["<Leader>.p"] = lplug,
-        ["<Leader>.a"] = ascii,
-        ["<Leader>.m"] = mpplus,
-        ["<Leader>.M"] = mpmenu,
-        -- Windows
-        ["<Leader>ww"] = {
-          "<C-W>p",
-          desc = "Other window",
-        },
-        ["<Leader>wd"] = {
-          "<C-W>c",
-          desc = "Delete window",
-        },
-        ["<Leader>w-"] = {
-          "<C-W>s",
-          desc = "Split window below",
-        },
-        ["<Leader>w|"] = {
-          "<C-W>v",
-          desc = "Split window right",
+        ["<Leader>,s"] = top,
+        ["<Leader>,g"] = git,
+        ["<Leader>,l"] = lman,
+        ["<Leader>,C"] = lconf,
+        ["<Leader>,P"] = lplug,
+        ["<Leader>,A"] = ascii,
+        ["<Leader>,m"] = mpplus,
+        ["<Leader>,M"] = mpmenu,
+        ["<Leader>,O"] = {
+          "<cmd>OpenRepo<CR>",
+          desc = "Open URL",
         },
         -- Tabs
         ["<Leader><tab>l"] = {
@@ -283,16 +274,157 @@ return {
           "<cmd>tabprevious<cr>",
           desc = "Previous Tab",
         },
+        -- Windows
+        ["<Leader>ww"] = {
+          "<C-W>p",
+          desc = "Other window",
+        },
+        ["<Leader>wd"] = {
+          "<C-W>c",
+          desc = "Delete window",
+        },
+        ["<Leader>w-"] = {
+          "<C-W>s",
+          desc = "Split window below",
+        },
+        ["<Leader>w|"] = {
+          "<C-W>v",
+          desc = "Split window right",
+        },
+        -- Resize window using <ctrl> arrow keys
+        ["<C-Up>"] = {
+          "<cmd>resize +2<cr>",
+          desc = "Increase window height",
+        },
+        ["<C-Down>"] = {
+          "<cmd>resize -2<cr>",
+          desc = "Decrease window height",
+        },
+        ["<C-Left>"] = {
+          "<cmd>vertical resize -2<cr>",
+          desc = "Decrease window width",
+        },
+        ["<C-Right>"] = {
+          "<cmd>vertical resize +2<cr>",
+          desc = "Increase window width",
+        },
+
+        -- Toggle keymaps
+        ["<Leader>.f"] = {
+          require("configs.lsp.format").toggle,
+          desc = "Toggle Format on Save",
+        },
+        ["<Leader>.s"] = {
+          function()
+            Util.toggle "spell"
+          end,
+          desc = "Toggle Spelling",
+        },
+        ["<Leader>.w"] = {
+          function()
+            Util.toggle "wrap"
+          end,
+          desc = "Toggle Word Wrap",
+        },
+        ["<Leader>.l"] = {
+          function()
+            Util.toggle("relativenumber", true)
+            Util.toggle "number"
+          end,
+          desc = "Toggle Line Numbers",
+        },
+        ["<Leader>.C"] = {
+          function()
+            Util.toggle("conceallevel", false, { 0, conceallevel })
+          end,
+          desc = "Toggle Conceal",
+        },
+        ["<Leader>.g"] = {
+          function()
+            if vim.wo.signcolumn == "no" then
+              vim.wo.signcolumn = "yes"
+            elseif vim.wo.signcolumn == "yes" then
+              vim.wo.signcolumn = "auto"
+            else
+              vim.wo.signcolumn = "no"
+            end
+            Info("Set signcolumn to " .. vim.wo.signcolumn, { title = "Option" })
+          end,
+          desc = "Toggle Signcolumn",
+        },
+
+        ["<Leader>.L"] = {
+          function()
+            vim.opt.showtabline = vim.api.nvim_get_option "showtabline" == 0 and 2 or 0
+            Info("Set showtabline to " .. vim.api.nvim_get_option "showtabline", { title = "Option" })
+          end,
+          desc = "Toggle Tabline",
+        },
+
+        ["<Leader>.S"] = {
+          function()
+            local laststatus = vim.api.nvim_get_option "laststatus"
+            if laststatus == 0 then
+              vim.opt.laststatus = 2
+            elseif laststatus == 2 then
+              vim.opt.laststatus = 3
+            elseif laststatus == 3 then
+              vim.opt.laststatus = 0
+            end
+            Info("Set laststatus to " .. vim.api.nvim_get_option "laststatus", { title = "Option" })
+          end,
+          desc = "Toggle Statusline",
+        },
+
+        ["<Leader>.m"] = {
+          function()
+            local mouse = vim.api.nvim_get_option "mouse"
+            if mouse == "" then
+              vim.opt.mouse = "nv"
+              Info("Mouse Enabled: mouse = " .. vim.api.nvim_get_option "mouse", { title = "Option" })
+            else
+              vim.opt.mouse = ""
+              Info("Mouse Disabled", { title = "Option" })
+            end
+          end,
+          desc = "Toggle Mouse",
+        },
+
+        ["<Leader>.N"] = {
+          function()
+            local number = vim.wo.number -- local to window
+            local relativenumber = vim.wo.relativenumber -- local to window
+            if not number and not relativenumber then
+              vim.wo.number = true
+              Info("Set number to true", { title = "Option" })
+            elseif number and not relativenumber then
+              vim.wo.relativenumber = true
+              Info("Set relativenumber to true", { title = "Option" })
+            elseif number and relativenumber then
+              vim.wo.number = false
+              Info("Set number to false", { title = "Option" })
+            else -- not number and relativenumber
+              vim.wo.relativenumber = false
+              Info("Set relativenumber to false", { title = "Option" })
+            end
+          end,
+          desc = "Toggle Number",
+        },
+        ["<Leader>.x"] = {
+          require("utils.functions").toggle_colorcolumn,
+          desc = "Toggle Colorcolumn",
+        },
+
         -- Workspaces
-        ["<leader>Wa"] = {
+        ["<Leader>Wa"] = {
           vim.lsp.buf.add_workspace_folder,
           desc = "add workspace folder",
         },
-        ["<leader>Wr"] = {
+        ["<Leader>Wr"] = {
           vim.lsp.buf.remove_workspace_folder,
           desc = "remove workspace folder",
         },
-        ["<leader>Wl"] = {
+        ["<Leader>Wl"] = {
           function()
             vim.print(vim.lsp.buf.list_workspace_folders())
           end,
@@ -389,6 +521,57 @@ return {
             require("ginit")
           end,
         },
+      },
+    },
+    commands = {
+      -- key is the command name
+      -- AstroReload = {
+      -- first element with no key is the command (string or function)
+      -- function() require("astrocore").reload() end,
+      -- the rest are options for creating user commands (:h nvim_create_user_command)
+      -- desc = "Reload AstroNvim (Experimental)",
+      -- },
+      --- Toggle monochrome mode
+      MonochromeModeToggle = {
+        function()
+          if settings.theme == "monokai-pro" then
+            local monochrome_element = "neo-tree"
+            local mnk_config = require("monokai-pro.config")
+            local mnk_opts = plugin.opts("monokai-pro.nvim")
+            local bg_clear_list = mnk_opts.background_clear or {}
+            local is_monochrome_mode = vim.tbl_contains(bg_clear_list, monochrome_element)
+            if is_monochrome_mode then
+              -- stylua: ignore
+              bg_clear_list = vim.tbl_filter(function(value) return value ~= monochrome_element end, bg_clear_list)
+            else
+              vim.list_extend(bg_clear_list, { monochrome_element })
+            end
+            mnk_config.extend({ background_clear = bg_clear_list })
+            vim.cmd([[colorscheme monokai-pro]])
+          end
+        end,
+        desc = "Toggle monochrome mode",
+      },
+      -- Open the URL of the plugin spec or 'user/repo' path under the cursor
+      OpenRepo = {
+        function()
+          local ghpath = vim.api.nvim_eval("shellescape(expand('<cfile>'))")
+          local formatpath = ghpath:sub(2, #ghpath - 1)
+          local repourl = "https://www.github.com/" .. formatpath
+          if formatpath:sub(1, 5) == "http:" or formatpath:sub(1, 6) == "https:" then
+            repourl = formatpath
+          end
+          if vim.fn.has("mac") == 1 then
+            vim.fn.system({ "open", repourl })
+          else
+            if vim.fn.executable("gio") then
+              vim.fn.system({ "gio", "open", repourl })
+            else
+              vim.fn.system({ "xdg-open", repourl })
+            end
+          end
+        end,
+        desc = "Open URL",
       },
     },
   },

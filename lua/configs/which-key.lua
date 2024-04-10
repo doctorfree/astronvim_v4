@@ -130,7 +130,7 @@ local normal_mode_mappings = {
   ["q"] = { "quicklist" },
 
   ["/"] = {
-    name = "Manage",
+    name = "Manage Packages/Plugins",
     a = { "<cmd>Alpha<CR>", "Open dashboard" },
     m = { "<cmd>Mason<CR>", "Manage packages" },
     p = { "<cmd>Lazy<CR>", "Manage plugins" },

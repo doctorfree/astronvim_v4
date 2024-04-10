@@ -1,8 +1,9 @@
-local settings = require "configuration"
+local settings = require("configuration")
 local theme = settings.theme
 local style = settings.theme_style
 local filter = "pro"
 if theme == "monokai-pro" then
+  vim.o.termguicolors = true
   if
     style == "classic"
     or style == "octagon"
@@ -14,12 +15,21 @@ if theme == "monokai-pro" then
   end
 end
 
-require("monokai-pro").setup {
+require("monokai-pro").setup({
   transparent_background = settings.enable_transparent,
   terminal_colors = true,
   devicons = true, -- highlight the icons of `nvim-web-devicons`
-  italic_comments = true,
   filter = filter, -- classic | octagon | pro | machine | ristretto | spectrum
+  styles = {
+    comment = { italic = true },
+    keyword = { italic = true }, -- any other keyword
+    type = { italic = true }, -- (preferred) int, long, char, etc
+    storageclass = { italic = true }, -- static, register, volatile, etc
+    structure = { italic = true }, -- struct, union, enum, etc
+    parameter = { italic = true }, -- parameter pass in function
+    annotation = { italic = true },
+    tag_attribute = { italic = true }, -- attribute of tag in reactjs
+  },
   -- Enable this will disable filter option
   day_night = {
     enable = false, -- turn off by default
@@ -71,8 +81,6 @@ require("monokai-pro").setup {
   },
   override = function(c)
     return {
-      -- TODO: which to use
-      -- ColorColumn = { bg = c.base.dimmed3 },
       ColorColumn = { bg = c.editor.background },
       -- Mine
       DashboardRecent = { fg = c.base.magenta },
@@ -82,29 +90,48 @@ require("monokai-pro").setup {
       DashboardLazy = { fg = c.base.cyan },
       DashboardServer = { fg = c.base.yellow },
       DashboardQuit = { fg = c.base.red },
+      IndentBlanklineChar = { fg = c.base.dimmed4 },
+      -- mini.hipatterns
+      MiniHipatternsFixme = { fg = c.base.black, bg = c.base.red, bold = true }, -- FIXME
+      MiniHipatternsTodo = { fg = c.base.black, bg = c.base.blue, bold = true }, -- TODO
+      MiniHipatternsHack = { fg = c.base.black, bg = c.base.yellow, bold = true }, -- HACK
+      MiniHipatternsNote = { fg = c.base.black, bg = c.base.green, bold = true }, -- NOTE
     }
   end,
-}
+})
 
 if theme == "monokai-pro" then
+  require("monokai-pro").load()
   local have_current = false
-  local theme_ok, _ = pcall(require, "current-theme")
-  if theme_ok then
-    have_current = true
+  if settings.enable_telescope_themes then
+    local theme_ok, _ = pcall(require, "current-theme")
+    if theme_ok then
+      have_current = true
+    end
   end
   if have_current then
-    require "current-theme"
+    require("current-theme")
   else
-    vim.cmd [[colorscheme monokai-pro]]
+    vim.cmd([[colorscheme monokai-pro]])
   end
-  vim.api.nvim_set_hl(0, "AlphaShortcut", { link = "DashboardShortcut" })
-  local mopts = require("monokai-pro.config").options
+  if settings.dashboard == "alpha" then
+    vim.api.nvim_set_hl(0, "AlphaShortcut", { link = "DashboardShortcut" })
+  end
+  local mnk_config = require("monokai-pro.config")
+  local plugin = require("utils.plugin")
+  local mopts = plugin.opts("monokai-pro.nvim")
   vim.g.monokaipro_transparent = mopts.transparent_background
-  require("utils").map("n", "<leader>,t", function()
+  local toggle_transparency = function()
     vim.g.monokaipro_transparent = not vim.g.monokaipro_transparent
     mopts.transparent_background = vim.g.monokaipro_transparent
     require("monokai-pro").setup(mopts)
-    vim.cmd [[colorscheme monokai-pro]]
-  end, { desc = "Toggle Transparency" })
-  require "configs.highlights"
+    require("monokai-pro").load()
+    vim.cmd([[colorscheme monokai-pro]])
+  end
+  require("utils").map("n", "<leader>,t", toggle_transparency, { desc = "Toggle Transparency" })
+  require("utils").map("n", "<leader>.t", toggle_transparency, { desc = "Toggle Transparency" })
+
+  if settings.namespace == "ecovim" then
+    require("ecovim.plugins.highlights")
+  end
 end
