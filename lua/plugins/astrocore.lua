@@ -361,6 +361,14 @@ return {
           desc = "Toggle Tabline",
         },
 
+--      ["<Leader>.W"] = {
+--        function()
+--          vim.opt.winbar = vim.api.nvim_get_option "winbar" == "" and "1" or ""
+--          Info("Set winbar to " .. vim.api.nvim_get_option "winbar", { title = "Option" })
+--        end,
+--        desc = "Toggle Winbar",
+--      },
+
         ["<Leader>.S"] = {
           function()
             local laststatus = vim.api.nvim_get_option "laststatus"
