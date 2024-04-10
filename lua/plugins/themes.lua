@@ -37,14 +37,6 @@ return {
     end,
   },
   {
-    "olimorris/onedarkpro.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("configs.themes.onedarkpro")
-    end,
-  },
-  {
     "sam4llis/nvim-tundra",
     lazy = false,
     priority = 1000,

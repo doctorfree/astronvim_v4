@@ -2,8 +2,16 @@
 return {
   {
     "rebelot/heirline.nvim",
+    dependencies = { "zeioth/heirline-components.nvim" },
     opts = function(_, opts)
+      local lib = require "heirline-components.all"
       local status = require "astroui.status"
+      opts.tabline = { -- UI upper bar
+        lib.component.tabline_conditional_padding(),
+        lib.component.tabline_buffers(),
+        lib.component.fill { hl = { bg = "tabline_bg" } },
+        lib.component.tabline_tabpages()
+      }
       opts.statusline = {
         -- default highlight for the entire statusline
         hl = { fg = "fg", bg = "bg" },

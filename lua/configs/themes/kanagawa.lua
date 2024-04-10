@@ -69,7 +69,7 @@ if settings.theme == "kanagawa" then
   local style = settings.theme_style
   set_colorscheme(style)
   local plugin = require("utils.plugin")
-  local kopts = plugin.opts("kanagawa")
+  local kopts = plugin.opts("kanagawa.nvim")
   vim.g.kanagawa_transparent = kopts.transparent
   local toggle_transparency = function()
     vim.g.kanagawa_transparent = not vim.g.kanagawa_transparent

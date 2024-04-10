@@ -1,4 +1,3 @@
----@class beastvim.utils.plugin
 local M = {}
 
 ---Check if a plugin is installed

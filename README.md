@@ -124,20 +124,18 @@ or any of several other settings, edit `lua/configuration.lua`.
 local conf = {}
 
 -- THEME CONFIGURATION
--- Available themes:
---   nightfox, tokyonight, dracula, kanagawa, catppuccin,
---   tundra, onedarkpro, everforest, monokai-pro
+-- Available themes: catppuccin, dracula, everforest, kanagawa,
+--                   monokai-pro nightfox, tokyonight, tundra,
 -- A configuration file for each theme is in lua/configs/themes/
 -- Use <F8> to step through themes
 conf.theme = "tokyonight"
 -- Available styles are:
---   kanagawa:    wave, dragon, lotus
---   tokyonight:  night, storm, day, moon
---   onedarkpro:  onedark, onelight, onedark_vivid, onedark_dark
 --   catppuccin:  latte, frappe, macchiato, mocha, custom
 --   dracula:     blood, magic, soft, default
---   nightfox:    carbonfox, dawnfox, dayfox, duskfox, nightfox, nordfox, terafox
+--   kanagawa:    wave, dragon, lotus
 --   monokai-pro: classic, octagon, pro, machine, ristretto, spectrum
+--   nightfox:    carbonfox, dawnfox, dayfox, duskfox, nightfox, nordfox, terafox
+--   tokyonight:  night, storm, day, moon
 conf.theme_style = "moon"
 -- enable transparency if the theme supports it
 conf.enable_transparent = false

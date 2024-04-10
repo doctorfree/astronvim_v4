@@ -3,7 +3,7 @@ local transparent = settings.enable_transparent
 
 local level = 0
 if transparent then
-  level = 1
+  level = 2
 end
 
 require("everforest").setup {
@@ -43,10 +43,10 @@ if settings.theme == "everforest" then
   local opts = require("everforest").config
   vim.g.everforest_transparent = opts.transparent_background_level
   local toggle_transparency = function()
-    if vim.g.everforest_transparent == 1 then
+    if vim.g.everforest_transparent == 2 then
       vim.g.everforest_transparent = 0
     else
-      vim.g.everforest_transparent = 1
+      vim.g.everforest_transparent = 2
     end
     opts.transparent_background_level = vim.g.everforest_transparent
     require("everforest").setup(opts)
