@@ -110,23 +110,7 @@ Beyond the basic features provided by this template, `AstroNvimV4` includes:
 - Support for multiple colorschemes and colorscheme switching
 - An icon set for use with several plugins
 - Neovim command line customization
-- Many additional plugins enabled in `lua/plugins`:
-  - autocomplete.lua
-  - bufferline.lua
-  - cmp-cmdline.lua
-  - editor-behavior.lua
-  - icons.lua
-  - motion.lua
-  - neogit.lua
-  - neotest.lua
-  - notes.lua
-  - null-ls.lua
-  - nvim-dap.lua
-  - statuslines.lua
-  - syntax.lua
-  - telescope.lua
-  - themes.lua
-  - ui.lua
+- Many [additional plugins](https://github.com/doctorfree/nvim-lazyman/blob/main/info/AstroNvimV4.md) enabled and configured in `lua/plugins`
 
 ## Configuration
 
