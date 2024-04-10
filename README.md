@@ -99,13 +99,14 @@ configuration in `AstroNvim` v4.
 Beyond the basic features provided by this template, `AstroNvimV4` includes:
 
 - Extensive customization of the AstroNvim v4 files:
-  - `lua/plugins/astrocore.lua` : globals, options, mappings, and autocmds
+  - `lua/plugins/astrocore.lua` : customized globals, options, mappings, and autocmds
   - `lua/plugins/astrolsp.lua` : custom formatters, linters, and language servers
   - `lua/plugins/astroui.lua` : options, icons, and status configuration
 - Options and plugin configuration in `lua/options.lua` and `lua/configuration.lua`
+- Customized `tabline`, `winbar`, and `statusline` with `heirline.nvim`
 - Mason installed formatters, linters, language servers
 - LSP configuration for several language servers
-- Customized `terminal` with autocmds/commands for `lazygit`, `lazyman`, `htop`
+- Customized `terminal` with autocmds/commands for `lazygit`, `lazyman`, `btop`, more
 - Highly customized `alpha.nvim` dashboard
 - Support for multiple colorschemes and colorscheme switching
 - An icon set for use with several plugins
