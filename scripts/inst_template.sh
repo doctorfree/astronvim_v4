@@ -33,7 +33,7 @@ else
   vim ${CFDIR}/lua/plugins/*.lua
   export NVIM_APPNAME="${CFG}"
   printf "\n\nInitializing ${CFG} ..."
-  nvim --headless "+Lazy! sync" +qa >/dev/null 2>&1
+  nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1
   printf " done\n"
   nvim ${CFDIR}/lua/plugins/treesitter.lua
 fi

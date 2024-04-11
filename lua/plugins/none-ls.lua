@@ -21,6 +21,11 @@ return {
     local diagnostics = null_ls.builtins.diagnostics
     local actions = null_ls.builtins.code_actions
 
+    -- To enable debug mode, set debug flag to true:
+    --     config.debug = true
+    -- Use :NullLsLog to open your debug log in the current Neovim instance or
+    --     :NullLsInfo to get the path to your debug log
+
     config.sources = {
       actions.gitsigns,
       diagnostics.zsh.with({ filetypes = { "zsh" } }),
@@ -51,8 +56,7 @@ return {
     end
     if table_contains(external_formatters, "ruff") then
       if vim.fn.executable("ruff") == 1 then
-        table.insert(config.sources,
-          require("none-ls.diagnostics.ruff"))
+        table.insert(config.sources, require("none-ls.diagnostics.ruff"))
       end
     end
     if table_contains(external_formatters, "black") then
@@ -85,7 +89,8 @@ return {
             timeout = 10000,
             extra_args = {
               "--ignore=E203,E501,E402,F401,F821,W503,W292",
-              "--max-line-length","88",
+              "--max-line-length",
+              "88",
             },
             filetypes = { "python" },
           })
@@ -111,12 +116,25 @@ return {
         })
       )
     end
+    -- Arguments to shfmt:
+    -- -i, --indent <uint>
+    --     Indent: 0 for tabs (default), >0 for number of spaces.
+    -- -bn, --binary-next-line
+    --     Binary ops like && and | may start a line.
+    -- -ci, --case-indent
+    --     Switch cases will be indented.
+    -- -sr, --space-redirects
+    --     Redirect operators will be followed by a space.
+    -- -kp, --keep-padding
+    --     Keep column alignment paddings.
+    -- -fn, --func-next-line
+    --     Function opening braces are placed on a separate line.
     if table_contains(formatters_linters, "shfmt") then
       table.insert(
         config.sources,
         formatting.shfmt.with({
           timeout = 10000,
-          extra_args = { "-i", "2", "-ci", "-bn" },
+          extra_args = { "-i", "2", "-ci", "-bn", "-sr" },
           filetypes = { "sh", "zsh", "bash" },
         })
       )
@@ -172,7 +190,7 @@ return {
         )
       end
     end
-    
+
     return config
-  end
+  end,
 }
