@@ -1,5 +1,15 @@
 local attach = {}
 
+-- set quickfix list from diagnostics in a buffer, not the whole workspace
+local set_qflist = function(buf_num, severity)
+  local diagnostics = nil
+  diagnostics = vim.diagnostic.get(buf_num, { severity = severity })
+  local qf_items = vim.diagnostic.toqflist(diagnostics)
+  vim.fn.setqflist({}, " ", { title = "Diagnostics", items = qf_items })
+  -- open quickfix by default
+  vim.cmd [[copen]]
+end
+
 -- A custom `on_attach` function to be run after the default `on_attach` function
 -- takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)
 attach.on_attach = function(client, bufnr)
@@ -11,23 +21,25 @@ attach.on_attach = function(client, bufnr)
     vim.keymap.set(mode, l, r, opts)
   end
 
-  map("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
+  map("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
   map("n", "<C-]>", vim.lsp.buf.definition)
   map("n", "K", vim.lsp.buf.hover, { desc = "Display symbol info in float" })
   map("n", "<C-k>", vim.lsp.buf.signature_help)
   -- map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "variable rename" })
-  map("n", "gr", vim.lsp.buf.references, { desc = "show references" })
-  map("n", "[d", vim.diagnostic.goto_prev, { desc = "previous diagnostic" })
-  map("n", "]d", vim.diagnostic.goto_next, { desc = "next diagnostic" })
+  map("n", "gr", vim.lsp.buf.references, { desc = "Show References" })
+  map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
+  map("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
   -- this puts diagnostics from opened files to quickfix
-  map("n", "<leader>qw", vim.diagnostic.setqflist, { desc = "put window diagnostics to qf" })
+  map("n", "<leader>qw", vim.diagnostic.setqflist, { desc = "Put window diagnostics to qf" })
   -- this puts diagnostics from current buffer to quickfix
-  map("n", "<leader>qb", function() set_qflist(bufnr) end, { desc = "put buffer diagnostics to qf" })
-  map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
+  map("n", "<leader>qb", function()
+    set_qflist(bufnr)
+  end, { desc = "Put buffer diagnostics to qf" })
+  map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
 
   -- Set some key bindings conditional on server capabilities
   if client.server_capabilities.documentFormattingProvider then
-    map("n", "<leader>f", vim.lsp.buf.format, { desc = "format code" })
+    map("n", "<leader>f", vim.lsp.buf.format, { desc = "Format Code" })
   end
 
   vim.api.nvim_create_autocmd("CursorHold", {
@@ -41,7 +53,9 @@ attach.on_attach = function(client, bufnr)
         prefix = " ",
       }
 
-      if not vim.b.diagnostics_pos then vim.b.diagnostics_pos = { nil, nil } end
+      if not vim.b.diagnostics_pos then
+        vim.b.diagnostics_pos = { nil, nil }
+      end
 
       local cursor_pos = vim.api.nvim_win_get_cursor(0)
       if

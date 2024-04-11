@@ -224,16 +224,16 @@ return {
 
         -- Plugin Management
         ["<Leader>,L"] = {
-          "<cmd>Lazy<cr>",
+          "<cmd>Lazy<CR>",
           desc = "Lazy Menu",
         },
         ["<Leader>U"] = {
-          "<cmd>Lazy update<cr>",
+          "<cmd>Lazy update<CR>",
           desc = "Update Plugins",
         },
         -- Options
         ["<Leader>,o"] = {
-          "<cmd>options<cr>",
+          "<cmd>options<CR>",
           desc = "Options",
         },
         -- Terminal commands
@@ -251,27 +251,27 @@ return {
         },
         -- Tabs
         ["<Leader><tab>l"] = {
-          "<cmd>tablast<cr>",
+          "<cmd>tablast<CR>",
           desc = "Last Tab",
         },
         ["<Leader><tab>f"] = {
-          "<cmd>tabfirst<cr>",
+          "<cmd>tabfirst<CR>",
           desc = "First Tab",
         },
         ["<Leader><tab><tab>"] = {
-          "<cmd>tabnew<cr>",
+          "<cmd>tabnew<CR>",
           desc = "New Tab",
         },
         ["<Leader><tab>]"] = {
-          "<cmd>tabnext<cr>",
+          "<cmd>tabnext<CR>",
           desc = "Next Tab",
         },
         ["<Leader><tab>d"] = {
-          "<cmd>tabclose<cr>",
+          "<cmd>tabclose<CR>",
           desc = "Close Tab",
         },
         ["<Leader><tab>["] = {
-          "<cmd>tabprevious<cr>",
+          "<cmd>tabprevious<CR>",
           desc = "Previous Tab",
         },
         -- Windows
@@ -293,19 +293,19 @@ return {
         },
         -- Resize window using <ctrl> arrow keys
         ["<C-Up>"] = {
-          "<cmd>resize +2<cr>",
+          "<cmd>resize +2<CR>",
           desc = "Increase window height",
         },
         ["<C-Down>"] = {
-          "<cmd>resize -2<cr>",
+          "<cmd>resize -2<CR>",
           desc = "Decrease window height",
         },
         ["<C-Left>"] = {
-          "<cmd>vertical resize -2<cr>",
+          "<cmd>vertical resize -2<CR>",
           desc = "Decrease window width",
         },
         ["<C-Right>"] = {
-          "<cmd>vertical resize +2<cr>",
+          "<cmd>vertical resize +2<CR>",
           desc = "Increase window width",
         },
 
@@ -361,13 +361,13 @@ return {
           desc = "Toggle Tabline",
         },
 
---      ["<Leader>.W"] = {
---        function()
---          vim.opt.winbar = vim.api.nvim_get_option "winbar" == "" and "1" or ""
---          Info("Set winbar to " .. vim.api.nvim_get_option "winbar", { title = "Option" })
---        end,
---        desc = "Toggle Winbar",
---      },
+        --      ["<Leader>.W"] = {
+        --        function()
+        --          vim.opt.winbar = vim.api.nvim_get_option "winbar" == "" and "1" or ""
+        --          Info("Set winbar to " .. vim.api.nvim_get_option "winbar", { title = "Option" })
+        --        end,
+        --        desc = "Toggle Winbar",
+        --      },
 
         ["<Leader>.S"] = {
           function()
@@ -437,6 +437,43 @@ return {
             vim.print(vim.lsp.buf.list_workspace_folders())
           end,
           desc = "list workspace folder",
+        },
+        -- LSP
+        ["<C-Space>"] = {
+          "<cmd>lua vim.lsp.buf.code_action()<CR>",
+          desc = "Code Action",
+        },
+        ["<Leader>ca"] = {
+          "<cmd>lua vim.lsp.buf.code_action()<CR>",
+          desc = "Code Action",
+        },
+        ["<Leader>cr"] = {
+          "<cmd>lua vim.lsp.buf.rename()<CR>",
+          desc = "Code Action",
+        },
+        ["<Leader>cf"] = {
+          "<cmd>lua vim.lsp.buf.format({ async = true })<CR>",
+          desc = "Format",
+        },
+      },
+      v = {
+        ["<Leader>ca"] = {
+          "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>",
+          desc = "Code Action",
+        },
+        ["<Leader>cf"] = {
+          function()
+            local start_row, _ = table.unpack(vim.api.nvim_buf_get_mark(0, "<"))
+            local end_row, _ = table.unpack(vim.api.nvim_buf_get_mark(0, ">"))
+            vim.lsp.buf.format {
+              range = {
+                ["start"] = { start_row, 0 },
+                ["end"] = { end_row, 0 },
+              },
+              async = true,
+            }
+          end,
+          desc = "Format Range",
         },
       },
     },
