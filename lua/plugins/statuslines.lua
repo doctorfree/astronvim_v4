@@ -1,31 +1,41 @@
 ---@type LazySpec
 return {
   {
+    "zeioth/heirline-components.nvim",
+    opts = {
+      icons = require("icons").nerdicons,
+    },
+  },
+  {
     "rebelot/heirline.nvim",
     dependencies = { "zeioth/heirline-components.nvim" },
     opts = function(_, opts)
       local lib = require "heirline-components.all"
       local status = require "astroui.status"
-      opts.disable_winbar_cb = function(args) -- We do this to avoid showing it on the greeter.
-        local is_disabled = not require("heirline-components.buffer").is_valid(args.buf) or
-            lib.condition.buffer_matches({
-              buftype = { "terminal", "prompt", "nofile", "help", "quickfix" },
-              filetype = { "NvimTree", "neo%-tree", "dashboard", "Outline", "aerial" },
-            }, args.buf)
+      opts.disable_winbar_cb = function(args)
+        local is_disabled = not require("heirline-components.buffer").is_valid(args.buf)
+          or lib.condition.buffer_matches({
+            buftype = { "terminal", "prompt", "nofile", "help", "quickfix" },
+            filetype = { "NvimTree", "neo%-tree", "dashboard", "Outline", "aerial" },
+          }, args.buf)
         return is_disabled
       end
       opts.tabline = { -- UI upper bar
         lib.component.tabline_conditional_padding(),
         lib.component.tabline_buffers(),
         lib.component.fill { hl = { bg = "tabline_bg" } },
-        lib.component.tabline_tabpages()
+        lib.component.tabline_tabpages(),
       }
       opts.winbar = { -- UI breadcrumbs bar
-        init = function(self) self.bufnr = vim.api.nvim_get_current_buf() end,
+        init = function(self)
+          self.bufnr = vim.api.nvim_get_current_buf()
+        end,
         fallthrough = false,
         -- Winbar for terminal, neotree, and aerial.
         {
-          condition = function() return not lib.condition.is_active() end,
+          condition = function()
+            return not lib.condition.is_active()
+          end,
           {
             lib.component.neotree(),
             lib.component.compiler_play(),
@@ -44,7 +54,7 @@ return {
           lib.component.fill(),
           lib.component.compiler_redo(),
           lib.component.aerial(),
-        }
+        },
       }
       opts.statusline = {
         -- default highlight for the entire statusline
@@ -62,7 +72,9 @@ return {
             -- it's a left element, so use the left separator
             separator = "left",
             -- set the color of the surrounding based on the current mode using astronvim.utils.status module
-            color = function() return { main = status.hl.mode_bg(), right = "blank_bg" } end,
+            color = function()
+              return { main = status.hl.mode_bg(), right = "blank_bg" }
+            end,
           },
         },
         -- we want an empty space here so we can use the component builder to make a new section with just an empty string
@@ -138,7 +150,9 @@ return {
               -- we only want filename to be used and we can change the fname
               -- function to get the current working directory name
               filename = {
-                fname = function(nr) return vim.fn.getcwd(nr) end,
+                fname = function(nr)
+                  return vim.fn.getcwd(nr)
+                end,
                 padding = { left = 1, right = 1 },
               },
               -- disable all other elements of the file_info component
@@ -175,7 +189,7 @@ return {
           },
           -- add a navigation component and just display the percentage of progress in the file
           status.component.nav {
-            ruler = { padding = { left = 1 }, },
+            ruler = { padding = { left = 1 } },
             percentage = { padding = { right = 1 } },
             scrollbar = false,
             -- use no separator and define the background color
