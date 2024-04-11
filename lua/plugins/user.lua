@@ -1,5 +1,6 @@
 local settings = require("configuration")
 local twilight = { "folke/twilight.nvim", enabled = false }
+local wakatime_type = {}
 local zenmode = { "folke/zen-mode.nvim", enabled = false }
 local kitty = false
 if settings.enable_kitty then
@@ -12,6 +13,12 @@ end
 local wezterm = false
 if settings.enable_wezterm then
   wezterm = true
+end
+if settings.enable_wakatime then
+  wakatime_type = {
+    "wakatime/vim-wakatime",
+    lazy = false,
+  }
 end
 if settings.enable_zenmode then
   twilight = {
@@ -185,5 +192,6 @@ return {
     end,
   },
   twilight,
+  wakatime_type,
   zenmode,
 }

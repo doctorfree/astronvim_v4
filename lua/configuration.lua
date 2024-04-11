@@ -43,6 +43,8 @@ conf.listchars = {
 -- PLUGINS CONFIGURATION
 -- Enable ToggleTerm
 conf.enable_toggleterm = false
+-- Enable the WakaTime metrics dashboard (requires API key)
+conf.enable_wakatime = false
 -- Enable zen mode distraction-free coding
 conf.enable_zenmode = true
 -- if zenmode enabled then enable terminal support as well
