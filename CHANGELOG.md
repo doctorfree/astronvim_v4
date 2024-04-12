@@ -10,6 +10,7 @@
 
 ### ⚡️ Added
 
+- Integration with `lazyman` interactive menu system
 - Add comments used by `Lazyman` to `LSP` and `Formatters` tables in `configuration.lua`
 - Add `configuration.lua` conditional support for `neotest` and `toggleterm` plugins
 - Add `wakatime` plugin optionally enabled in `configuration.lua`
