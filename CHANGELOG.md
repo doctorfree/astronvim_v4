@@ -10,6 +10,24 @@
 
 ### ⚡️ Added
 
+- Add comments used by `Lazyman` to `LSP` and `Formatters` tables in `configuration.lua`
+- Add `configuration.lua` conditional support for `neotest` and `toggleterm` plugins
+- Add `wakatime` plugin optionally enabled in `configuration.lua`
+- Add `shfmt` usage in comments, add `-sr` to `shfmt` arguments
+- Add `none-ls` configuration, add nerd icons and set them in `heirline`
+
+### 🐞 Fixed
+
+- Continue to move keymaps from `keymaps.lua` to `astrocore.lua`
+- Add custom `tabline`, `winbar`, `statusline` to readme and release notes features section
+
+- Fix shellcheck config in none-ls
+- Fix none-ls setup
+
+## v1.0.4r1
+
+### ⚡️ Added
+
 - Configure `heirline` `tabline` and `winbar`
 - Add transparency toggles
 - Add toggle transparency function for `Catppuccin`, `Everforest`, and `Kanagawa`
