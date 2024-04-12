@@ -14,6 +14,7 @@ return {
   "nvimtools/none-ls.nvim",
   dependencies = {
     "nvimtools/none-ls-extras.nvim",
+    "gbprod/none-ls-shellcheck.nvim",
   },
   opts = function(_, config)
     local null_ls = require("null-ls")
@@ -110,10 +111,14 @@ return {
     if table_contains(formatters_linters, "shellcheck") then
       table.insert(
         config.sources,
-        actions.shellcheck.with({
+        require("none-ls-shellcheck.code_actions").with({
           timeout = 10000,
           filetypes = { "sh", "zsh", "bash" },
         })
+      )
+      table.insert(
+        config.sources,
+        require("none-ls-shellcheck.diagnostics")
       )
     end
     -- Arguments to shfmt:
