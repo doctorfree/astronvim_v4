@@ -49,9 +49,14 @@ Installing with `lazyman` ensures dependencies are met, initialization is
 automated, updates/removal/reinstallation can be performed easily, and
 configuration is site-specific for some settings. Lazyman can perform
 health checks, launching, updates, and generation of HTML and markdown
-format reports. Several other features make `lazyman` an attractive choice
-but the primary attraction is the `nvims` shell function which can be used
-to easily invoke any `lazyman` installed Neovim configuration.
+format reports.
+
+Several other features make `lazyman` an attractive choice but the primary
+attractions are the `nvims` shell function and the interactive menu system.
+The `nvims` shell function can be used to easily invoke any `lazyman` installed
+Neovim configuration. The interactive menu system in `lazyman` version 3.1.6+
+has been augmented with menus to configure `AstroNvimV4` settings, enabled
+LSP servers, Formatters, and Plugins.
 
 An additional benefit `lazyman` provides is the ability to easily and
 quickly explore other Neovim configurations including many `AstroNvim`
@@ -102,7 +107,8 @@ Beyond the basic features provided by this template, `AstroNvimV4` includes:
   - `lua/plugins/astrocore.lua` : customized globals, options, mappings, and autocmds
   - `lua/plugins/astrolsp.lua` : custom formatters, linters, and language servers
   - `lua/plugins/astroui.lua` : options, icons, and status configuration
-- Options and plugin configuration in `lua/options.lua` and `lua/configuration.lua`
+- Options, LSP, Formatters, and Plugins configuration in `lua/configuration.lua`
+    - Integration with `lazyman` interactive menu system
 - Customized `tabline`, `winbar`, and `statusline` with `heirline.nvim`
 - Mason installed formatters, linters, language servers
 - LSP configuration for several language servers
@@ -115,8 +121,8 @@ Beyond the basic features provided by this template, `AstroNvimV4` includes:
 
 ## Configuration
 
-Neovim options are set in `lua/options.lua`. In addition, some configuration can
-be specified in the file `lua/configuration.lua`.
+Neovim options are set in `lua/plugins/astrocore.lua` and `lua/options.lua`.
+In addition, some configuration can be specified in the file `lua/configuration.lua`.
 
 The default leader key in `AstroNvimV4` is set to `,`. To modify the leader key
 or any of several other settings, edit `lua/configuration.lua`.
