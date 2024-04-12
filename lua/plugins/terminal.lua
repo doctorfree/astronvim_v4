@@ -1,5 +1,4 @@
 local settings = require("configuration")
-
 local toggleterm = { "akinsho/nvim-toggleterm.lua", enabled = false }
 if settings.enable_toggleterm then
   toggleterm = {

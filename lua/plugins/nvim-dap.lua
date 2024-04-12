@@ -1,11 +1,17 @@
+local settings = require("configuration")
+local dependencies = { "mfussenegger/nvim-dap" }
+if settings.enable_neotest then
+  dependencies = {
+    "mfussenegger/nvim-dap",
+    "nvim-neotest/nvim-nio",
+  }
+end
+
 ---@type LazySpec
 return {
   {
     "rcarriga/nvim-dap-ui",
-    dependencies = {
-      "mfussenegger/nvim-dap",
-      "nvim-neotest/nvim-nio",
-    },
+    dependencies = dependencies,
   },
   {
     "mfussenegger/nvim-dap",

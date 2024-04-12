@@ -41,8 +41,10 @@ conf.listchars = {
 }
 
 -- PLUGINS CONFIGURATION
--- Enable ToggleTerm
-conf.enable_toggleterm = false
+-- Enable the Neotest plugin
+conf.enable_neotest = false
+-- Enable toggleterm plugin
+conf.enable_toggleterm = true
 -- Enable the WakaTime metrics dashboard (requires API key)
 conf.enable_wakatime = false
 -- Enable zen mode distraction-free coding

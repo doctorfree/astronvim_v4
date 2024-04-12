@@ -1,7 +1,8 @@
+local settings = require("configuration")
 local prefix = "<Leader>T"
----@type LazySpec
-return {
-  {
+local neotest = {}
+if settings.enable_neotest then
+  neotest = {
     "nvim-neotest/neotest",
     lazy = true,
     optional = true,
@@ -72,5 +73,8 @@ return {
       }, vim.api.nvim_create_namespace "neotest")
       require("neotest").setup(opts)
     end,
-  },
-}
+  }
+end
+
+---@type LazySpec
+return neotest
