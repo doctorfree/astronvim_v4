@@ -8,13 +8,23 @@ map({ "n", "x" }, "<leader>ts", term_map.operator_send, { expr = true, desc = "T
 map("n", "<leader>to", term_map.toggle, { desc = "Terminal Toggle" })
 map("n", "<leader>tO", term_map.toggle({ open_cmd = "enew" }), { desc = "New Terminal Toggle" })
 map("n", "<leader>tr", term_map.run, { desc = "Terminal Run" })
-map("n", "<leader>tR", term_map.run(nil, { layout = { open_cmd = "enew" } }), { desc = "New Terminal Run" })
+map(
+  "n",
+  "<leader>tR",
+  term_map.run(nil, { layout = { open_cmd = "enew" } }),
+  { desc = "New Terminal Run" }
+)
 map("n", "<leader>tk", term_map.kill, { desc = "Terminal Kill" })
 map("n", "<leader>t]", term_map.cycle_next, { desc = "Terminal Next" })
 map("n", "<leader>t[", term_map.cycle_prev, { desc = "Terminal Prev" })
 map("n", "<leader>tl", term_map.move({ open_cmd = "belowright vnew" }), { desc = "Move Below Right" })
 map("n", "<leader>tL", term_map.move({ open_cmd = "botright vnew" }), { desc = "Move Bottom Right" })
-map("n", "<leader>th", term_map.move({ open_cmd = "belowright new" }), { desc = "Move Below Right New" })
+map(
+  "n",
+  "<leader>th",
+  term_map.move({ open_cmd = "belowright new" }),
+  { desc = "Move Below Right New" }
+)
 map("n", "<leader>tH", term_map.move({ open_cmd = "botright new" }), { desc = "Move Bottom Right New" })
 map("n", "<leader>tf", term_map.move({ open_cmd = "float" }), { desc = "Move Float" })
 
@@ -88,8 +98,17 @@ if vim.fn.executable("lazyman") == 1 then
     cmd = { "lazyman", "-F", "anvmv4" },
     autoclose = true,
   })
-  api.nvim_create_user_command("Lazyconf", function()
+  api.nvim_create_user_command("Astroconf", function()
     lazyconf:toggle(nil, true)
+  end, { nargs = "?" })
+
+  local lazylsp = require("terminal").terminal:new({
+    layout = { open_cmd = "float", border = "rounded", height = 0.95, width = 0.95 },
+    cmd = { "lazyman", "-F", "anvlsp" },
+    autoclose = true,
+  })
+  api.nvim_create_user_command("Astrolsp", function()
+    lazylsp:toggle(nil, true)
   end, { nargs = "?" })
 
   local lazyplug = require("terminal").terminal:new({
@@ -97,8 +116,17 @@ if vim.fn.executable("lazyman") == 1 then
     cmd = { "lazyman", "-F", "anvplug" },
     autoclose = true,
   })
-  api.nvim_create_user_command("Lazyplug", function()
+  api.nvim_create_user_command("Astroplug", function()
     lazyplug:toggle(nil, true)
+  end, { nargs = "?" })
+
+  local lazyform = require("terminal").terminal:new({
+    layout = { open_cmd = "float", border = "rounded", height = 0.95, width = 0.95 },
+    cmd = { "lazyman", "-F", "anvform" },
+    autoclose = true,
+  })
+  api.nvim_create_user_command("Astroform", function()
+    lazyform:toggle(nil, true)
   end, { nargs = "?" })
 end
 

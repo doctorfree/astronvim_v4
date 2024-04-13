@@ -27,10 +27,14 @@ end
 local lman = {}
 local lconf = {}
 local lplug = {}
+local lform = {}
+local llsp = {}
 if vim.fn.executable "lazyman" == 1 then
   lman = { "<cmd>Lazyman<CR>", desc = "Lazyman Menu" }
-  lconf = { "<cmd>Lazyconf<CR>", desc = "AstroNvimV4 Configuration" }
-  lplug = { "<cmd>Lazyplug<CR>", desc = "AstroNvimV4 Plugins" }
+  lconf = { "<cmd>Astroconf<CR>", desc = "AstroNvimV4 Configuration" }
+  lplug = { "<cmd>Astroplug<CR>", desc = "AstroNvimV4 Plugins" }
+  lform = { "<cmd>Astroform<CR>", desc = "AstroNvimV4 Formatters" }
+  llsp = { "<cmd>Astrolsp<CR>", desc = "AstroNvimV4 LSP Servers" }
 end
 local ascii = {}
 if vim.fn.executable "asciiville" == 1 then
@@ -205,7 +209,7 @@ return {
         },
 
         -- AstroNvimV4 custom mappings
-        ["<Leader>,a"] = {
+        ["<Leader>,d"] = {
           "<cmd>Alpha<CR>",
           desc = "Open Dashboard",
         },
@@ -231,10 +235,6 @@ return {
         },
 
         -- Plugin Management
-        ["<Leader>,L"] = {
-          "<cmd>Lazy<CR>",
-          desc = "Lazy Menu",
-        },
         ["<Leader>U"] = {
           "<cmd>Lazy update<CR>",
           desc = "Update Plugins",
@@ -248,8 +248,10 @@ return {
         ["<Leader>,s"] = top,
         ["<Leader>,g"] = git,
         ["<Leader>,l"] = lman,
-        ["<Leader>,A"] = lconf,
+        ["<Leader>,a"] = lconf,
         ["<Leader>,P"] = lplug,
+        ["<Leader>,F"] = lform,
+        ["<Leader>,L"] = llsp,
         ["<Leader>,A"] = ascii,
         ["<Leader>,m"] = mpplus,
         ["<Leader>,M"] = mpmenu,
