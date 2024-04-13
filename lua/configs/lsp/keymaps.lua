@@ -7,7 +7,7 @@ cfg._keys = nil
 function cfg.get()
   local format = require("configs.lsp.format").format
   if not cfg._keys then
-  ---@class PluginLspKeys
+    ---@class PluginLspKeys
     -- stylua: ignore
     cfg._keys =  {
       { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
@@ -63,6 +63,7 @@ function cfg.on_attach(client, buffer)
 
   for _, keys in pairs(keymaps) do
     if not keys.has or client.server_capabilities[keys.has .. "Provider"] then
+      ---@class LazyKeysBase
       local opts = Keys.opts(keys)
       ---@diagnostic disable-next-line: no-unknown
       opts.has = nil

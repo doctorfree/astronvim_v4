@@ -107,7 +107,20 @@ Line Diagnostics                    | <leader>cl
 Local Diagnostics                   | <leader>cd
 Workspace Diagnostics               | <leader>cD
 Rename                              | <leader>cr
-Structural Replace                  | <leader>cR
+Structural Replace                  | <leader>cs
+Goto Definition                     | <leader>cg
+References                          | <leader>cR
+Goto Declaration                    | <leader>cG
+Goto Implementation                 | <leader>cI
+Goto Type Definition                | <leader>cT
+Hover                               | <leader>ck
+Signature Help                      | <leader>cK
+Next Diagnostic                     | <leader>cn
+Prev Diagnostic                     | <leader>cp
+Next Error                          | <leader>cp
+Prev Error                          | <leader>cE
+Next Warning                        | <leader>cw
+Prev Warning                        | <leader>cW
 Attach                              | <leader>da
 Breakpoint                          | <leader>db
 Clear Breakpoints                   | <leader>dB
@@ -249,21 +262,34 @@ Go to Harpoon File 4                | <leader>h4
 Go to Harpoon File 5                | <leader>h5
 
 ## ui @ui
-Colorscheme with Preview            | <leader>uC
+Colorschemes                        | <leader>uc
 Change Line Numbers                 | <leader>un
 Toggle Auto Chdir                   | <leader>uA
+Toggle Auto Pairs                   | <leader>ua
+Toggle Auto Completion              | <leader>uC
 Toggle Background                   | <leader>ub
 Toggle Diagnostics                  | <leader>ud
+Dismiss Notifications               | <leader>uD
+Toggle Explorer                     | <leader>ue
+Toggle Buffer Auto Formatting       | <leader>uf
+Toggle Global Auto Formatting       | <leader>uF
 Toggle Signcolumn                   | <leader>ug
+Toggle Harpoon                      | <leader>uh
 Toggle Foldcolumn                   | <leader>u>
 Change Indent Setting               | <leader>ui
+Toggle CodeLens                     | <leader>uL
 Toggle Statusline                   | <leader>ul
 Change Line Numbering               | <leader>un
 Toggle Notifications                | <leader>uN
 Toggle Paste Mode                   | <leader>up
+Toggle Buffer Reference Highlights  | <leader>ur
+Toggle Global Reference Highlights  | <leader>uR
 Toggle Spellcheck                   | <leader>us
 Toggle Conceal                      | <leader>uS
+Toggle Switcher                     | <leader>uT
 Toggle Tabline                      | <leader>ut
 Toggle URL Highlight                | <leader>uu
 Toggle Wrap                         | <leader>uw
 Toggle Syntax Highlight             | <leader>uy
+Toggle LSP Semantic Highlight       | <leader>uY
+Toggle Color Highlight              | <leader>uz

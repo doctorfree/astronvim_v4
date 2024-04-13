@@ -6,6 +6,7 @@ local icons = require("icons")
 local Util = require("utils")
 local plugin = require("utils.plugin")
 local Info = require("lazy.core.util").info
+local diagnostic_goto = require("configs.lsp.keymaps").diagnostic_goto
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 
 local cheat = {}
@@ -476,6 +477,58 @@ return {
         ["<Leader>ci"] = {
           "<cmd>LspInfo<CR>",
           desc = "LSP Info",
+        },
+        ["<Leader>cg"] = {
+          "<cmd>Telescope lsp_definitions<CR>",
+          desc = "Goto Definition",
+        },
+        ["<Leader>cR"] = {
+          "<cmd>Telescope lsp_references<CR>",
+          desc = "References",
+        },
+        ["<Leader>cG"] = {
+          vim.lsp.buf.declaration,
+          desc = "Goto Declaration",
+        },
+        ["<Leader>cI"] = {
+          "<cmd>Telescope lsp_implementations<CR>",
+          desc = "Goto Implementation",
+        },
+        ["<Leader>cT"] = {
+          "<cmd>Telescope lsp_type_definitions<CR>",
+          desc = "Goto Type Definition",
+        },
+        ["<Leader>ck"] = {
+          vim.lsp.buf.hover,
+          desc = "Hover",
+        },
+        ["<Leader>cK"] = {
+          vim.lsp.buf.signature_help,
+          desc = "Signature Help",
+        },
+        ["<Leader>cn"] = {
+          diagnostic_goto(true),
+          desc = "Next Diagnostic",
+        },
+        ["<Leader>cp"] = {
+          diagnostic_goto(false),
+          desc = "Prev Diagnostic",
+        },
+        ["<Leader>ce"] = {
+          diagnostic_goto(true, "ERROR"),
+          desc = "Next Error",
+        },
+        ["<Leader>cE"] = {
+          diagnostic_goto(false, "ERROR"),
+          desc = "Prev Error",
+        },
+        ["<Leader>cw"] = {
+          diagnostic_goto(true, "WARN"),
+          desc = "Next Warning",
+        },
+        ["<Leader>cW"] = {
+          diagnostic_goto(false, "WARN"),
+          desc = "Prev Warning",
         },
         -- Noice
         ["<Leader>sna"] = {

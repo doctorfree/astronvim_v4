@@ -154,7 +154,7 @@ local normal_mode_mappings = {
     f = { "Format" },
     l = { "Line Diagnostics" },
     r = { "Rename" },
-    R = { "Structural Replace" },
+    s = { "Structural Replace" },
     t = { "<cmd>LspToggleAutoFormat<CR>", "Toggle Format on Save" },
   },
 
