@@ -8,6 +8,10 @@ local plugin = require("utils.plugin")
 local Info = require("lazy.core.util").info
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 
+local cheat = {}
+if settings.enable_cheatsheet then
+  cheat = { "<cmd>Cheatsheet<CR>", desc = "AstroNvimV4 Cheatsheet" }
+end
 local top = {}
 if vim.fn.executable "btop" == 1 then
   top = { "<cmd>Top<CR>", desc = "System Monitor" }
@@ -25,8 +29,8 @@ local lconf = {}
 local lplug = {}
 if vim.fn.executable "lazyman" == 1 then
   lman = { "<cmd>Lazyman<CR>", desc = "Lazyman Menu" }
-  lconf = { "<cmd>Lazyconf<CR>", desc = "Lazyman Configuration" }
-  lplug = { "<cmd>Lazyplug<CR>", desc = "Lazyman Plugins" }
+  lconf = { "<cmd>Lazyconf<CR>", desc = "AstroNvimV4 Configuration" }
+  lplug = { "<cmd>Lazyplug<CR>", desc = "AstroNvimV4 Plugins" }
 end
 local ascii = {}
 if vim.fn.executable "asciiville" == 1 then
@@ -182,6 +186,10 @@ return {
           desc = "Pick to close",
         },
 
+        -- AstroNvimV4 Cheatsheet
+        ["<leader>,C"] = cheat,
+        ["<leader>H"] = cheat,
+
         -- Telescope
         ["<Leader>C"] = {
           "<cmd>Telescope command_palette<CR>",
@@ -240,7 +248,7 @@ return {
         ["<Leader>,s"] = top,
         ["<Leader>,g"] = git,
         ["<Leader>,l"] = lman,
-        ["<Leader>,C"] = lconf,
+        ["<Leader>,A"] = lconf,
         ["<Leader>,P"] = lplug,
         ["<Leader>,A"] = ascii,
         ["<Leader>,m"] = mpplus,

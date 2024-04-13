@@ -46,7 +46,7 @@ conf.enable_cheatsheet = true
 -- Enable smooth scrolling with neoscroll plugin
 conf.enable_smooth_scrolling = true
 -- Enable the Neotest plugin
-conf.enable_neotest = false
+conf.enable_neotest = true
 -- Enable toggleterm plugin
 conf.enable_toggleterm = true
 -- Enable the WakaTime metrics dashboard (requires API key)

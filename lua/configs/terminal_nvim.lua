@@ -85,7 +85,7 @@ if vim.fn.executable("lazyman") == 1 then
 
   local lazyconf = require("terminal").terminal:new({
     layout = { open_cmd = "float", border = "rounded", height = 0.95, width = 0.95 },
-    cmd = { "lazyman", "-F" },
+    cmd = { "lazyman", "-F", "anvmv4" },
     autoclose = true,
   })
   api.nvim_create_user_command("Lazyconf", function()
@@ -94,7 +94,7 @@ if vim.fn.executable("lazyman") == 1 then
 
   local lazyplug = require("terminal").terminal:new({
     layout = { open_cmd = "float", border = "rounded", height = 0.95, width = 0.95 },
-    cmd = { "lazyman", "-F", "plugins" },
+    cmd = { "lazyman", "-F", "anvplug" },
     autoclose = true,
   })
   api.nvim_create_user_command("Lazyplug", function()
