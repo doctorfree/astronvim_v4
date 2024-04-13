@@ -1,0 +1,158 @@
+## AstroNvimV4 @quick @reference
+Asciiville Command                  | <leader>av
+Asciiville Command                  | :Asciiville
+Htop Command                        | <leader>H
+Htop Command                        | :Htop
+Lazygit Command                     | :Lazygit
+Lazygit Root Dir                    | <leader>gg
+Lazygit Current Dir                 | <leader>gG
+Generate .gitignore                 | <leader>gi
+Lazy Menu                           | <leader>L
+Lazy Menu                           | :Lazy
+Lazy Update                         | <leader>U
+Lazy Update                         | :Lazy update
+AstroNvimV4 Configuration           | <leader>lc
+AstroNvimV4 Configuration           | :Lazyconf
+AstroNvimV4 Plugins                 | <leader>lp
+AstroNvimV4 Plugins                 | :Lazyplug
+AstroNvimV4 Help                    | <leader>hl
+AstroNvimV4 Keymaps                 | <leader>hk
+AstroNvimV4 Menu                    | <leader>lm
+AstroNvimV4 Menu                    | :Lazyman
+Mason Menu                          | <leader>M
+Mason Menu                          | :Mason
+Open URL                            | gh
+Open URL                            | :OpenRepo
+Options                             | <leader>o
+Options                             | :options
+Toggle Color Column                 | <leader>C
+Toggle Conceal Level                | <leader>uc
+Toggle File Tree                    | <leader>T
+Toggle Word Wrap                    | <leader>uw
+Toggle Format on Save               | <leader>uf
+Toggle Line Numbers                 | <leader>ul
+Toggle Number                       | <leader>uN
+Toggle Sign Column                  | <leader>ug
+Toggle Spelling                     | <leader>us
+Toggle Status Line                  | <leader>uL
+Toggle Tab Line                     | <leader>uT
+Toggle Transparency                 | <leader>ut
+Toggle Word Wrap                    | <leader>uw
+Toggle Zen Mode                     | <leader>z
+Generate .gitignore                 | <leader>gi
+Quit all                            | <leader>qq
+Other Window                        | <leader>ww
+Delete Window                       | <leader>wd
+Split Window Below                  | <leader>w-
+Split Window Right                  | <leader>w|
+Last Tab                            | <leader><tab>l
+First Tab                           | <leader><tab>f
+New Tab                             | <leader><tab><tab>
+Next Tab                            | <leader><tab>]
+Close Tab                           | <leader><tab>d
+Previous Tab                        | <leader><tab>[]
+
+## plugins @quick @reference
+Open Diagnostics Float              | <leader>de
+Diagnostics Location List           | <leader>dq
+Toggle Diagnostics                  | <leader>dt
+Line Diagnostics                    | <leader>cd
+LSP Info                            | <leader>cl
+Code Action                         | <leader>ca
+Format Document                     | <leader>cf
+Rename                              | <leader>cr
+Signature Help                      | <leader>ls
+Toggle Breakpoint                   | <leader>B
+Alpha Dashboard                     | <leader>ad
+Noice Last Message                  | <leader>snl
+Noice History                       | <leader>snh
+Noice All                           | <leader>sna
+Delete All Notifications            | <leader>un
+Toggle Treesitter Join              | <leader>tt
+Treesitter Join                     | <leader>tj
+Treesitter Split                    | <leader>ts
+Explorer (root dir)_                | <leader>e
+Explorer Float     _                | <leader>E
+Find in Files (Grep)                | <leader>/
+Command History                     | <leader>:
+Find Files (root dir)               | <leader><space>
+Find Files (cwd)                    | <leader>fF
+Git Commits                         | <leader>gc
+Git Commits                         | <leader>gm
+Git Status                          | <leader>gs
+Telescope Auto Commands             | <leader>sa
+Telescope Command History           | <leader>sc
+Telescope Commands                  | <leader>sC
+Telescope Diagnostics               | <leader>sd
+Live Grep (root dir)                | <leader>sg
+Live Grep (cwd)                     | <leader>sG
+Search Hightlight Groups            | <leader>sH
+Telescope Man Pages                 | <leader>sM
+Jump to Mark                        | <leader>sm
+Options                             | <leader>so
+Resume                              | <leader>sR
+Grep Word (root dir)                | <leader>sw
+Grep Word (cwd)                     | <leader>sW
+Colorscheme with Preview            | <leader>uC
+Goto Symbol                         | <leader>ss
+Goto Symbol (workspace)             | <leader>sS
+Document Diagnostics (Trouble)      | <leader>xx
+Workspace Diagnostics (Trouble)     | <leader>xX
+Location List (Trouble)             | <leader>xL
+Quickfix List (Trouble)             | <leader>xQ
+Todo (Trouble)                      | <leader>xt
+Todo/Fix/Fixme (Trouble)            | <leader>xT
+Todo                                | <leader>st
+Restore Session (persistence)       | <leader>ps
+Restore Last Session (persistence)  | <leader>pl
+Don't Save Current Session          | <leader>pd
+Close Buffer                        | <leader>D
+Commands                            | <leader>sc
+Strings                             | <leader>st
+Help                                | <leader>s?
+Headings                            | <leader>sh
+Keymaps                             | <leader>sk
+Vim Options                         | <leader>sO
+Projects                            | <leader>sp
+Registers                           | <leader>sR
+Text Under Cursor                   | <leader>ss
+Emoji                               | <leader>sS
+Search History                      | <leader>s:
+Command History                     | <leader>s;
+Fuzzy Search                        | <leader>sf
+Branches                            | <leader>gh
+File Browser                        | <leader>fb
+Zoxide                              | <leader>fz
+Open File                           | <leader>ff
+Recent Files                        | <leader>fr
+Run 'make'                          | <leader>mm
+Telescope                           | <leader>mt
+Buffer List                         | <leader>bb
+
+## terminal.nvim @terminal
+Terminal Send                       | <leader>ts
+Terminal Toggle                     | <leader>to
+New Terminal Toggle                 | <leader>tO
+Terminal Run                        | <leader>tr
+New Terminal Run                    | <leader>tR
+Terminal Kill                       | <leader>tk
+Terminal Next                       | <leader>t]
+Terminal Prev                       | <leader>t[
+Move Below Right                    | <leader>tl
+Move Bottom Right                   | <leader>tL
+Move Below Right New                | <leader>th
+Move Bottom Right New               | <leader>tH
+Move Float                          | <leader>tf
+
+## gitsigns @git
+Diff This                                | <leader>ghd
+Diff This ~                              | <leader>ghD
+Stage Buffer                             | <leader>ghS
+Reset Buffer                             | <leader>ghR
+Stage Hunk                               | <leader>ghs
+Undo Stage Hunk                          | <leader>ghu
+Reset hunk                               | <leader>ghr
+Preview Hunk                             | <leader>ghp
+Blame Current Line                       | <leader>ghb
+Next Hunk                                | ]h
+Previous Hunk                            | [h

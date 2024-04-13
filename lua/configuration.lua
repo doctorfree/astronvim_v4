@@ -41,6 +41,10 @@ conf.listchars = {
 }
 
 -- PLUGINS CONFIGURATION
+-- Enable display of custom cheatsheets
+conf.enable_cheatsheet = true
+-- Enable smooth scrolling with neoscroll plugin
+conf.enable_smooth_scrolling = true
 -- Enable the Neotest plugin
 conf.enable_neotest = false
 -- Enable toggleterm plugin
