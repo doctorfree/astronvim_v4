@@ -108,11 +108,12 @@ Beyond the basic features provided by this template, `AstroNvimV4` includes:
   - `lua/plugins/astrolsp.lua` : custom formatters, linters, and language servers
   - `lua/plugins/astroui.lua` : options, icons, and status configuration
 - Options, LSP, Formatters, and Plugins configuration in `lua/configuration.lua`
-    - Integration with `lazyman` interactive menu system
+  - Integration with `lazyman` interactive menu system
 - Customized `tabline`, `winbar`, and `statusline` with `heirline.nvim`
 - Mason installed formatters, linters, language servers
 - LSP configuration for several language servers
 - Customized `terminal` with autocmds/commands for `lazygit`, `lazyman`, `btop`, more
+- AstroNvimV4 Cheat Sheet (open with `<leader>H`)
 - Highly customized `alpha.nvim` dashboard
 - Support for multiple colorschemes and colorscheme switching
 - An icon set for use with several plugins
