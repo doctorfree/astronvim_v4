@@ -213,6 +213,8 @@ local normal_mode_mappings = {
     },
   },
 
+  h = { name = "Harpoon" },
+
   p = {
     name = "Project",
     f = { "File" },

@@ -233,6 +233,10 @@ return {
           "<cmd>Lazy update<CR>",
           desc = "Update Plugins",
         },
+        ["<Leader>,q"] = {
+          "<cmd>qa<CR>",
+          desc = "Quit All",
+        },
 
         -- Plugin Management
         ["<Leader>U"] = {
@@ -240,6 +244,10 @@ return {
           desc = "Update Plugins",
         },
         -- Options
+        ["<Leader>O"] = {
+          "<cmd>options<CR>",
+          desc = "Options",
+        },
         ["<Leader>,o"] = {
           "<cmd>options<CR>",
           desc = "Options",
@@ -343,7 +351,7 @@ return {
           end,
           desc = "Toggle Line Numbers",
         },
-        ["<Leader>.C"] = {
+        ["<Leader>.c"] = {
           function()
             Util.toggle("conceallevel", false, { 0, conceallevel })
           end,
@@ -459,11 +467,40 @@ return {
         },
         ["<Leader>cr"] = {
           "<cmd>lua vim.lsp.buf.rename()<CR>",
-          desc = "Code Action",
+          desc = "Rename",
         },
         ["<Leader>cf"] = {
           "<cmd>lua vim.lsp.buf.format({ async = true })<CR>",
           desc = "Format",
+        },
+        ["<Leader>ci"] = {
+          "<cmd>LspInfo<CR>",
+          desc = "LSP Info",
+        },
+        -- Noice
+        ["<Leader>sna"] = {
+          "<cmd>Noice<CR>",
+          desc = "Noice All",
+        },
+        ["<Leader>snl"] = {
+          "<cmd>NoiceLast<CR>",
+          desc = "Noice Last Message",
+        },
+        ["<Leader>snh"] = {
+          "<cmd>NoiceHistory<CR>",
+          desc = "Noice History",
+        },
+        ["<Leader>snL"] = {
+          "<cmd>NoiceLog<CR>",
+          desc = "Noice Log",
+        },
+        ["<Leader>sne"] = {
+          "<cmd>NoiceErrors<CR>",
+          desc = "Noice Errors",
+        },
+        ["<Leader>snf"] = {
+          "<cmd>NoiceTelescope<CR>",
+          desc = "Filter Noice",
         },
       },
       v = {

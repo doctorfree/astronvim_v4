@@ -1,73 +1,146 @@
 ## AstroNvimV4 @quick @reference
-Asciiville Command                  | <leader>av
+Buffers                             | <leader>b
+Commands/Themes                     | <leader>,
+Debugger                            | <leader>d
+Find                                | <leader>f
+Git                                 | <leader>g
+Language Tools                      | <leader>l
+LSP                                 | <leader>c
+Manage Packages/Plugins             | <leader>/
+Markdown                            | <leader>m
+Packages                            | <leader>p
+Session                             | <leader>S
+Tabs                                | <leader><tab>
+Terminal                            | <leader>t
+Toggle Keymaps                      | <leader>.
+UI/UX                               | <leader>u
+Windows                             | <leader>w
+Workspaces                          | <leader>W
 Asciiville Command                  | :Asciiville
-Htop Command                        | <leader>H
-Htop Command                        | :Htop
+Asciiville Command                  | <leader>,v
+System Monitor                      | :Top
+System Monitor                      | <leader>,s
 Lazygit Command                     | :Lazygit
-Lazygit Root Dir                    | <leader>gg
-Lazygit Current Dir                 | <leader>gG
-Generate .gitignore                 | <leader>gi
-Lazy Menu                           | <leader>L
-Lazy Menu                           | :Lazy
-Lazy Update                         | <leader>U
-Lazy Update                         | :Lazy update
-AstroNvimV4 Configuration           | <leader>lc
-AstroNvimV4 Configuration           | :Lazyconf
-AstroNvimV4 Plugins                 | <leader>lp
-AstroNvimV4 Plugins                 | :Lazyplug
-AstroNvimV4 Help                    | <leader>hl
-AstroNvimV4 Keymaps                 | <leader>hk
-AstroNvimV4 Menu                    | <leader>lm
-AstroNvimV4 Menu                    | :Lazyman
-Mason Menu                          | <leader>M
-Mason Menu                          | :Mason
-Open URL                            | gh
+Lazygit Command                     | <leader>,g
+Open Dashboard                      | <leader>/a
+Manage Plugins                      | :Lazy
+Manage Plugins                      | <leader>P
+Manage Plugins                      | <leader>,p
+Manage Plugins                      | <leader>/p
+Update Plugins                      | :Lazy update
+Update Plugins                      | <leader>U
+Update Plugins                      | <leader>,u
+Update Plugins                      | <leader>/u
+AstroNvimV4 Configuration           | :Astroconf
+AstroNvimV4 Configuration           | <leader>,a
+AstroNvimV4 Formatters              | :Astroform
+AstroNvimV4 Formatters              | <leader>,F
+AstroNvimV4 LSP Servers             | :Astrolsp
+AstroNvimV4 LSP Servers             | <leader>,L
+AstroNvimV4 Plugins                 | :Astroplug
+AstroNvimV4 Plugins                 | <leader>,P
+Lazyman Menu                        | :Lazyman
+Lazyman Menu                        | <leader>,l
+Manage Packages                     | :Mason
+Manage Packages                     | <leader>M
+Manage Packages                     | <leader>/m
+MusicPlayerPlus                     | :MusicPlayerPlus
+MusicPlayerPlus                     | <leader>,m
+MusicPlayerMenu                     | :MusicPlayerMenu
+MusicPlayerMenu                     | <leader>,M
 Open URL                            | :OpenRepo
-Options                             | <leader>o
+Open URL                            | gh
+Open URL                            | <leader>,O
 Options                             | :options
-Toggle Color Column                 | <leader>C
-Toggle Conceal Level                | <leader>uc
-Toggle File Tree                    | <leader>T
-Toggle Word Wrap                    | <leader>uw
-Toggle Format on Save               | <leader>uf
-Toggle Line Numbers                 | <leader>ul
-Toggle Number                       | <leader>uN
-Toggle Sign Column                  | <leader>ug
-Toggle Spelling                     | <leader>us
-Toggle Status Line                  | <leader>uL
-Toggle Tab Line                     | <leader>uT
-Toggle Transparency                 | <leader>ut
-Toggle Word Wrap                    | <leader>uw
+Options                             | <leader>O
+Options                             | <leader>,o
+Toggle Color Column                 | <leader>.x
+Toggle Conceal Level                | <leader>.c
+Toggle Explorer                     | <leader>e
+Toggle Explorer Focus               | <leader>o
+Toggle Format on Save               | <leader>.f
+Toggle Line Numbers                 | <leader>.l
+Toggle Mouse                        | <leader>.m
+Toggle Number                       | <leader>.N
+Toggle Sign Column                  | <leader>.g
+Toggle Spelling                     | <leader>.s
+Toggle Status Line                  | <leader>.S
+Toggle Tab Line                     | <leader>.L
+Toggle Transparency                 | <leader>,t
+Toggle Transparency                 | <leader>.t
+Toggle Word Wrap                    | <leader>.w
 Toggle Zen Mode                     | <leader>z
-Generate .gitignore                 | <leader>gi
-Quit all                            | <leader>qq
+Quit all                            | <leader>Q
+Quit all                            | <leader>,q
 Other Window                        | <leader>ww
 Delete Window                       | <leader>wd
 Split Window Below                  | <leader>w-
 Split Window Right                  | <leader>w|
+Increase Window Height              | <C-Up>
+Decrease Window Height              | <C-Down>
+Increase Window Width               | <C-Right>
+Increase Window Width               | <C-Left>
 Last Tab                            | <leader><tab>l
 First Tab                           | <leader><tab>f
 New Tab                             | <leader><tab><tab>
 Next Tab                            | <leader><tab>]
 Close Tab                           | <leader><tab>d
-Previous Tab                        | <leader><tab>[]
+Previous Tab                        | <leader><tab>[
 
 ## plugins @quick @reference
+Buffer List                         | <leader>bB
+Close Buffer                        | <leader>bc
+Close Buffer from Tabline           | <leader>bd
+Force Close Buffer                  | <leader>bC
+Pick Buffer to Close                | <leader>bD
+Previous Buffer                     | <leader>bp
+Select Buffer from Tabline          | <leader>bb
+Switch Buffer                       | <leader>b,
+Close All Buffers to the Left       | <leader>bl
+Close All Buffers to the Right      | <leader>br
+Sort Buffers                        | <leader>bs
+LSP Info                            | <leader>ci
+Code Action                         | <C-space>
+Code Action                         | <leader>ca
+Format Document                     | <leader>cf
+Line Diagnostics                    | <leader>cl
+Local Diagnostics                   | <leader>cd
+Workspace Diagnostics               | <leader>cD
+Rename                              | <leader>cr
+Structural Replace                  | <leader>cR
+Attach                              | <leader>da
+Breakpoint                          | <leader>db
+Clear Breakpoints                   | <leader>dB
+Close UI                            | <leader>dC
+Continue                            | <leader>dc
+Continue                            | <leader>dd
 Open Diagnostics Float              | <leader>de
 Diagnostics Location List           | <leader>dq
 Toggle Diagnostics                  | <leader>dt
-Line Diagnostics                    | <leader>cd
-LSP Info                            | <leader>cl
-Code Action                         | <leader>ca
-Format Document                     | <leader>cf
-Rename                              | <leader>cr
-Signature Help                      | <leader>ls
-Toggle Breakpoint                   | <leader>B
-Alpha Dashboard                     | <leader>ad
+Visual Hover                        | <leader>dh
+Step into                           | <leader>di
+Step over                           | <leader>do
+Step out                            | <leader>dO
+Diagnostics location list           | <leader>dq
+Pause                               | <leader>dp
+Repl                                | <leader>dr
+Scopes                              | <leader>ds
+Terminate                           | <leader>dT
+Log variable                        | <leader>dv
+Log variable above                  | <leader>dV
+Watches                             | <leader>dw
+Toggle UI                           | <leader>Dt
+Find Buffer                         | <leader>Df
+Rename Buffer                       | <leader>Dr
+Last Query Info                     | <leader>Dq
+Signature Help                      | gK
+Alpha Dashboard                     | <leader>A
 Noice Last Message                  | <leader>snl
 Noice History                       | <leader>snh
 Noice All                           | <leader>sna
-Delete All Notifications            | <leader>un
+Noice Log                           | <leader>snL
+Noice Errors                        | <leader>sne
+Filter Noice                        | <leader>snf
 Toggle Treesitter Join              | <leader>tt
 Treesitter Join                     | <leader>tj
 Treesitter Split                    | <leader>ts
@@ -75,11 +148,10 @@ Explorer (root dir)_                | <leader>e
 Explorer Float     _                | <leader>E
 Find in Files (Grep)                | <leader>/
 Command History                     | <leader>:
+Cheat Sheet                         | <leader>?
+AstroNvimV4 Cheatsheet              | <leader>H
 Find Files (root dir)               | <leader><space>
 Find Files (cwd)                    | <leader>fF
-Git Commits                         | <leader>gc
-Git Commits                         | <leader>gm
-Git Status                          | <leader>gs
 Telescope Auto Commands             | <leader>sa
 Telescope Command History           | <leader>sc
 Telescope Commands                  | <leader>sC
@@ -93,7 +165,6 @@ Options                             | <leader>so
 Resume                              | <leader>sR
 Grep Word (root dir)                | <leader>sw
 Grep Word (cwd)                     | <leader>sW
-Colorscheme with Preview            | <leader>uC
 Goto Symbol                         | <leader>ss
 Goto Symbol (workspace)             | <leader>sS
 Document Diagnostics (Trouble)      | <leader>xx
@@ -106,7 +177,6 @@ Todo                                | <leader>st
 Restore Session (persistence)       | <leader>ps
 Restore Last Session (persistence)  | <leader>pl
 Don't Save Current Session          | <leader>pd
-Close Buffer                        | <leader>D
 Commands                            | <leader>sc
 Strings                             | <leader>st
 Help                                | <leader>s?
@@ -120,14 +190,14 @@ Emoji                               | <leader>sS
 Search History                      | <leader>s:
 Command History                     | <leader>s;
 Fuzzy Search                        | <leader>sf
-Branches                            | <leader>gh
 File Browser                        | <leader>fb
 Zoxide                              | <leader>fz
 Open File                           | <leader>ff
 Recent Files                        | <leader>fr
 Run 'make'                          | <leader>mm
-Telescope                           | <leader>mt
-Buffer List                         | <leader>bb
+Start Markdown Preview              | <leader>mp
+Stop Markdown Preview               | <leader>ms
+Toggle Markdown Preview             | <leader>mt
 
 ## terminal.nvim @terminal
 Terminal Send                       | <leader>ts
@@ -144,15 +214,56 @@ Move Below Right New                | <leader>th
 Move Bottom Right New               | <leader>tH
 Move Float                          | <leader>tf
 
-## gitsigns @git
-Diff This                                | <leader>ghd
-Diff This ~                              | <leader>ghD
-Stage Buffer                             | <leader>ghS
-Reset Buffer                             | <leader>ghR
-Stage Hunk                               | <leader>ghs
-Undo Stage Hunk                          | <leader>ghu
-Reset hunk                               | <leader>ghr
-Preview Hunk                             | <leader>ghp
-Blame Current Line                       | <leader>ghb
-Next Hunk                                | ]h
-Previous Hunk                            | [h
+## git @git
+Add current                         | <leader>ga
+Add all                             | <leader>gA
+Blame Line                          | <leader>gm
+View Full Git Blame                 | <leader>gL
+Branches                            | <leader>gB
+Git Branches                        | <leader>gb
+Git Commits                         | <leader>gC
+Log Commits                         | <leader>gla
+Log Buffer Commits                  | <leader>glc
+Open Neogit Commit Page             | <leader>gnc
+Open Neogit Override CWD            | <leader>gnd
+Open Neogit Override Kind           | <leader>gnk
+Open Neogit Tap Page                | <leader>gnt
+Preview Git Hunk                    | <leader>gp
+Reset Git Buffer                    | <leader>gr
+Status                              | <leader>gs
+Git Status                          | <leader>gt
+Telescope Status                    | <leader>gS
+ToggleTerm Lazygit                  | <leader>gg
+Unstage Git Hunk                    | <leader>gu
+View Git Diff                       | <leader>gd
+Worktrees                           | <leader>gww
+Create Worktree                     | <leader>gwc
+
+## harpoon @harpoon
+Add File to Harpoon                 | <leader>ha
+Toggle Harpoon                      | <leader>hh
+Go to Harpoon File 1                | <leader>h1
+Go to Harpoon File 2                | <leader>h2
+Go to Harpoon File 3                | <leader>h3
+Go to Harpoon File 4                | <leader>h4
+Go to Harpoon File 5                | <leader>h5
+
+## ui @ui
+Colorscheme with Preview            | <leader>uC
+Change Line Numbers                 | <leader>un
+Toggle Auto Chdir                   | <leader>uA
+Toggle Background                   | <leader>ub
+Toggle Diagnostics                  | <leader>ud
+Toggle Signcolumn                   | <leader>ug
+Toggle Foldcolumn                   | <leader>u>
+Change Indent Setting               | <leader>ui
+Toggle Statusline                   | <leader>ul
+Change Line Numbering               | <leader>un
+Toggle Notifications                | <leader>uN
+Toggle Paste Mode                   | <leader>up
+Toggle Spellcheck                   | <leader>us
+Toggle Conceal                      | <leader>uS
+Toggle Tabline                      | <leader>ut
+Toggle URL Highlight                | <leader>uu
+Toggle Wrap                         | <leader>uw
+Toggle Syntax Highlight             | <leader>uy
