@@ -6,7 +6,21 @@
 
 ### 🐞 Fixed
 
-## v1.0.4r1
+## v1.0.4r3
+
+### ⚡️ Added
+
+- Additional `cheatsheet` improvements and mappings in `astrocore.lua`
+- Port `cheatsheet.txt` to `AstroNvimV4`
+- Add autocmds and mappings for `AstroNvimV4` configuration submenus
+- Add mappings for `cheatsheet` and command line submenus
+- Add `cheatsheet` and smooth scrolling plugins
+
+### 🐞 Fixed
+
+- Add `cheatsheet` to `Features` in readme and release notes
+
+## v1.0.4r2
 
 ### ⚡️ Added
 
