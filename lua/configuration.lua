@@ -96,72 +96,75 @@ conf.treesitter_ensure_installed = {
 -- LSPs that are installed by the Lazyman initialization
 -- Leave the 'LSP_SERVERS' trailing comment, it is used by lazyman
 conf.lsp_installed = {
-  "cssls",         -- LSP_SERVERS
-  "denols",        -- LSP_SERVERS
-  "html",          -- LSP_SERVERS
-  "lua_ls",        -- LSP_SERVERS
-  "pylsp",         -- LSP_SERVERS
-  "pyright",       -- LSP_SERVERS
-  "tsserver",      -- LSP_SERVERS
-  "vimls",         -- LSP_SERVERS
+  "cssls", -- LSP_SERVERS
+  "denols", -- LSP_SERVERS
+  "html", -- LSP_SERVERS
+  "lua_ls", -- LSP_SERVERS
+  "pylsp", -- LSP_SERVERS
+  "pyright", -- LSP_SERVERS
+  "tsserver", -- LSP_SERVERS
+  "vimls", -- LSP_SERVERS
 }
 -- LSPs that should be installed by Mason-lspconfig
 -- Leave the 'LSP_SERVERS' trailing comment, it is used by lazyman
 conf.lsp_servers = {
-  "bashls",           -- LSP_SERVERS
-  "clangd",           -- LSP_SERVERS
-  "cmake",            -- LSP_SERVERS
+  "bashls", -- LSP_SERVERS
+  "clangd", -- LSP_SERVERS
+  "cmake", -- LSP_SERVERS
   -- "cssmodules_ls", -- LSP_SERVERS
   -- "dockerls",      -- LSP_SERVERS
   -- "emmet_ls",      -- LSP_SERVERS
   -- "eslint",        -- LSP_SERVERS
   -- "gopls",         -- LSP_SERVERS
   -- "graphql",       -- LSP_SERVERS
-  "jsonls",           -- LSP_SERVERS
+  "jsonls", -- LSP_SERVERS
   -- "jdtls",         -- LSP_SERVERS
   -- "julials",       -- LSP_SERVERS
   -- "ltex",          -- LSP_SERVERS
-  "marksman",         -- LSP_SERVERS
+  "marksman", -- LSP_SERVERS
   -- "prismals",      -- LSP_SERVERS
   -- "sqlls",         -- LSP_SERVERS
   -- "tailwindcss",   -- LSP_SERVERS
-  "taplo",            -- LSP_SERVERS
+  "taplo", -- LSP_SERVERS
   -- "texlab",        -- LSP_SERVERS
-  "vuels",            -- LSP_SERVERS
-  "yamlls",           -- LSP_SERVERS
+  "vuels", -- LSP_SERVERS
+  "yamlls", -- LSP_SERVERS
 }
+
+-- Enable/Disable automatic formatting
+conf.enable_autoformat = false
 -- Formatters and linters installed by Mason
 conf.formatters_linters = {
-  "actionlint",           -- FORMATTERS_LINTERS
+  "actionlint", -- FORMATTERS_LINTERS
   -- "debugpy",           -- FORMATTERS_LINTERS
-  "gofumpt",              -- FORMATTERS_LINTERS
-  "goimports",            -- FORMATTERS_LINTERS
-  "golines",              -- FORMATTERS_LINTERS
-  "golangci-lint",        -- FORMATTERS_LINTERS
-  "google-java-format",   -- FORMATTERS_LINTERS
-  "isort",                -- FORMATTERS_LINTERS
+  "gofumpt", -- FORMATTERS_LINTERS
+  "goimports", -- FORMATTERS_LINTERS
+  "golines", -- FORMATTERS_LINTERS
+  "golangci-lint", -- FORMATTERS_LINTERS
+  "google-java-format", -- FORMATTERS_LINTERS
+  "isort", -- FORMATTERS_LINTERS
   -- "json-lsp",          -- FORMATTERS_LINTERS
   -- "latexindent",       -- FORMATTERS_LINTERS
   -- "markdownlint",      -- FORMATTERS_LINTERS
-  "marksman",             -- FORMATTERS_LINTERS
+  "marksman", -- FORMATTERS_LINTERS
   -- "php-debug-adapter", -- FORMATTERS_LINTERS
   -- "php-cs-fixer",      -- FORMATTERS_LINTERS
-  "prettier",             -- FORMATTERS_LINTERS
-  "prettierd",            -- FORMATTERS_LINTERS
-  "pyright",              -- FORMATTERS_LINTERS
-  "sql-formatter",        -- FORMATTERS_LINTERS
+  "prettier", -- FORMATTERS_LINTERS
+  "prettierd", -- FORMATTERS_LINTERS
+  "pyright", -- FORMATTERS_LINTERS
+  "sql-formatter", -- FORMATTERS_LINTERS
   -- "shellcheck",        -- FORMATTERS_LINTERS
-  "shfmt",                -- FORMATTERS_LINTERS
-  "stylua",               -- FORMATTERS_LINTERS
-  "tflint",               -- FORMATTERS_LINTERS
-  "yamllint",             -- FORMATTERS_LINTERS
+  "shfmt", -- FORMATTERS_LINTERS
+  "stylua", -- FORMATTERS_LINTERS
+  "tflint", -- FORMATTERS_LINTERS
+  "yamllint", -- FORMATTERS_LINTERS
 }
 -- Formatters and linters installed externally
 conf.external_formatters = {
-  "beautysh",        -- FORMATTERS_LINTERS
-  "black",           -- FORMATTERS_LINTERS
-  "flake8",          -- FORMATTERS_LINTERS
-  "ruff",            -- FORMATTERS_LINTERS
+  "beautysh", -- FORMATTERS_LINTERS
+  "black", -- FORMATTERS_LINTERS
+  "flake8", -- FORMATTERS_LINTERS
+  "ruff", -- FORMATTERS_LINTERS
 }
 
 return conf

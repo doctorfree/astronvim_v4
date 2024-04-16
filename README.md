@@ -164,16 +164,24 @@ conf.showtabline = 2
 conf.list = true
 -- which list chars to show
 conf.listchars = {
-	eol = "⤶",
-	tab = ">.",
-	trail = "~",
-	extends = "◀",
-	precedes = "▶",
+  eol = "⤶",
+  tab = ">.",
+  trail = "~",
+  extends = "◀",
+  precedes = "▶",
 }
 
 -- PLUGINS CONFIGURATION
--- Enable ToggleTerm
-conf.enable_toggleterm = false
+-- Enable display of custom cheatsheets
+conf.enable_cheatsheet = true
+-- Enable smooth scrolling with neoscroll plugin
+conf.enable_smooth_scrolling = true
+-- Enable the Neotest plugin
+conf.enable_neotest = true
+-- Enable toggleterm plugin
+conf.enable_toggleterm = true
+-- Enable the WakaTime metrics dashboard (requires API key)
+conf.enable_wakatime = false
 -- Enable zen mode distraction-free coding
 conf.enable_zenmode = true
 -- if zenmode enabled then enable terminal support as well
@@ -216,74 +224,78 @@ conf.treesitter_ensure_installed = {
   "yaml",
 }
 
--- Language servers installed by the Lazyman initialization
+-- LSPs that are installed by the Lazyman initialization
+-- Leave the 'LSP_SERVERS' trailing comment, it is used by lazyman
 conf.lsp_installed = {
-	"cssls",
-	"denols",
-	"html",
-	"lua_ls",
-	"pylsp",
-	"pyright",
-	"tsserver",
-	"vimls",
+  "cssls", -- LSP_SERVERS
+  "denols", -- LSP_SERVERS
+  "html", -- LSP_SERVERS
+  "lua_ls", -- LSP_SERVERS
+  "pylsp", -- LSP_SERVERS
+  "pyright", -- LSP_SERVERS
+  "tsserver", -- LSP_SERVERS
+  "vimls", -- LSP_SERVERS
 }
--- Language servers that should be installed by mason-lspconfig
+-- LSPs that should be installed by Mason-lspconfig
+-- Leave the 'LSP_SERVERS' trailing comment, it is used by lazyman
 conf.lsp_servers = {
-	"bashls",
-	"clangd",
-	"cmake",
-	-- "cssmodules_ls",
-	-- "dockerls",
-	-- "emmet_ls",
-	-- "eslint",
-	-- "gopls",
-	-- "graphql",
-	-- "jdtls",
-	-- "julials",
-	-- "ltex",
-	"jsonls",
-	"marksman",
-	-- "prismals",
-	-- "sqlls",
-	-- "tailwindcss",
-	"taplo",
-	-- "texlab",
-	"vuels",
-	"yamlls",
+  "bashls", -- LSP_SERVERS
+  "clangd", -- LSP_SERVERS
+  "cmake", -- LSP_SERVERS
+  -- "cssmodules_ls", -- LSP_SERVERS
+  -- "dockerls",      -- LSP_SERVERS
+  -- "emmet_ls",      -- LSP_SERVERS
+  -- "eslint",        -- LSP_SERVERS
+  -- "gopls",         -- LSP_SERVERS
+  -- "graphql",       -- LSP_SERVERS
+  "jsonls", -- LSP_SERVERS
+  -- "jdtls",         -- LSP_SERVERS
+  -- "julials",       -- LSP_SERVERS
+  -- "ltex",          -- LSP_SERVERS
+  "marksman", -- LSP_SERVERS
+  -- "prismals",      -- LSP_SERVERS
+  -- "sqlls",         -- LSP_SERVERS
+  -- "tailwindcss",   -- LSP_SERVERS
+  "taplo", -- LSP_SERVERS
+  -- "texlab",        -- LSP_SERVERS
+  "vuels", -- LSP_SERVERS
+  "yamlls", -- LSP_SERVERS
 }
 
--- Formatters and linters installed by mason-tool-installer
+-- Enable/Disable automatic formatting
+conf.enable_autoformat = false
+-- Formatters and linters installed by Mason
 conf.formatters_linters = {
-	"actionlint",
-	"gofumpt",
-	"goimports",
-	"golines",
-	"golangci-lint",
-	"google-java-format",
-	-- "latexindent",
-	-- "markdownlint",
-	-- "debugpy",
-	"isort",
-	-- "json-lsp",
-	"marksman",
-	-- "php-debug-adapter",
-	-- "php-cs-fixer",
-	"prettier",
-	"prettierd",
-	"pyright",
-	"sql-formatter",
-	-- "shellcheck",
-	"shfmt",
-	"stylua",
-	"tflint",
-	"yamllint",
+  "actionlint", -- FORMATTERS_LINTERS
+  -- "debugpy",           -- FORMATTERS_LINTERS
+  "gofumpt", -- FORMATTERS_LINTERS
+  "goimports", -- FORMATTERS_LINTERS
+  "golines", -- FORMATTERS_LINTERS
+  "golangci-lint", -- FORMATTERS_LINTERS
+  "google-java-format", -- FORMATTERS_LINTERS
+  "isort", -- FORMATTERS_LINTERS
+  -- "json-lsp",          -- FORMATTERS_LINTERS
+  -- "latexindent",       -- FORMATTERS_LINTERS
+  -- "markdownlint",      -- FORMATTERS_LINTERS
+  "marksman", -- FORMATTERS_LINTERS
+  -- "php-debug-adapter", -- FORMATTERS_LINTERS
+  -- "php-cs-fixer",      -- FORMATTERS_LINTERS
+  "prettier", -- FORMATTERS_LINTERS
+  "prettierd", -- FORMATTERS_LINTERS
+  "pyright", -- FORMATTERS_LINTERS
+  "sql-formatter", -- FORMATTERS_LINTERS
+  -- "shellcheck",        -- FORMATTERS_LINTERS
+  "shfmt", -- FORMATTERS_LINTERS
+  "stylua", -- FORMATTERS_LINTERS
+  "tflint", -- FORMATTERS_LINTERS
+  "yamllint", -- FORMATTERS_LINTERS
 }
 -- Formatters and linters installed externally
 conf.external_formatters = {
-	"beautysh",
-	"black",
-	"flake8",
-	"ruff",
+  "beautysh", -- FORMATTERS_LINTERS
+  "black", -- FORMATTERS_LINTERS
+  "flake8", -- FORMATTERS_LINTERS
+  "ruff", -- FORMATTERS_LINTERS
 }
 
 return conf

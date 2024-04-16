@@ -2,7 +2,7 @@ local Util = require("lazy.core.util")
 
 local cfg = {}
 
-cfg.autoformat = true
+cfg.autoformat = require("configuration").enable_autoformat
 
 function cfg.toggle()
   if vim.b.autoformat == false then
