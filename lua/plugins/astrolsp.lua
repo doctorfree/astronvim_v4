@@ -18,19 +18,9 @@ if table_contains(formatters_linters, "stylua") then
   disable_format = { "lua_ls" }
 end
 
-local bashls_settings = {
-  bashIde = {
-    backgroundAnalysisMaxFiles = 500,
-    enableSourceErrorDiagnostics = false,
-    explainshellEndpoint = "",
-    globPattern = vim.env.GLOB_PATTERN or "*@(.sh|.inc|.bash|.command)",
-    includeAllWorkspaceSymbols = false,
-    logLevel = "info",
-    shellcheckArguments = "",
-    shellcheckPath = vim.env.SHELLCHECK_PATH or "",
-  },
-}
-if table_contains(formatters_linters, "shellcheck") then
+local bashls_enabled = { enabled = false }
+local bashls_settings = {}
+if table_contains(lsp_servers, "bashls") then
   bashls_settings = {
     bashIde = {
       backgroundAnalysisMaxFiles = 500,
@@ -40,9 +30,24 @@ if table_contains(formatters_linters, "shellcheck") then
       includeAllWorkspaceSymbols = false,
       logLevel = "info",
       shellcheckArguments = "",
-      shellcheckPath = vim.env.SHELLCHECK_PATH or "shellcheck",
+      shellcheckPath = vim.env.SHELLCHECK_PATH or "",
     },
   }
+  if table_contains(formatters_linters, "shellcheck") then
+    bashls_settings = {
+      bashIde = {
+        backgroundAnalysisMaxFiles = 500,
+        enableSourceErrorDiagnostics = false,
+        explainshellEndpoint = "",
+        globPattern = vim.env.GLOB_PATTERN or "*@(.sh|.inc|.bash|.command)",
+        includeAllWorkspaceSymbols = false,
+        logLevel = "info",
+        shellcheckArguments = "",
+        shellcheckPath = vim.env.SHELLCHECK_PATH or "shellcheck",
+      },
+    }
+  end
+  bashls_enabled = { settings = bashls_settings }
 end
 
 local venv_path = os.getenv "VIRTUAL_ENV"
@@ -60,6 +65,175 @@ end
 local enable_ruff = { enabled = false }
 if table_contains(external_formatters, "ruff") then
   enable_ruff = { enabled = true }
+end
+
+local pylsp_enabled = { enabled = false }
+if table_contains(lsp_installed, "pylsp") then
+  pylsp_enabled = {
+    settings = {
+      pylsp = {
+        plugins = {
+          -- formatter options
+          black = enable_black,
+          autopep8 = { enabled = false },
+          yapf = { enabled = false },
+          -- linter options
+          pylint = { enabled = false },
+          ruff = enable_ruff,
+          pyflakes = { enabled = false },
+          pycodestyle = { enabled = false },
+          -- type checker
+          pylsp_mypy = {
+            enabled = true,
+            overrides = { "--python-executable", py_path, true },
+            report_progress = true,
+            live_mode = false,
+          },
+          -- auto-completion options
+          jedi_completion = { fuzzy = true },
+          -- import sorting
+          isort = { enabled = true },
+        },
+      },
+    },
+    flags = {
+      debounce_text_changes = 200,
+    },
+  }
+end
+local pyright_enabled = { enabled = false }
+if table_contains(lsp_installed, "pyright") then
+  pyright_enabled = {
+    settings = {
+      python = {
+        analysis = {
+          indexing = true,
+          typeCheckingMode = "basic",
+          diagnosticMode = "workspace",
+          autoImportCompletions = true,
+          autoSearchPaths = true,
+          inlayHints = {
+            variableTypes = true,
+            functionReturnTypes = true,
+          },
+          useLibraryCodeForTypes = true,
+          diagnosticSeverityOverrides = {
+            reportGeneralTypeIssues = "none",
+            reportOptionalMemberAccess = "none",
+            reportOptionalSubscript = "none",
+            reportPrivateImportUsage = "none",
+            reportUnusedExpression = "none",
+          },
+        },
+      },
+    },
+  }
+end
+local lua_ls_enabled = { enabled = false }
+if table_contains(lsp_installed, "lua_ls") then
+  lua_ls_enabled = {
+    -- Note: These settings will meaningfully increase the time until lua_ls
+    -- can service initial requests (completion, location) upon starting as well
+    -- as time to first diagnostics. Completion results will include a workspace
+    -- indexing progress message until the server has finished indexing.
+    settings = {
+      Lua = {
+        runtime = {
+          version = "LuaJIT",
+        },
+        diagnostics = {
+          globals = {
+            "vim",
+            "describe",
+            "it",
+            "before_each",
+            "after_each",
+            "pending",
+            "nnoremap",
+            "vnoremap",
+            "inoremap",
+            "tnoremap",
+          },
+        },
+        workspace = {
+          library = api.nvim_get_runtime_file("", true),
+          checkThirdParty = false,
+        },
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  }
+end
+local vimls_enabled = { enabled = false }
+if table_contains(lsp_installed, "vimls") then
+  vimls_enabled = {
+    flags = {
+      debounce_text_changes = 500,
+    },
+  }
+end
+local ccls_enabled = { enabled = false }
+if table_contains(lsp_servers, "ccls") then
+  ccls_enabled = {
+    init_options = {
+      cache = {
+        directory = ".ccls-cache",
+      },
+      highlight = {
+        lsRanges = true,
+      },
+    },
+  }
+end
+local clangd_enabled = { enabled = false }
+if table_contains(lsp_servers, "clangd") then
+  clangd_enabled = {
+    filetypes = { "c", "cpp", "cc", "mpp", "ixx", "objc", "objcpp", "cuda" },
+    flags = {
+      debounce_text_changes = 500,
+      fallbackFlags = {
+        "--query-driver=/**/*",
+        "--clang-tidy",
+        "--header-insertion=never",
+        "--offset-encoding=utf-16",
+      },
+    },
+    on_attach = function(client, bufnr)
+      require("nvim-navic").attach(client, bufnr)
+      require("clangd_extensions.inlay_hints").setup_autocmd()
+      require("clangd_extensions.inlay_hints").set_inlay_hints()
+    end,
+  }
+end
+local yamlls_enabled = { enabled = false }
+if table_contains(lsp_servers, "yamlls") then
+  yamlls_enabled = {
+    schemaStore = {
+      enable = true,
+      url = "https://www.schemastore.org/api/json/catalog.json",
+    },
+    schemas = {
+      kubernetes = "*.yaml",
+      ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+      ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+      ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
+      ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
+      ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+      ["http://json.schemastore.org/ansible-playbook"] = "*play*.{yml,yaml}",
+      ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+      ["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
+      ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "*gitlab-ci*.{yml,yaml}",
+      ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "*api*.{yml,yaml}",
+      ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
+      ["https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json"] = "*flow*.{yml,yaml}",
+    },
+    format = { enabled = false },
+    validate = false,
+    completion = true,
+    hover = true,
+  }
 end
 
 ---@type LazySpec
@@ -98,154 +272,14 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      bashls = { settings = bashls_settings },
-      pylsp = {
-        settings = {
-          pylsp = {
-            plugins = {
-              -- formatter options
-              black = enable_black,
-              autopep8 = { enabled = false },
-              yapf = { enabled = false },
-              -- linter options
-              pylint = { enabled = false },
-              ruff = enable_ruff,
-              pyflakes = { enabled = false },
-              pycodestyle = { enabled = false },
-              -- type checker
-              pylsp_mypy = {
-                enabled = true,
-                overrides = { "--python-executable", py_path, true },
-                report_progress = true,
-                live_mode = false,
-              },
-              -- auto-completion options
-              jedi_completion = { fuzzy = true },
-              -- import sorting
-              isort = { enabled = true },
-            },
-          },
-        },
-        flags = {
-          debounce_text_changes = 200,
-        },
-      },
-      pyright = {
-        settings = {
-          python = {
-            analysis = {
-              indexing = true,
-              typeCheckingMode = "basic",
-              diagnosticMode = "workspace",
-              autoImportCompletions = true,
-              autoSearchPaths = true,
-              inlayHints = {
-                variableTypes = true,
-                functionReturnTypes = true,
-              },
-              useLibraryCodeForTypes = true,
-              diagnosticSeverityOverrides = {
-                reportGeneralTypeIssues = "none",
-                reportOptionalMemberAccess = "none",
-                reportOptionalSubscript = "none",
-                reportPrivateImportUsage = "none",
-                reportUnusedExpression = "none",
-              },
-            },
-          },
-        },
-      },
-      lua_ls = {
-        -- Note: These settings will meaningfully increase the time until lua_ls
-        -- can service initial requests (completion, location) upon starting as well
-        -- as time to first diagnostics. Completion results will include a workspace
-        -- indexing progress message until the server has finished indexing.
-        settings = {
-          Lua = {
-            runtime = {
-              version = "LuaJIT",
-            },
-            diagnostics = {
-              globals = {
-                "vim",
-                "describe",
-                "it",
-                "before_each",
-                "after_each",
-                "pending",
-                "nnoremap",
-                "vnoremap",
-                "inoremap",
-                "tnoremap",
-              },
-            },
-            workspace = {
-              library = api.nvim_get_runtime_file("", true),
-              checkThirdParty = false,
-            },
-            telemetry = {
-              enable = false,
-            },
-          },
-        },
-      },
-      vimls = {
-        flags = {
-          debounce_text_changes = 500,
-        },
-      },
-      yamlls = {
-        schemaStore = {
-          enable = true,
-          url = "https://www.schemastore.org/api/json/catalog.json",
-        },
-        schemas = {
-          kubernetes = "*.yaml",
-          ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
-          ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
-          ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
-          ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
-          ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
-          ["http://json.schemastore.org/ansible-playbook"] = "*play*.{yml,yaml}",
-          ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
-          ["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
-          ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "*gitlab-ci*.{yml,yaml}",
-          ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "*api*.{yml,yaml}",
-          ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
-          ["https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json"] = "*flow*.{yml,yaml}",
-        },
-        format = { enabled = false },
-        validate = false,
-        completion = true,
-        hover = true,
-      },
-      ccls = {
-        init_options = {
-          cache = {
-            directory = ".ccls-cache",
-          },
-          highlight = {
-            lsRanges = true,
-          },
-        },
-      },
-      clangd = {
-        filetypes = { "c", "cpp", "cc", "mpp", "ixx", "objc", "objcpp", "cuda" },
-        flags = {
-          debounce_text_changes = 500,
-          fallbackFlags = {
-            "--query-driver=/**/*",
-            "--clang-tidy",
-            "--header-insertion=never",
-            "--offset-encoding=utf-16",
-          },
-        },
-        on_attach = function(client, bufnr)
-          require("nvim-navic").attach(client, bufnr)
-          require("clangd_extensions.inlay_hints").setup_autocmd()
-          require("clangd_extensions.inlay_hints").set_inlay_hints()
-        end,
-      },
+      bashls = bashls_enabled,
+      pylsp = pylsp_enabled,
+      pyright = pyright_enabled,
+      lua_ls = lua_ls_enabled,
+      vimls = vimls_enabled,
+      yamlls = yamlls_enabled,
+      ccls = ccls_enabled,
+      clangd = clangd_enabled,
     },
     -- customize how language servers are attached
     handlers = {
