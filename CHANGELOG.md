@@ -6,6 +6,20 @@
 
 ### 🐞 Fixed
 
+## v1.0.5r1
+
+### ⚡️ Added
+
+- Integrate all LSP servers and formatters into `astrolsp`
+- Override `nvim-lspconfig` configuration setup
+- Add notifications enable to `lazy` setup
+- Add `enable_autoformat` to `configuration.lua` to make auto formatting conditional
+
+### 🐞 Fixed
+
+- Remove `navic`
+- Fix `shfmt` and `shellcheck` conditional formatting with `configuration.lua`
+
 ## v1.0.4r3
 
 ### ⚡️ Added
