@@ -2,6 +2,8 @@
 return {
   {
     "onsails/lspkind.nvim",
+    lazy = true,
+    enabled = vim.g.icons_enabled ~= false,
     opts = function(_, opts)
       opts.mode = "symbol_text"
       opts.preset = "codicons"
@@ -53,6 +55,7 @@ return {
         TypeParameter = " ",
       }
       return opts
-    end
+    end,
+    config = function(...) require "astronvim.plugins.configs.lspkind"(...) end,
   }
 }

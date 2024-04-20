@@ -194,7 +194,7 @@ catppuccin.setup({
       },
     },
     navic = {
-      enabled = true,
+      enabled = false,
       custom_bg = "NONE",
     },
     coc_nvim = false,
