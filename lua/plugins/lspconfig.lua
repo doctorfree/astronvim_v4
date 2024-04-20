@@ -107,9 +107,10 @@ return {
       vim.list_extend(cmds, { "LspInfo", "LspLog", "LspStart" }) -- add normal `nvim-lspconfig` commands
     end,
     event = "User AstroFile",
-    config = function(plugin, opts)
+    -- config = function(plugin, opts)
+    config = function()
       -- Include the default astronvim config that calls the setup call
-      require "astronvim.plugins.configs.lspconfig"(plugin, opts)
+      -- require "astronvim.plugins.configs.lspconfig"(plugin, opts)
       local masonopts = {
         ensure_installed = formatters_linters,
         ui = {
