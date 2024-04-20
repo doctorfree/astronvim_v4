@@ -1,6 +1,8 @@
 -- local wk = require("which-key")
 local present, wk = pcall(require, "which-key")
-if not present then return end
+if not present then
+  return
+end
 
 local icons = require("icons")
 
@@ -127,10 +129,10 @@ local normal_mode_mappings = {
   -- ['-'] = { '<cmd>vertical resize -5<CR>',                      'Resize +5' },
   ["v"] = { "<C-W>v", "Split right" },
   ["V"] = { "<C-W>s", "Split below" },
-  ["q"] = { "quicklist" },
+  ["q"] = { "quicklist", icons.ui.List .. "Quicklist" },
 
   ["/"] = {
-    name = "Manage Packages/Plugins",
+    name = icons.ui.Gear .. "Manage Packages/Plugins",
     a = { "<cmd>Alpha<CR>", "Open dashboard" },
     m = { "<cmd>Mason<CR>", "Manage packages" },
     p = { "<cmd>Lazy<CR>", "Manage plugins" },
@@ -141,13 +143,13 @@ local normal_mode_mappings = {
   },
 
   a = {
-    name = "Actions",
+    name = icons.kinds.Number .. " Actions",
     n = { "<cmd>set nonumber!<CR>", "Line numbers" },
     r = { "<cmd>set norelativenumber!<CR>", "Relative number" },
   },
 
   c = {
-    name = "LSP",
+    name = icons.ui.Code .. "LSP",
     a = { "Code Action" },
     d = { "<cmd>TroubleToggle<CR>", "Local Diagnostics" },
     D = { "<cmd>Telescope diagnostics wrap_results=true<CR>", "Workspace Diagnostics" },
@@ -213,7 +215,9 @@ local normal_mode_mappings = {
     },
   },
 
-  h = { name = "Harpoon" },
+  h = {
+    name = icons.arrows.CurvedArrowRight .. "Harpoon",
+  },
 
   p = {
     name = "Project",
@@ -250,11 +254,11 @@ local visual_mode_mappings = {
   ["s"] = { "<cmd>'<,'>sort<CR>", "Sort" },
 
   a = {
-    name = "Actions",
+    name = icons.kinds.Number .. " Actions",
   },
 
   c = {
-    name = "LSP",
+    name = icons.ui.Code .. "LSP",
     a = { "Range code action" },
     f = { "Range format" },
   },
@@ -289,7 +293,7 @@ wk.register(visual_mode_mappings, visual_opts)
 local function attach_markdown(bufnr)
   wk.register({
     a = {
-      name = "Actions",
+      name = icons.kinds.Number .. " Actions",
       m = { "<cmd>MarkdownPreviewToggle<CR>", "markdown preview" },
     },
   }, {

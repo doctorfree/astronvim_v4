@@ -15,8 +15,8 @@ return {
   },
   --Markdown (or any Outline)
   { "simrat39/symbols-outline.nvim", event = "VeryLazy" },
-  { "stevearc/aerial.nvim",          event = "VeryLazy" },
-  { "godlygeek/tabular",             event = "VeryLazy" },
+  { "stevearc/aerial.nvim", event = "VeryLazy" },
+  { "godlygeek/tabular", event = "VeryLazy" },
   {
     "preservim/vim-markdown",
     event = "VeryLazy",
@@ -26,7 +26,7 @@ return {
       vim.g.vim_markdown_strikethrough = true
       vim.g.vim_markdown_autowrite = true
       vim.g.vim_markdown_toc_autofit = true
-    end
+    end,
   },
   {
     "iamcco/markdown-preview.nvim",
@@ -38,7 +38,7 @@ return {
       local wk = require("which-key")
       wk.register({
         m = {
-          name = "Markdown",
+          name = require("icons").ui.Note .. "Markdown",
           p = { ":MarkdownPreview<CR>", "Start Preview" },
           s = { ":MarkdownPreviewStop<CR>", "Stop Preview" },
           t = { ":MarkdownPreviewToggle<CR>", "Toggle Preview" },
@@ -53,7 +53,7 @@ return {
   },
   {
     "epwalsh/obsidian.nvim",
-    version = "*",  -- recommended, use latest release instead of latest commit
+    version = "*", -- recommended, use latest release instead of latest commit
     lazy = true,
     event = { "BufReadPre " .. vim.fn.expand "~" .. "/" .. obsidian_vault .. "/**.md" },
     dependencies = {
@@ -64,6 +64,6 @@ return {
     },
     config = function()
       require("configs.obsidian")
-    end
+    end,
   },
 }

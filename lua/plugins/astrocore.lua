@@ -157,7 +157,7 @@ return {
 
         -- Tables with just a `desc` key will be registered with which-key if it's installed
         -- This is useful for naming menus
-        ["<Leader>b"] = { desc = "Buffers" },
+        ["<Leader>b"] = { desc = icons.ui.Table .. "Buffers" },
         ["<Leader>t"] = { desc = icons.ui.Terminal .. "Terminal" },
         ["<Leader><tab>"] = { desc = icons.ui.Terminal .. "Tabs" },
         ["<Leader>w"] = { desc = icons.ui.Terminal .. "Windows" },
