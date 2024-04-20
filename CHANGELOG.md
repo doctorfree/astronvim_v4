@@ -4,6 +4,8 @@
 
 ### ⚡️ Added
 
+- Add icons to names for all `which-key` folders
+
 ### 🐞 Fixed
 
 ## v1.0.5r1
