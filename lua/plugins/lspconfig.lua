@@ -5,13 +5,6 @@ local lsp_servers = settings.lsp_servers
 ---@type LazySpec
 return {
   {
-    "SmiteshP/nvim-navic",
-    dependencies = "neovim/nvim-lspconfig",
-    config = function()
-      require("configs.navic")
-    end,
-  },
-  {
     "neovim/nvim-lspconfig",
     dependencies = {
       {

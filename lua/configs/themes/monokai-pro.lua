@@ -69,7 +69,6 @@ require("monokai-pro").setup({
     "neo-tree",
     "noice",
     "notify",
-    "nvim-navic",
     "nvim-tree",
     "nvim-treesitter",
     "renamer",

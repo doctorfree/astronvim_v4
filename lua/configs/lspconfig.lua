@@ -64,15 +64,6 @@ api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- require("utils").on_attach(function(client, buffer)
---   require("configs.lsp.navic").attach(client, buffer)
---   require("configs.lsp.lspkeymaps").attach(client, buffer)
---   require("configs.lsp.keymaps").on_attach(client, buffer)
---   require("configs.lsp.inlayhints").attach(client, buffer)
---   require("configs.lsp.gitsigns").attach(client, buffer)
---   require("configs.lsp.python").attach(client, buffer)
--- end)
-
 -- diagnostics
 for name, icon in pairs(require("icons").diagnostics) do
   name = "DiagnosticSign" .. name
