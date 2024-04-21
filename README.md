@@ -77,24 +77,24 @@ the main `AstroNvimV4` configuration menu invoke `lazyman -F anv` or simply
 </div>
 
 <div align="center"><p>
-<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/config.png" style="width:1914px;height:1117px;">
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/config.png" style="width:957px;height:558px;">
 </p>
 </div>
 
 From here you can configure LSP servers, formatters, linters, and plugins:
 
 <div align="center"><p>
-<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/lsp.png" style="width:1914px;height:1117px;">
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/lsp.png" style="width:957px;height:558px;">
 </p>
 </div>
 
 <div align="center"><p>
-<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/formatters.png" style="width:1914px;height:1117px;">
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/formatters.png" style="width:957px;height:558px;">
 </p>
 </div>
 
 <div align="center"><p>
-<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/plugins.png" style="width:1914px;height:1117px;">
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/plugins.png" style="width:957px;height:558px;">
 </p>
 </div>
 
