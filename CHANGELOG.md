@@ -6,6 +6,20 @@
 
 ### 🐞 Fixed
 
+## v1.0.5r3
+
+### ⚡️ Added
+
+- Add `Update` and `Remove` sections to `README`
+- Add `astrocore.lua` listing to `README`
+- Add UI Keymaps screenshot to `README`
+- Add Keymaps screenshots to `README`
+- Add interactive menu screenshots to `README`
+
+### 🐞 Fixed
+
+- Reorder sections in `README`
+
 ## v1.0.5r2
 
 ### ⚡️ Added
