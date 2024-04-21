@@ -5,6 +5,20 @@ if settings.enable_toggleterm then
     "akinsho/nvim-toggleterm.lua",
     lazy = false,
     branch = "main",
+    dependencies = {
+      "sunjon/shade.nvim",
+      config = function()
+        require'shade'.setup({
+          overlay_opacity = 50,
+          opacity_step = 1,
+          keys = {
+            brightness_up    = '<C-Up>',
+            brightness_down  = '<C-Down>',
+            toggle           = '<Leader>s',
+          }
+        })
+      end
+    },
     config = function()
       require("configs.toggleterm")
     end,
