@@ -6,6 +6,20 @@
 
 ### 🐞 Fixed
 
+## v1.0.5r4
+
+### ⚡️ Added
+
+- Migrate some functions from `Lazyman free` namespace to `utils/init.lua`
+- Expose main `Lazyman` menu screenshot in `README`
+- Add `Cheatsheet` screenshot to `README`
+- Add screenshot to top of `README`
+- Add `Git` menu screenshot to `README`
+
+### 🐞 Fixed
+
+- Fix calls to `toggle()` function in `lua/utils/init.lua`
+
 ## v1.0.5r3
 
 ### ⚡️ Added
