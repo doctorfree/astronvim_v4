@@ -4,9 +4,18 @@
 
 ### ⚡️ Added
 
+### 🐞 Fixed
+
+## v1.0.5r2
+
+### ⚡️ Added
+
 - Add icons to names for all `which-key` folders
+- Add UI borders for `Lazy` and `Mason`
 
 ### 🐞 Fixed
+
+- Fix `Mason` and `Terminal` dependencies and setup
 
 ## v1.0.5r1
 
