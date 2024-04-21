@@ -139,21 +139,21 @@ View Keymaps with `<leader>` (`comma` is the default leader key in `AstroNvimV4`
 </summary>
 
 <div align="center"><p>
-<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Keymaps.png" style="width:1611px;height:966px;">
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Keymaps.png" style="width:806px;height:483px;">
 </p>
 </div>
 
 Command and Themes keymaps (view with `<leader>,`
 
 <div align="center"><p>
-<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Command_Keymaps.png" style="width:1611px;height:966px;">
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Command_Keymaps.png" style="width:806px;height:483px;">
 </p>
 </div>
 
 Toggle keymaps (view with `<leader>.`
 
 <div align="center"><p>
-<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Toggle_Keymaps.png" style="width:1611px;height:966px;">
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Toggle_Keymaps.png" style="width:806px;height:483px;">
 </p>
 </div>
 
