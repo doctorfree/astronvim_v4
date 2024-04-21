@@ -58,6 +58,48 @@ Neovim configuration. The interactive menu system in `lazyman` version 3.1.6+
 has been augmented with menus to configure `AstroNvimV4` settings, enabled
 LSP servers, Formatters, and Plugins.
 
+#### Lazyman Screenshots
+
+<details><summary>Click here to view the
+
+**AstroNvimV4 Management with Lazyman screenshots**
+
+</summary>
+
+If `AstroNvimV4` was installed with `lazyman` an interactive menu system to
+manage the `AstroNvimV4` configuration is available in `lazyman`.  To view
+the main `AstroNvimV4` configuration menu invoke `lazyman -F anv` or simply
+`lazyman` and select the `AstroNvimV4 Config` menu entry:
+
+<div align="center"><p>
+<img src="https://raw.githubuwercontent.com/wiki/doctorfree/astronvim_v4/screenshots/lazyman.png" style="width:1165px;height:588px;">
+</p>
+</div>
+
+<div align="center"><p>
+<img src="https://raw.githubuwercontent.com/wiki/doctorfree/astronvim_v4/screenshots/config.png" style="width:1914px;height:1117px;">
+</p>
+</div>
+
+From here you can configure LSP servers, formatters, linters, and plugins:
+
+<div align="center"><p>
+<img src="https://raw.githubuwercontent.com/wiki/doctorfree/astronvim_v4/screenshots/lsp.png" style="width:1914px;height:1117px;">
+</p>
+</div>
+
+<div align="center"><p>
+<img src="https://raw.githubuwercontent.com/wiki/doctorfree/astronvim_v4/screenshots/formatters.png" style="width:1914px;height:1117px;">
+</p>
+</div>
+
+<div align="center"><p>
+<img src="https://raw.githubuwercontent.com/wiki/doctorfree/astronvim_v4/screenshots/plugins.png" style="width:1914px;height:1117px;">
+</p>
+</div>
+
+</details>
+
 An additional benefit `lazyman` provides is the ability to easily and
 quickly explore other Neovim configurations including many `AstroNvim`
 configurations. For example, `lazyman -i astronvim` installs and initializes
@@ -127,6 +169,12 @@ In addition, some configuration can be specified in the file `lua/configuration.
 
 The default leader key in `AstroNvimV4` is set to `,`. To modify the leader key
 or any of several other settings, edit `lua/configuration.lua`.
+
+<details><summary>Click here to view the
+
+**AstroNvimV4 lua/configuration.lua**
+
+</summary>
 
 ```lua
 local conf = {}
@@ -227,76 +275,79 @@ conf.treesitter_ensure_installed = {
 -- LSPs that are installed by the Lazyman initialization
 -- Leave the 'LSP_SERVERS' trailing comment, it is used by lazyman
 conf.lsp_installed = {
-  "cssls", -- LSP_SERVERS
-  "denols", -- LSP_SERVERS
-  "html", -- LSP_SERVERS
-  "lua_ls", -- LSP_SERVERS
-  "pylsp", -- LSP_SERVERS
-  "pyright", -- LSP_SERVERS
+  "cssls",    -- LSP_SERVERS
+  "denols",   -- LSP_SERVERS
+  "html",     -- LSP_SERVERS
+  "lua_ls",   -- LSP_SERVERS
+  "pylsp",    -- LSP_SERVERS
+  "pyright",  -- LSP_SERVERS
   "tsserver", -- LSP_SERVERS
-  "vimls", -- LSP_SERVERS
+  "vimls",    -- LSP_SERVERS
 }
 -- LSPs that should be installed by Mason-lspconfig
 -- Leave the 'LSP_SERVERS' trailing comment, it is used by lazyman
 conf.lsp_servers = {
-  "bashls", -- LSP_SERVERS
-  "clangd", -- LSP_SERVERS
-  "cmake", -- LSP_SERVERS
+  "bashls",           -- LSP_SERVERS
+  "clangd",           -- LSP_SERVERS
+  "cmake",            -- LSP_SERVERS
   -- "cssmodules_ls", -- LSP_SERVERS
   -- "dockerls",      -- LSP_SERVERS
   -- "emmet_ls",      -- LSP_SERVERS
   -- "eslint",        -- LSP_SERVERS
   -- "gopls",         -- LSP_SERVERS
   -- "graphql",       -- LSP_SERVERS
-  "jsonls", -- LSP_SERVERS
+  "jsonls",           -- LSP_SERVERS
   -- "jdtls",         -- LSP_SERVERS
   -- "julials",       -- LSP_SERVERS
   -- "ltex",          -- LSP_SERVERS
-  "marksman", -- LSP_SERVERS
+  "marksman",         -- LSP_SERVERS
   -- "prismals",      -- LSP_SERVERS
   -- "sqlls",         -- LSP_SERVERS
   -- "tailwindcss",   -- LSP_SERVERS
-  "taplo", -- LSP_SERVERS
+  "taplo",            -- LSP_SERVERS
   -- "texlab",        -- LSP_SERVERS
-  "vuels", -- LSP_SERVERS
-  "yamlls", -- LSP_SERVERS
+  "vuels",            -- LSP_SERVERS
+  "yamlls",           -- LSP_SERVERS
 }
 
 -- Enable/Disable automatic formatting
 conf.enable_autoformat = false
 -- Formatters and linters installed by Mason
 conf.formatters_linters = {
-  "actionlint", -- FORMATTERS_LINTERS
+  "actionlint",           -- FORMATTERS_LINTERS
   -- "debugpy",           -- FORMATTERS_LINTERS
-  "gofumpt", -- FORMATTERS_LINTERS
-  "goimports", -- FORMATTERS_LINTERS
-  "golines", -- FORMATTERS_LINTERS
-  "golangci-lint", -- FORMATTERS_LINTERS
-  "google-java-format", -- FORMATTERS_LINTERS
-  "isort", -- FORMATTERS_LINTERS
+  "gofumpt",              -- FORMATTERS_LINTERS
+  "goimports",            -- FORMATTERS_LINTERS
+  "golines",              -- FORMATTERS_LINTERS
+  "golangci-lint",        -- FORMATTERS_LINTERS
+  "google-java-format",   -- FORMATTERS_LINTERS
+  "isort",                -- FORMATTERS_LINTERS
   -- "json-lsp",          -- FORMATTERS_LINTERS
   -- "latexindent",       -- FORMATTERS_LINTERS
   -- "markdownlint",      -- FORMATTERS_LINTERS
-  "marksman", -- FORMATTERS_LINTERS
+  "marksman",             -- FORMATTERS_LINTERS
   -- "php-debug-adapter", -- FORMATTERS_LINTERS
   -- "php-cs-fixer",      -- FORMATTERS_LINTERS
-  "prettier", -- FORMATTERS_LINTERS
-  "prettierd", -- FORMATTERS_LINTERS
-  "pyright", -- FORMATTERS_LINTERS
-  "sql-formatter", -- FORMATTERS_LINTERS
+  "prettier",             -- FORMATTERS_LINTERS
+  "prettierd",            -- FORMATTERS_LINTERS
+  "pyright",              -- FORMATTERS_LINTERS
+  "sql-formatter",        -- FORMATTERS_LINTERS
   -- "shellcheck",        -- FORMATTERS_LINTERS
-  "shfmt", -- FORMATTERS_LINTERS
-  "stylua", -- FORMATTERS_LINTERS
-  "tflint", -- FORMATTERS_LINTERS
-  "yamllint", -- FORMATTERS_LINTERS
+  "shfmt",                -- FORMATTERS_LINTERS
+  "stylua",               -- FORMATTERS_LINTERS
+  "tflint",               -- FORMATTERS_LINTERS
+  "yamllint",             -- FORMATTERS_LINTERS
 }
 -- Formatters and linters installed externally
 conf.external_formatters = {
-  "beautysh", -- FORMATTERS_LINTERS
-  "black", -- FORMATTERS_LINTERS
-  "flake8", -- FORMATTERS_LINTERS
-  "ruff", -- FORMATTERS_LINTERS
+  "beautysh",             -- FORMATTERS_LINTERS
+  "black",                -- FORMATTERS_LINTERS
+  "flake8",               -- FORMATTERS_LINTERS
+  "ruff",                 -- FORMATTERS_LINTERS
 }
 
 return conf
 ```
+
+</details>
+
