@@ -9,10 +9,10 @@ A sample configuration for [AstroNvim](https://github.com/AstroNvim/AstroNvim) v
 - [Installation](#installation)
   - [Lazyman](#lazyman)
   - [Lazyman Screenshots](#lazyman-screenshots)
-- [Usage](#usage)
-  - [Keymaps](#keymaps)
 - [Features](#features)
 - [Configuration](#configuration)
+- [Usage](#usage)
+  - [Keymaps](#keymaps)
 
 ## Installation
 
@@ -74,7 +74,7 @@ LSP servers, Formatters, and Plugins.
 </summary>
 
 If `AstroNvimV4` was installed with `lazyman` an interactive menu system to
-manage the `AstroNvimV4` configuration is available in `lazyman`.  To view
+manage the `AstroNvimV4` configuration is available in `lazyman`. To view
 the main `AstroNvimV4` configuration menu invoke `lazyman -F anv` or simply
 `lazyman` and select the `AstroNvimV4 Config` menu entry:
 
@@ -102,65 +102,6 @@ From here you can configure LSP servers, formatters, linters, and plugins:
 
 <div align="center"><p>
 <img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/plugins.png" style="width:957px;height:558px;">
-</p>
-</div>
-
-</details>
-
-## Usage
-
-If using `lazyman`, the `nvims` shell function can be used to select `AstroNvimV4`:
-
-```bash
-nvims
-# Or edit a file(s)
-nvims foobar.lua
-# Fuzzy select AstroNvimV4 by typing 'ast' and <Enter>
-```
-
-After selecting a configuration with `nvims` an alias is set so subsequent
-invocations can be performed using `vi` until the current shell is exited.
-
-Alternately, set `NVIM_APPNAME`:
-
-```bash
-export NVIM_APPNAME="nvim-AstroNvimV4"
-nvim
-```
-
-### Keymaps
-
-View Keymaps with `<leader>` (`comma` is the default leader key in `AstroNvimV4`)
-
-<details><summary>Click here to view the
-
-**AstroNvimV4 Keymaps screenshots**
-
-</summary>
-
-<div align="center"><p>
-<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Keymaps.png" style="width:806px;height:483px;">
-</p>
-</div>
-
-Command and Themes keymaps (view with `<leader>,`
-
-<div align="center"><p>
-<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Command_Keymaps.png" style="width:806px;height:483px;">
-</p>
-</div>
-
-Toggle keymaps (view with `<leader>.`
-
-<div align="center"><p>
-<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Toggle_Keymaps.png" style="width:806px;height:483px;">
-</p>
-</div>
-
-UI/UX and more toggle keymaps (view with `<leader>u`
-
-<div align="center"><p>
-<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/UI.png" style="width:1780px;height:720px;">
 </p>
 </div>
 
@@ -385,3 +326,61 @@ return conf
 
 </details>
 
+## Usage
+
+If using `lazyman`, the `nvims` shell function can be used to select `AstroNvimV4`:
+
+```bash
+nvims
+# Or edit a file(s)
+nvims foobar.lua
+# Fuzzy select AstroNvimV4 by typing 'ast' and <Enter>
+```
+
+After selecting a configuration with `nvims` an alias is set so subsequent
+invocations can be performed using `vi` until the current shell is exited.
+
+Alternately, set `NVIM_APPNAME`:
+
+```bash
+export NVIM_APPNAME="nvim-AstroNvimV4"
+nvim
+```
+
+### Keymaps
+
+View Keymaps with `<leader>` (`comma` is the default leader key in `AstroNvimV4`)
+
+<details><summary>Click here to view the
+
+**AstroNvimV4 Keymaps screenshots**
+
+</summary>
+
+<div align="center"><p>
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Keymaps.png" style="width:806px;height:483px;">
+</p>
+</div>
+
+Command and Themes keymaps (view with `<leader>,`
+
+<div align="center"><p>
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Command_Keymaps.png" style="width:806px;height:483px;">
+</p>
+</div>
+
+Toggle keymaps (view with `<leader>.`
+
+<div align="center"><p>
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Toggle_Keymaps.png" style="width:806px;height:483px;">
+</p>
+</div>
+
+UI/UX and more toggle keymaps (view with `<leader>u`
+
+<div align="center"><p>
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/UI.png" style="width:1780px;height:720px;">
+</p>
+</div>
+
+</details>
