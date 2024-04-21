@@ -157,6 +157,13 @@ Toggle keymaps (view with `<leader>.`
 </p>
 </div>
 
+UI/UX and more toggle keymaps (view with `<leader>u`
+
+<div align="center"><p>
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/UI.png" style="width:1780px;height:720px;">
+</p>
+</div>
+
 </details>
 
 ## Features
