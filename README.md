@@ -1,8 +1,6 @@
-# AstroNvim v4
+# AstroNvimV4
 
-**NOTE:** This is for AstroNvim v4+
-
-A sample configuration for [AstroNvim](https://github.com/AstroNvim/AstroNvim) v4
+An advanced configuration for [AstroNvim V4](https://github.com/AstroNvim/AstroNvim)
 
 ## Table of Contents
 
