@@ -8,7 +8,9 @@ A sample configuration for [AstroNvim](https://github.com/AstroNvim/AstroNvim) v
 
 - [Installation](#installation)
   - [Lazyman](#lazyman)
+  - [Lazyman Screenshots](#lazyman-screenshots)
 - [Usage](#usage)
+  - [Keymaps](#keymaps)
 - [Features](#features)
 - [Configuration](#configuration)
 
@@ -51,6 +53,11 @@ configuration is site-specific for some settings. Lazyman can perform
 health checks, launching, updates, and generation of HTML and markdown
 format reports.
 
+`Lazyman` provides the ability to easily and quickly explore Neovim
+configurations including many `AstroNvim` configurations. For example,
+`lazyman -i astronvim` installs and initializes 8 `AstroNvim` configurations.
+These can be easily explored using the `nvims` shell function.
+
 Several other features make `lazyman` an attractive choice but the primary
 attractions are the `nvims` shell function and the interactive menu system.
 The `nvims` shell function can be used to easily invoke any `lazyman` installed
@@ -60,9 +67,9 @@ LSP servers, Formatters, and Plugins.
 
 #### Lazyman Screenshots
 
-<details><summary>Click here to view the
+<details><summary>Click here to view the AstroNvimV4
 
-**AstroNvimV4 Management with Lazyman screenshots**
+**Management with Lazyman screenshots**
 
 </summary>
 
@@ -100,17 +107,6 @@ From here you can configure LSP servers, formatters, linters, and plugins:
 
 </details>
 
-An additional benefit `lazyman` provides is the ability to easily and
-quickly explore other Neovim configurations including many `AstroNvim`
-configurations. For example, `lazyman -i astronvim` installs and initializes
-8 `AstroNvim` configurations. These can be easily explored using `nvims`.
-
-The main downside to using `lazyman` is the time it takes to install all of
-the Neovim dependencies including language servers and external utilities.
-It can take several minutes for `lazyman` to install and initialize.
-Minimalists may eschew `lazyman` in favor of a tedious and error-prone manual
-installation of Neovim configurations. Different lanes for different brains!
-
 ## Usage
 
 If using `lazyman`, the `nvims` shell function can be used to select `AstroNvimV4`:
@@ -131,6 +127,37 @@ Alternately, set `NVIM_APPNAME`:
 export NVIM_APPNAME="nvim-AstroNvimV4"
 nvim
 ```
+
+### Keymaps
+
+View Keymaps with `<leader>` (`comma` is the default leader key in `AstroNvimV4`)
+
+<details><summary>Click here to view the
+
+**AstroNvimV4 Keymaps screenshots**
+
+</summary>
+
+<div align="center"><p>
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Keymaps.png" style="width:1611px;height:966px;">
+</p>
+</div>
+
+Command and Themes keymaps (view with `<leader>,`
+
+<div align="center"><p>
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Command_Keymaps.png" style="width:1611px;height:966px;">
+</p>
+</div>
+
+Toggle keymaps (view with `<leader>.`
+
+<div align="center"><p>
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Toggle_Keymaps.png" style="width:1611px;height:966px;">
+</p>
+</div>
+
+</details>
 
 ## Features
 
