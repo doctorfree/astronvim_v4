@@ -74,12 +74,6 @@ LSP servers, Formatters, and Plugins.
 
 #### Lazyman Screenshots
 
-<details><summary>Click here to view the AstroNvimV4
-
-**Management with Lazyman screenshots**
-
-</summary>
-
 If `AstroNvimV4` was installed with `lazyman` an interactive menu system to
 manage the `AstroNvimV4` configuration is available in `lazyman`. To view
 the main `AstroNvimV4` configuration menu invoke `lazyman -F anv` or simply
@@ -89,6 +83,12 @@ the main `AstroNvimV4` configuration menu invoke `lazyman -F anv` or simply
 <img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/lazyman.png" style="width:1165px;height:588px;">
 </p>
 </div>
+
+<details><summary>Click here to view the AstroNvimV4
+
+**Management with Lazyman screenshots**
+
+</summary>
 
 <div align="center"><p>
 <img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/config.png" style="width:957px;height:558px;">
@@ -389,7 +389,6 @@ nvim
 ### Cheatsheet
 
 View the `AstroNvimV4` fuzzy searchable cheatsheet with `<leader>H`
-(`comma` is the default leader key in `AstroNvimV4`)
 
 <div align="center"><p>
 <img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/cheatsheet.png" style="width:1116px;height:582px;">
