@@ -2,6 +2,11 @@
 
 An advanced configuration for [AstroNvim V4](https://github.com/AstroNvim/AstroNvim)
 
+<div align="center"><p>
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/diagnostic.png" style="width:1116px;height:582px;">
+</p>
+</div>
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -1123,29 +1128,38 @@ return {
 
 </summary>
 
+`which-key` menus can be viewed with `<leader>` (`comma` is the default leader key in `AstroNvimV4`):
+
 <div align="center"><p>
 <img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Keymaps.png" style="width:806px;height:483px;">
 </p>
 </div>
 
-Command and Themes keymaps (view with `<leader>,`
+Command and Themes keymaps (view with `<leader>,`)
 
 <div align="center"><p>
 <img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Command_Keymaps.png" style="width:806px;height:483px;">
 </p>
 </div>
 
-Toggle keymaps (view with `<leader>.`
+Toggle keymaps (view with `<leader>.`)
 
 <div align="center"><p>
 <img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/Toggle_Keymaps.png" style="width:806px;height:483px;">
 </p>
 </div>
 
-UI/UX and more toggle keymaps (view with `<leader>u`
+UI/UX and more toggle keymaps (view with `<leader>u`)
 
 <div align="center"><p>
 <img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/UI.png" style="width:1780px;height:720px;">
+</p>
+</div>
+
+Git keymaps (view with `<leader>g`)
+
+<div align="center"><p>
+<img src="https://raw.githubusercontent.com/wiki/doctorfree/astronvim_v4/screenshots/git.png" style="width:1116px;height:582px;">
 </p>
 </div>
 
