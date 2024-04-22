@@ -12,11 +12,6 @@ local table_contains = require("utils").table_contains
 local fn = vim.fn
 local api = vim.api
 
-local open_float = "<cmd>lua vim.diagnostic.open_float()<cr>"
-if not showdiag == "popup" then
-  open_float = ""
-end
-
 -- disable formatting capabilities for the listed language servers
 local disable_format = {}
 if table_contains(formatters_linters, "stylua") then
@@ -316,8 +311,8 @@ if table_contains(lsp_all, "tsserver") then
   end
 
   tsserver_enabled = {
-      on_attach = tsserver_on_attach,
-      settings = require("configs.lsp.servers.tsserver").settings,
+    on_attach = tsserver_on_attach,
+    settings = require("configs.lsp.servers.tsserver").settings,
   }
 end
 
@@ -569,14 +564,16 @@ return {
       -- map mode (:h map-modes)
       n = {
         -- a binding with no condition and therefore is always added
-        gl = {
+        ["gl"] = {
           function()
-            open_float
+            if showdiag == "popup" then
+              vim.diagnostic.open_float()
+            end
           end,
           desc = "Hover diagnostics",
         },
         -- condition for only server with declaration capabilities
-        gD = {
+        ["gD"] = {
           function()
             vim.lsp.buf.declaration()
           end,
