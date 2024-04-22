@@ -586,7 +586,7 @@ return {
             require("astrolsp.toggles").buffer_semantic_tokens()
           end,
           desc = "Toggle LSP semantic highlight (buffer)",
-          cond = function(client, bufnr)
+          cond = function(client, _)
             local prv_st = client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens
             return prv_st
           end,
