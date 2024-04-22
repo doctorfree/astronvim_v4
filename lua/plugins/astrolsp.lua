@@ -7,9 +7,15 @@ local lsp_installed = settings.lsp_installed
 local lsp_all = require("utils").concat_tables(lsp_servers, lsp_installed)
 local formatters_linters = settings.formatters_linters
 local external_formatters = settings.external_formatters
+local showdiag = settings.show_diagnostics
 local table_contains = require("utils").table_contains
 local fn = vim.fn
 local api = vim.api
+
+local open_float = "<cmd>lua vim.diagnostic.open_float()<cr>"
+if not showdiag == "popup" then
+  open_float = ""
+end
 
 -- disable formatting capabilities for the listed language servers
 local disable_format = {}
@@ -565,7 +571,7 @@ return {
         -- a binding with no condition and therefore is always added
         gl = {
           function()
-            vim.diagnostic.open_float()
+            open_float
           end,
           desc = "Hover diagnostics",
         },
