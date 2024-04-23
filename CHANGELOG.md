@@ -4,6 +4,12 @@
 
 ### ⚡️ Added
 
+### 🐞 Fixed
+
+## v1.0.6r1
+
+### ⚡️ Added
+
 - Integrate `AstroNvim` v4 `toggleterm` config
 - Additional `astrocommunity` packs, `vscode` support
 - Community plugins conditional in `configuration.lua`
