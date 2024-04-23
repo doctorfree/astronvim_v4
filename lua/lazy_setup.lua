@@ -1,4 +1,8 @@
 local settings = require("configuration")
+local community = {}
+if settings.enable_community then
+  community = { import = "community" }
+end
 
 require("lazy").setup({
   {
@@ -13,7 +17,7 @@ require("lazy").setup({
       update_notifications = true, -- Enable/disable notification about running `:Lazy update` twice to update pinned plugins
     },
   },
-  { import = "community" },
+  community,
   { import = "plugins" },
 } --[[@as LazySpec]], {
   -- Configure any other `lazy.nvim` configuration options here
