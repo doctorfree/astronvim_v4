@@ -152,7 +152,7 @@ return {
       telescope = { alsoSearchSnippetBody = true },
       jsonFormatter = "yq",
     },
-    setup = function(_, opts)
+    config = function(_, opts)
       require("luasnip.loaders.from_vscode").lazy_load {
         paths = { "./snippets" },
       }
