@@ -1,3 +1,5 @@
+local settings = require("configuration")
+local showdiag = settings.show_diagnostics
 local attach = {}
 
 -- set quickfix list from diagnostics in a buffer, not the whole workspace
@@ -62,7 +64,9 @@ attach.on_attach = function(client, bufnr)
         (cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
         and #vim.diagnostic.get() > 0
       then
-        vim.diagnostic.open_float(nil, float_opts)
+        if showdiag == "popup" then
+          vim.diagnostic.open_float(nil, float_opts)
+        end
       end
 
       vim.b.diagnostics_pos = cursor_pos

@@ -75,13 +75,6 @@ else
   diagnostic.config(require("configs.lsp.diagnostics")["on"])
 end
 
--- Show line diagnostics automatically in hover window
-if showdiag == "popup" then
-  vim.cmd([[
-    autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })
-  ]])
-end
-
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation
 local diagnostics_active = true

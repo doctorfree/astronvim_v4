@@ -43,7 +43,6 @@ require("monokai-pro").setup({
     "toggleterm",
     "telescope",
     "which-key",
-    "renamer",
     "bufferline",
   },
   plugins = {
@@ -71,7 +70,6 @@ require("monokai-pro").setup({
     "notify",
     "nvim-tree",
     "nvim-treesitter",
-    "renamer",
     "scrollbar",
     "telescope",
     "toggleterm",

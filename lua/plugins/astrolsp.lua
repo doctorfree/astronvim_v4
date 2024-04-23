@@ -7,6 +7,7 @@ local lsp_installed = settings.lsp_installed
 local lsp_all = require("utils").concat_tables(lsp_servers, lsp_installed)
 local formatters_linters = settings.formatters_linters
 local external_formatters = settings.external_formatters
+local showdiag = settings.show_diagnostics
 local table_contains = require("utils").table_contains
 local fn = vim.fn
 local api = vim.api
@@ -310,8 +311,8 @@ if table_contains(lsp_all, "tsserver") then
   end
 
   tsserver_enabled = {
-      on_attach = tsserver_on_attach,
-      settings = require("configs.lsp.servers.tsserver").settings,
+    on_attach = tsserver_on_attach,
+    settings = require("configs.lsp.servers.tsserver").settings,
   }
 end
 
@@ -563,14 +564,16 @@ return {
       -- map mode (:h map-modes)
       n = {
         -- a binding with no condition and therefore is always added
-        gl = {
+        ["gl"] = {
           function()
-            vim.diagnostic.open_float()
+            if showdiag == "popup" then
+              vim.diagnostic.open_float()
+            end
           end,
           desc = "Hover diagnostics",
         },
         -- condition for only server with declaration capabilities
-        gD = {
+        ["gD"] = {
           function()
             vim.lsp.buf.declaration()
           end,
@@ -583,7 +586,7 @@ return {
             require("astrolsp.toggles").buffer_semantic_tokens()
           end,
           desc = "Toggle LSP semantic highlight (buffer)",
-          cond = function(client, bufnr)
+          cond = function(client, _)
             local prv_st = client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens
             return prv_st
           end,
