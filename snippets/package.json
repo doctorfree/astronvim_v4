@@ -1,0 +1,27 @@
+{
+  "DOCS": [
+    "https://code.visualstudio.com/api/language-extensions/snippet-guide",
+    "https://code.visualstudio.com/docs/editor/userdefinedsnippets",
+    "https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vs-code"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "markdown"
+        ],
+        "path": "./markdown.json"
+      },
+      {
+        "language": [
+          "vue"
+        ],
+        "path": "./vue.json"
+      }
+    ]
+  },
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "name": "my-snippets"
+}

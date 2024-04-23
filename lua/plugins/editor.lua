@@ -118,6 +118,48 @@ return {
   },
   context,
   {
+    "L3MON4D3/LuaSnip",
+    config = function(plugin, opts)
+      -- include the default astronvim config that calls the setup call
+      require "astronvim.plugins.configs.luasnip"(plugin, opts)
+      -- add more custom luasnip configuration such as filetype extend or custom snippets
+      local luasnip = require "luasnip"
+      luasnip.filetype_extend("javascript", { "javascriptreact" })
+      require("luasnip.loaders.from_vscode").lazy_load {
+        paths = { "./snippets" },
+      }
+    end,
+  },
+  {
+    "chrisgrieser/nvim-scissors",
+    event = "User AstroFile",
+    -- priority = 40,
+    dependencies = {
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+    opts = {
+      -- editSnippetPopup = {
+      --   height = 0.45, -- between 0-1
+      --   width = 0.7,
+      --   border = vim.g.borderStyle,
+      --   keymaps = {
+      --     deleteSnippet = "<D-BS>",
+      --     openInFile = "<D-o>",
+      --     jumpBetweenBodyAndPrefix = "<S-CR>",
+      --     insertNextToken = "<D-t>",
+      --   },
+      -- },
+      telescope = { alsoSearchSnippetBody = true },
+      jsonFormatter = "yq",
+    },
+    setup = function(_, opts)
+      require("luasnip.loaders.from_vscode").lazy_load {
+        paths = { "./snippets" },
+      }
+      require("scissors").setup(opts)
+    end,
+  },
+  {
     "ThePrimeagen/harpoon",
     dependencies = { "nvim-telescope/telescope.nvim" },
     keys = {
