@@ -1,4 +1,3 @@
-local settings = require("configuration")
 local Util = require("utils")
 local plugin = require("utils.plugin")
 local map = Util.map
