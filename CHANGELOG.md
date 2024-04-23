@@ -4,7 +4,19 @@
 
 ### ⚡️ Added
 
+- Integrate `AstroNvim` v4 `toggleterm` config
+- Additional `astrocommunity` packs, `vscode` support
+- Community plugins conditional in `configuration.lua`
+- Make `treesitter-context` conditional and disabled by default in `configuration.lua`
+- Add check for `show_diagnostics` setting in `on_attach`
+- Enable conditional diagnostic popup with setting in `configuration.lua`
+
 ### 🐞 Fixed
+
+- Fix syntax of `open_float` in `astrolsp.lua`
+- Remove temporary `astrolsp.lua` from scripts
+- Replace `setup` with `config` key in `scissors` plugin spec
+- Do not disable `nvim-notify` in `community.lua`, `Noice` needs it
 
 ## v1.0.5r4
 
