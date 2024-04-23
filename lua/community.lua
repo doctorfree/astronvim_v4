@@ -72,5 +72,4 @@ return {
   { import = "astrocommunity.git.diffview-nvim" },
   { import = "astrocommunity.git.gitlinker-nvim" },
   { import = "astrocommunity.utility.noice-nvim" },
-  { "rcarriga/nvim-notify", enabled = false },
 }
