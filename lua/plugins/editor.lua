@@ -1,3 +1,15 @@
+local settings = require("configuration")
+local context = {}
+if settings.enable_treesitter_context then
+  context = {
+    "nvim-treesitter/nvim-treesitter-context",
+    lazy = false,
+    opts = {
+      mode = "topline",
+    },
+  }
+end
+
 ---@type LazySpec
 return {
   {
@@ -104,13 +116,7 @@ return {
       execution_message = { message = function() return "" end }
     },
   },
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    lazy = false,
-    opts = {
-      mode = "topline",
-    },
-  },
+  context,
   {
     "ThePrimeagen/harpoon",
     dependencies = { "nvim-telescope/telescope.nvim" },

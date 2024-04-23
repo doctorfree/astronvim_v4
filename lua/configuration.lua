@@ -72,6 +72,8 @@ conf.grepprg = "rg --hidden --vimgrep --smart-case --"
 --   "popup": an icon will show and a popup with the diagnostic will appear
 conf.show_diagnostics = "popup"
 
+-- Enable/disable nvim-treesitter-context
+conf.enable_treesitter_context = false
 -- treesitter parsers to be installed
 -- See https://github.com/nvim-treesitter/nvim-treesitter/wiki/List-of-parsers
 conf.treesitter_ensure_installed = {
