@@ -119,15 +119,19 @@ return {
   context,
   {
     "L3MON4D3/LuaSnip",
+    dependencies = { "rafamadriz/friendly-snippets" },
     config = function(plugin, opts)
       -- include the default astronvim config that calls the setup call
       require "astronvim.plugins.configs.luasnip"(plugin, opts)
       -- add more custom luasnip configuration such as filetype extend or custom snippets
       local luasnip = require "luasnip"
       luasnip.filetype_extend("javascript", { "javascriptreact" })
-      require("luasnip.loaders.from_vscode").lazy_load {
-        paths = { "./snippets" },
-      }
+      require("luasnip.loaders.from_vscode").lazy_load { paths = { "./snippets/typescript" } }
+      require("luasnip.loaders.from_vscode").lazy_load { paths = { "./snippets/angular" } }
+      require("luasnip.loaders.from_vscode").lazy_load { paths = { "./snippets/markdown" } }
+      require("luasnip.loaders.from_vscode").lazy_load { paths = { "./snippets/python" } }
+      require("luasnip.loaders.from_vscode").lazy_load { paths = { "./snippets/rust" } }
+      require("luasnip.loaders.from_vscode").lazy_load { paths = { "./snippets" } }
     end,
   },
   {

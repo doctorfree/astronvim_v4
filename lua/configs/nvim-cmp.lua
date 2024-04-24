@@ -13,21 +13,22 @@ if not snip_status_ok then
 end
 require("luasnip.loaders.from_vscode").lazy_load()
 local snippet_path = vim.fn.stdpath("config") .. "/snippets"
-require("luasnip.loaders.from_snipmate").load({ path = { snippet_path }, })
+require("luasnip.loaders.from_snipmate").load({ path = { snippet_path } })
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Command Line                                             │
 -- ╰──────────────────────────────────────────────────────────╯
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline("/", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = { { name = "buffer" } },
 })
-cmp.setup.cmdline(':', {
+cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = 'path' } }, {
-    { name = 'cmdline', option = { ignore_cmds = { 'Man', '!' } } }
-  })
+    { name = "path" },
+  }, {
+    { name = "cmdline", option = { ignore_cmds = { "Man", "!" } } },
+  }),
 })
 cmp.setup.filetype("java", {
   completion = {
@@ -52,10 +53,6 @@ end
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Utils                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
-local check_backspace = function()
-  local col = vim.fn.col(".") - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-end
 
 local function deprioritize_snippet(entry1, entry2)
   if entry1:get_kind() == types.lsp.CompletionItemKind.Snippet then
@@ -75,16 +72,18 @@ local function limit_lsp_types(entry, ctx)
 
   if char_before_cursor == "." and char_after_dot:match("[a-zA-Z]") then
     if
-        kind == types.lsp.CompletionItemKind.Method
-        or kind == types.lsp.CompletionItemKind.Field
-        or kind == types.lsp.CompletionItemKind.Property
+      kind == types.lsp.CompletionItemKind.Method
+      or kind == types.lsp.CompletionItemKind.Field
+      or kind == types.lsp.CompletionItemKind.Property
     then
       return true
     else
       return false
     end
   elseif string.match(line, "^%s+%w+$") then
-    if kind == types.lsp.CompletionItemKind.Function or kind == types.lsp.CompletionItemKind.Variable then
+    if
+      kind == types.lsp.CompletionItemKind.Function or kind == types.lsp.CompletionItemKind.Variable
+    then
       return true
     else
       return false
@@ -99,7 +98,8 @@ local has_words_before = function()
     return false
   end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+  return col ~= 0
+    and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 end
 
 -- ╭──────────────────────────────────────────────────────────╮
@@ -117,7 +117,9 @@ local source_mapping = {
   treesitter = icons.misc.tree,
   zsh = icons.misc.terminal .. "ZSH",
 }
-for k,v in pairs(icons.kinds) do source_mapping[k] = v end
+for k, v in pairs(icons.kinds) do
+  source_mapping[k] = v
+end
 
 local buffer_option = {
   -- Complete from all visible buffers (splits)
@@ -160,8 +162,6 @@ cmp.setup({
         luasnip.expand()
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-      elseif check_backspace() then
-        fallback()
       else
         fallback()
       end
@@ -233,18 +233,18 @@ cmp.setup({
     end,
   },
   sources = {
-    { name = "nvim_lsp",    priority = 8, entry_filter = limit_lsp_types, },
-    { name = "luasnip",     priority = 9, max_item_count = 5 },
+    { name = "nvim_lsp", priority = 8, entry_filter = limit_lsp_types },
+    { name = "luasnip", priority = 9, max_item_count = 5 },
     {
       name = "buffer",
       priority = 5,
       keyword_length = 5,
       option = buffer_option,
-      max_item_count = 5
+      max_item_count = 5,
     },
-    { name = "nvim_lua",    priority = 4 },
-    { name = "path",        priority = 3 },
-    { name = "calc",        priority = 2 },
+    { name = "nvim_lua", priority = 4 },
+    { name = "path", priority = 3 },
+    { name = "calc", priority = 2 },
   },
   sorting = {
     priority_weight = 2,
