@@ -73,6 +73,16 @@ return {
             end,
           },
         },
+        opts = {
+          ui = {
+            border = "rounded",
+            icons = {
+              package_pending = " ",
+              package_installed = " ",
+              package_uninstalled = " ﮊ",
+            },
+          },
+        },
       },
       {
         "williamboman/mason-lspconfig.nvim",
