@@ -219,6 +219,7 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-calc",
+      "saadparwaiz1/cmp_luasnip",
       "p00f/clangd_extensions.nvim",
     },
     config = function() require "configs.nvim-cmp" end,
