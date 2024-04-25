@@ -6,6 +6,21 @@
 
 ### 🐞 Fixed
 
+## v1.0.6r2
+
+### ⚡️ Added
+
+- Add community modules enable/disable to `configuration.lua`
+- Style `Mason` UI
+- Add `gitignore` file
+- Add `cmp_luasnip`
+- Add `snippets`, `friendly-snippets`, load snippets
+
+### 🐞 Fixed
+
+- Disable all community language modules by default
+- Rework LSP `capabilities`
+
 ## v1.0.6r1
 
 ### ⚡️ Added
