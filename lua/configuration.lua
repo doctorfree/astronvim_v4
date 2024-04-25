@@ -77,15 +77,15 @@ conf.enable_community = true
 -- Enable/disable individual AstroNvim Community modules
 -- Individual modules are all disabled if enable_community is false
 conf.enable_community_rust = false
-conf.enable_community_markdown = true
-conf.enable_community_json = true
-conf.enable_community_yaml = true
+conf.enable_community_markdown = false
+conf.enable_community_json = false
+conf.enable_community_yaml = false
 conf.enable_community_ps1 = false
-conf.enable_community_lua = true
+conf.enable_community_lua = false
 conf.enable_community_python_ruff = false
-conf.enable_community_bash = true
+conf.enable_community_bash = false
 conf.enable_community_html_css = false
-conf.enable_community_typescript = true
+conf.enable_community_typescript = false
 conf.enable_community_angular = false
 conf.enable_community_cpp = false
 conf.enable_community_cmake = false
